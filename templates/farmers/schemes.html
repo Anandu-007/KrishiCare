@@ -1,0 +1,659 @@
+{% include 'header.html' %}
+
+<div class="container py-4">
+  <!-- Header Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="mb-1">
+            <i class="fas fa-gift me-2 text-success"></i>Government Schemes
+          </h2>
+          <p class="text-muted mb-0">Available schemes and subsidies for farmers</p>
+        </div>
+        <a href="/farmers/dashboard/" class="btn btn-outline-secondary">
+          <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-gift text-success mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-success">12</h4>
+          <p class="mb-0">Active Schemes</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-clock text-warning mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-warning">5</h4>
+          <p class="mb-0">Expiring Soon</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-users text-primary mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-primary">8</h4>
+          <p class="mb-0">Categories</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-rupee-sign text-info mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-info">₹2.5L</h4>
+          <p class="mb-0">Total Benefits</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search and Filter -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <input type="text" class="form-control" placeholder="Search schemes...">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <select class="form-select">
+        <option selected>All Categories</option>
+        <option>Subsidy</option>
+        <option>Loan</option>
+        <option>Insurance</option>
+        <option>Training</option>
+        <option>Equipment</option>
+        <option>Infrastructure</option>
+        <option>Technology</option>
+        <option>Marketing</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select class="form-select">
+        <option selected>All Crops</option>
+        <option>Paddy</option>
+        <option>Wheat</option>
+        <option>Vegetables</option>
+        <option>Fruits</option>
+        <option>Pulses</option>
+        <option>Oilseeds</option>
+        <option>All Crops</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select class="form-select">
+        <option selected>Status</option>
+        <option>Active</option>
+        <option>Expiring Soon</option>
+        <option>Recently Added</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Schemes Grid -->
+  <div class="row g-4">
+    <!-- Scheme 1 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card scheme-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">Active</span>
+          <span class="badge bg-warning">Expires in 15 days</span>
+        </div>
+        
+        <div class="card-body">
+          <h5 class="card-title text-success">
+            <i class="fas fa-seedling me-2"></i>PM-KISAN Scheme
+          </h5>
+          <p class="card-text text-muted">
+            Direct income support of ₹6,000 per year to eligible farmer families. 
+            The amount is transferred in three equal installments of ₹2,000 each.
+          </p>
+          
+          <div class="scheme-details mb-3">
+            <div class="row">
+              <div class="col-6">
+                <small class="text-muted">Category:</small>
+                <br><strong class="text-primary">Subsidy</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Eligible Crop:</small>
+                <br><strong>All Crops</strong>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-6">
+                <small class="text-muted">Target Region:</small>
+                <br><strong>All India</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Deadline:</small>
+                <br><strong class="text-danger">Dec 31, 2024</strong>
+              </div>
+            </div>
+          </div>
+          
+          <div class="benefits-section mb-3">
+            <h6 class="text-success mb-2">
+              <i class="fas fa-star me-1"></i>Benefits:
+            </h6>
+            <ul class="list-unstyled small">
+              <li><i class="fas fa-check text-success me-1"></i>₹6,000 annual support</li>
+              <li><i class="fas fa-check text-success me-1"></i>Direct bank transfer</li>
+              <li><i class="fas fa-check text-success me-1"></i>No repayment required</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-grid gap-2">
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewSchemeDetails(1)">
+                <i class="fas fa-eye me-1"></i>View Details
+              </button>
+              <button class="btn btn-sm btn-success flex-fill" onclick="downloadScheme(1)">
+                <i class="fas fa-download me-1"></i>Download
+              </button>
+            </div>
+            <button class="btn btn-warning w-100" onclick="applyForScheme(1)">
+              <i class="fas fa-edit me-1"></i>Apply for Scheme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scheme 2 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card scheme-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">Active</span>
+          <span class="badge bg-info">New</span>
+        </div>
+        
+        <div class="card-body">
+          <h5 class="card-title text-success">
+            <i class="fas fa-leaf me-2"></i>PM Fasal Bima Yojana
+          </h5>
+          <p class="card-text text-muted">
+            Crop insurance scheme to protect farmers against natural calamities. 
+            Covers yield losses due to non-preventable risks.
+          </p>
+          
+          <div class="scheme-details mb-3">
+            <div class="row">
+              <div class="col-6">
+                <small class="text-muted">Category:</small>
+                <br><strong class="text-primary">Insurance</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Eligible Crop:</small>
+                <br><strong>Food & Oilseeds</strong>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-6">
+                <small class="text-muted">Target Region:</small>
+                <br><strong>All India</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Deadline:</small>
+                <br><strong class="text-success">Mar 15, 2025</strong>
+              </div>
+            </div>
+          </div>
+          
+          <div class="benefits-section mb-3">
+            <h6 class="text-success mb-2">
+              <i class="fas fa-star me-1"></i>Benefits:
+            </h6>
+            <ul class="list-unstyled small">
+              <li><i class="fas fa-check text-success me-1"></i>90% premium subsidy</li>
+              <li><i class="fas fa-check text-success me-1"></i>Comprehensive coverage</li>
+              <li><i class="fas fa-check text-success me-1"></i>Quick claim settlement</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-grid gap-2">
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewSchemeDetails(2)">
+                <i class="fas fa-eye me-1"></i>View Details
+              </button>
+              <button class="btn btn-sm btn-success flex-fill" onclick="downloadScheme(2)">
+                <i class="fas fa-download me-1"></i>Download
+              </button>
+            </div>
+            <button class="btn btn-warning w-100" onclick="applyForScheme(2)">
+              <i class="fas fa-edit me-1"></i>Apply for Scheme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scheme 3 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card scheme-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">Active</span>
+          <span class="badge bg-warning">Expires in 30 days</span>
+        </div>
+        
+        <div class="card-body">
+          <h5 class="card-title text-success">
+            <i class="fas fa-tractor me-2"></i>Kisan Credit Card
+          </h5>
+          <p class="card-text text-muted">
+            Easy credit access for farmers to meet agricultural needs. 
+            Includes crop loans, term loans, and working capital.
+          </p>
+          
+          <div class="scheme-details mb-3">
+            <div class="row">
+              <div class="col-6">
+                <small class="text-muted">Category:</small>
+                <br><strong class="text-primary">Loan</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Eligible Crop:</small>
+                <br><strong>All Crops</strong>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-6">
+                <small class="text-muted">Target Region:</small>
+                <br><strong>All India</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Deadline:</small>
+                <br><strong class="text-warning">Jan 15, 2025</strong>
+              </div>
+            </div>
+          </div>
+          
+          <div class="benefits-section mb-3">
+            <h6 class="text-success mb-2">
+              <i class="fas fa-star me-1"></i>Benefits:
+            </h6>
+            <ul class="list-unstyled small">
+              <li><i class="fas fa-check text-success me-1"></i>Up to ₹3 lakh limit</li>
+              <li><i class="fas fa-check text-success me-1"></i>Low interest rates</li>
+              <li><i class="fas fa-check text-success me-1"></i>Flexible repayment</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-grid gap-2">
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewSchemeDetails(3)">
+                <i class="fas fa-eye me-1"></i>View Details
+              </button>
+              <button class="btn btn-sm btn-success flex-fill" onclick="downloadScheme(3)">
+                <i class="fas fa-download me-1"></i>Download
+              </button>
+            </div>
+            <button class="btn btn-warning w-100" onclick="applyForScheme(3)">
+              <i class="fas fa-edit me-1"></i>Apply for Scheme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scheme 4 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card scheme-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">Active</span>
+          <span class="badge bg-info">New</span>
+        </div>
+        
+        <div class="card-body">
+          <h5 class="card-title text-success">
+            <i class="fas fa-solar-panel me-2"></i>PM-KUSUM Scheme
+          </h5>
+          <p class="card-text text-muted">
+            Solar power scheme for farmers. Install solar pumps and grid-connected 
+            solar power plants for irrigation and additional income.
+          </p>
+          
+          <div class="scheme-details mb-3">
+            <div class="row">
+              <div class="col-6">
+                <small class="text-muted">Category:</small>
+                <br><strong class="text-primary">Technology</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Eligible Crop:</small>
+                <br><strong>All Crops</strong>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-6">
+                <small class="text-muted">Target Region:</small>
+                <br><strong>All India</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Deadline:</small>
+                <br><strong class="text-success">Jun 30, 2025</strong>
+              </div>
+            </div>
+          </div>
+          
+          <div class="benefits-section mb-3">
+            <h6 class="text-success mb-2">
+              <i class="fas fa-star me-1"></i>Benefits:
+            </h6>
+            <ul class="list-unstyled small">
+              <li><i class="fas fa-check text-success me-1"></i>60% subsidy on solar pumps</li>
+              <li><i class="fas fa-check text-success me-1"></i>30% subsidy on solar plants</li>
+              <li><i class="fas fa-check text-success me-1"></i>Additional income from power sale</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-grid gap-2">
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewSchemeDetails(4)">
+                <i class="fas fa-eye me-1"></i>View Details
+              </button>
+              <button class="btn btn-sm btn-success flex-fill" onclick="downloadScheme(4)">
+                <i class="fas fa-download me-1"></i>Download
+              </button>
+            </div>
+            <button class="btn btn-warning w-100" onclick="applyForScheme(4)">
+              <i class="fas fa-edit me-1"></i>Apply for Scheme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scheme 5 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card scheme-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">Active</span>
+          <span class="badge bg-warning">Expires in 45 days</span>
+        </div>
+        
+        <div class="card-body">
+          <h5 class="card-title text-success">
+            <i class="fas fa-graduation-cap me-2"></i>Farmer Training Program
+          </h5>
+          <p class="card-text text-muted">
+            Free training programs on modern farming techniques, organic farming, 
+            and digital agriculture. Includes certification and practical sessions.
+          </p>
+          
+          <div class="scheme-details mb-3">
+            <div class="row">
+              <div class="col-6">
+                <small class="text-muted">Category:</small>
+                <br><strong class="text-primary">Training</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Eligible Crop:</small>
+                <br><strong>All Crops</strong>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-6">
+                <small class="text-muted">Target Region:</small>
+                <br><strong>Kerala</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Deadline:</small>
+                <br><strong class="text-warning">Jan 30, 2025</strong>
+              </div>
+            </div>
+          </div>
+          
+          <div class="benefits-section mb-3">
+            <h6 class="text-success mb-2">
+              <i class="fas fa-star me-1"></i>Benefits:
+            </h6>
+            <ul class="list-unstyled small">
+              <li><i class="fas fa-check text-success me-1"></i>Free training programs</li>
+              <li><i class="fas fa-check text-success me-1"></i>Certification provided</li>
+              <li><i class="fas fa-check text-success me-1"></i>Travel allowance included</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-grid gap-2">
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewSchemeDetails(5)">
+                <i class="fas fa-eye me-1"></i>View Details
+              </button>
+              <button class="btn btn-sm btn-success flex-fill" onclick="downloadScheme(5)">
+                <i class="fas fa-download me-1"></i>Download
+              </button>
+            </div>
+            <button class="btn btn-warning w-100" onclick="applyForScheme(5)">
+              <i class="fas fa-edit me-1"></i>Apply for Scheme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scheme 6 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card scheme-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">Active</span>
+          <span class="badge bg-info">New</span>
+        </div>
+        
+        <div class="card-body">
+          <h5 class="card-title text-success">
+            <i class="fas fa-warehouse me-2"></i>Warehouse Infrastructure
+          </h5>
+          <p class="card-text text-muted">
+            Subsidy for construction of warehouses and cold storage facilities. 
+            Helps farmers store produce and avoid distress sales.
+          </p>
+          
+          <div class="scheme-details mb-3">
+            <div class="row">
+              <div class="col-6">
+                <small class="text-muted">Category:</small>
+                <br><strong class="text-primary">Infrastructure</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Eligible Crop:</small>
+                <br><strong>Grains & Vegetables</strong>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-6">
+                <small class="text-muted">Target Region:</small>
+                <br><strong>All India</strong>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Deadline:</small>
+                <br><strong class="text-success">Dec 31, 2025</strong>
+              </div>
+            </div>
+          </div>
+          
+          <div class="benefits-section mb-3">
+            <h6 class="text-success mb-2">
+              <i class="fas fa-star me-1"></i>Benefits:
+            </h6>
+            <ul class="list-unstyled small">
+              <li><i class="fas fa-check text-success me-1"></i>50% subsidy on construction</li>
+              <li><i class="fas fa-check text-success me-1"></i>Technical support provided</li>
+              <li><i class="fas fa-check text-success me-1"></i>Quality certification</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-grid gap-2">
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewSchemeDetails(6)">
+                <i class="fas fa-eye me-1"></i>View Details
+              </button>
+              <button class="btn btn-sm btn-success flex-fill" onclick="downloadScheme(6)">
+                <i class="fas fa-download me-1"></i>Download
+              </button>
+            </div>
+            <button class="btn btn-warning w-100" onclick="applyForScheme(6)">
+              <i class="fas fa-edit me-1"></i>Apply for Scheme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Schemes pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<style>
+.scheme-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.scheme-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 1px solid #dee2e6;
+}
+
+.scheme-details {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #28a745;
+}
+
+.benefits-section {
+  background: #e8f5e8;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #28a745;
+}
+
+.card-title {
+  color: #28a745 !important;
+  font-weight: 600;
+}
+
+.badge {
+  font-size: 0.7rem;
+}
+
+/* Apply button styling */
+.btn-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(135deg, #ff8f00 0%, #ff6f00 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+  color: #000;
+}
+
+.card-footer .d-grid {
+  margin-top: 10px;
+}
+</style>
+
+<script>
+function viewSchemeDetails(schemeId) {
+  const schemes = {
+    1: 'PM-KISAN Scheme',
+    2: 'PM Fasal Bima Yojana',
+    3: 'Kisan Credit Card',
+    4: 'PM-KUSUM Scheme',
+    5: 'Farmer Training Program',
+    6: 'Warehouse Infrastructure'
+  };
+  alert(`Viewing detailed information for ${schemes[schemeId]} (Demo)`);
+}
+
+function downloadScheme(schemeId) {
+  const schemes = {
+    1: 'PM-KISAN Scheme',
+    2: 'PM Fasal Bima Yojana',
+    3: 'Kisan Credit Card',
+    4: 'PM-KUSUM Scheme',
+    5: 'Farmer Training Program',
+    6: 'Warehouse Infrastructure'
+  };
+  alert(`Downloading application form for ${schemes[schemeId]} (Demo)`);
+}
+
+function applyForScheme(schemeId) {
+  const schemes = {
+    1: 'PM-KISAN Scheme',
+    2: 'PM Fasal Bima Yojana',
+    3: 'Kisan Credit Card',
+    4: 'PM-KUSUM Scheme',
+    5: 'Farmer Training Program',
+    6: 'Warehouse Infrastructure'
+  };
+  
+  // Show a confirmation dialog
+  if (confirm(`Are you sure you want to apply for ${schemes[schemeId]}?\n\nThis will redirect you to the application form.`)) {
+    // Redirect to the application URL
+    window.location.href = `/farmers/schemes/apply/${schemeId}/`;
+  }
+}
+
+// Search functionality
+document.querySelector('input[placeholder="Search schemes..."]').addEventListener('input', function(e) {
+  console.log('Searching for:', e.target.value);
+});
+
+// Filter functionality
+document.querySelectorAll('select').forEach(select => {
+  select.addEventListener('change', function(e) {
+    console.log('Filtering by:', e.target.value);
+  });
+});
+</script>
+
+{% include 'footer.html' %} 

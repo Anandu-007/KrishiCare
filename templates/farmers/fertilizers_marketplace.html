@@ -1,0 +1,595 @@
+{% include 'header.html' %}
+
+<div class="container py-4">
+  <!-- Header Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="mb-1">
+            <i class="fas fa-leaf me-2 text-success"></i>Krishi Bhavan Fertilizers
+          </h2>
+          <p class="text-muted mb-0">Quality fertilizers for better crop yield</p>
+        </div>
+        <a href="/farmers/dashboard/" class="btn btn-outline-secondary">
+          <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-box text-success mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-success">18</h4>
+          <p class="mb-0">Available Fertilizers</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-tags text-primary mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-primary">5</h4>
+          <p class="mb-0">Categories</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-star text-warning mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-warning">4.6</h4>
+          <p class="mb-0">Average Rating</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-shipping-fast text-info mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-info">1-2</h4>
+          <p class="mb-0">Days Delivery</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search and Filter -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <input type="text" class="form-control" placeholder="Search fertilizers...">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <select class="form-select">
+        <option selected>All Types</option>
+        <option>NPK</option>
+        <option>Organic</option>
+        <option>Bio Fertilizers</option>
+        <option>Micronutrients</option>
+        <option>Soil Amendments</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select class="form-select">
+        <option selected>Sort by</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Name: A to Z</option>
+        <option>Rating: High to Low</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select class="form-select">
+        <option selected>Price Range</option>
+        <option>Under ₹200</option>
+        <option>₹200 - ₹500</option>
+        <option>₹500 - ₹1000</option>
+        <option>Above ₹1000</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Fertilizers Grid -->
+  <div class="row g-4">
+    <!-- Fertilizer Product 1 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">In Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <small class="ms-1">(4.8)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/4CAF50/FFFFFF?text=NPK+20-20-20" 
+                 alt="NPK 20-20-20" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">NPK 20-20-20</h6>
+          <p class="card-text text-muted small">
+            Balanced NPK fertilizer for all crops. Promotes healthy growth, flowering, and fruiting. 
+            Suitable for vegetables, fruits, and grains.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹450</strong>
+              <br><small class="text-muted">per 25kg bag</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-primary">25kg</strong>
+              <br><small class="text-muted">bag size</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(1)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-success flex-fill" onclick="addToCart(1)">
+              <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fertilizer Product 2 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">In Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="far fa-star text-warning"></i>
+            <small class="ms-1">(4.3)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/8BC34A/FFFFFF?text=Organic+Manure" 
+                 alt="Organic Manure" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">Organic Farm Manure</h6>
+          <p class="card-text text-muted small">
+            Pure organic manure from cow dung. Improves soil structure and fertility. 
+            Perfect for organic farming practices.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹180</strong>
+              <br><small class="text-muted">per 50kg bag</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-primary">50kg</strong>
+              <br><small class="text-muted">bag size</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(2)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-success flex-fill" onclick="addToCart(2)">
+              <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fertilizer Product 3 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-warning">Low Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <small class="ms-1">(4.7)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/FF9800/FFFFFF?text=Urea+46-0-0" 
+                 alt="Urea 46-0-0" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">Urea 46-0-0</h6>
+          <p class="card-text text-muted small">
+            High nitrogen fertilizer for leafy growth. Essential for vegetative development. 
+            Best for paddy, wheat, and vegetables.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹300</strong>
+              <br><small class="text-muted">per 50kg bag</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-primary">50kg</strong>
+              <br><small class="text-muted">bag size</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(3)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-success flex-fill" onclick="addToCart(3)">
+              <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fertilizer Product 4 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">In Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <small class="ms-1">(4.9)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/2196F3/FFFFFF?text=DAP+18-46-0" 
+                 alt="DAP 18-46-0" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">DAP 18-46-0</h6>
+          <p class="card-text text-muted small">
+            High phosphorus fertilizer for root development and flowering. 
+            Essential for fruit and flower crops. Promotes early maturity.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹1200</strong>
+              <br><small class="text-muted">per 50kg bag</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-primary">50kg</strong>
+              <br><small class="text-muted">bag size</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(4)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-success flex-fill" onclick="addToCart(4)">
+              <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fertilizer Product 5 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">In Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="far fa-star text-warning"></i>
+            <small class="ms-1">(4.2)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/9C27B0/FFFFFF?text=Bio+Fertilizer" 
+                 alt="Bio Fertilizer" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">Azotobacter Bio Fertilizer</h6>
+          <p class="card-text text-muted small">
+            Nitrogen-fixing bio fertilizer. Reduces chemical fertilizer requirement. 
+            Environment-friendly and improves soil health.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹80</strong>
+              <br><small class="text-muted">per kg</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-primary">1kg</strong>
+              <br><small class="text-muted">packet size</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(5)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-success flex-fill" onclick="addToCart(5)">
+              <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fertilizer Product 6 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-danger">Out of Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <small class="ms-1">(4.8)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/607D8B/FFFFFF?text=Micronutrients" 
+                 alt="Micronutrients" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">Micronutrient Mix</h6>
+          <p class="card-text text-muted small">
+            Complete micronutrient package. Contains Zinc, Iron, Manganese, Copper, Boron. 
+            Essential for healthy crop development.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹350</strong>
+              <br><small class="text-muted">per 5kg</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-danger">0</strong>
+              <br><small class="text-muted">available</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(6)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-secondary flex-fill" disabled>
+              <i class="fas fa-bell me-1"></i>Notify When Available
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Floating Button -->
+  <div class="floating-cart" onclick="showCart()">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-badge" id="cartBadge">0</span>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Fertilizers pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<style>
+.product-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.product-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border: 1px solid #e9ecef;
+}
+
+.rating {
+  font-size: 0.8rem;
+}
+
+.floating-cart {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ff5722 0%, #f44336 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-cart:hover {
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 1px solid #dee2e6;
+}
+</style>
+
+<script>
+let cart = [];
+
+function viewProduct(productId) {
+  alert(`Viewing details for fertilizer ${productId} (Demo)`);
+}
+
+function addToCart(productId) {
+  const product = getProductById(productId);
+  if (product) {
+    cart.push(product);
+    updateCartBadge();
+    alert(`${product.name} added to cart!`);
+  }
+}
+
+function getProductById(id) {
+  const products = [
+    { id: 1, name: 'NPK 20-20-20', price: 450 },
+    { id: 2, name: 'Organic Farm Manure', price: 180 },
+    { id: 3, name: 'Urea 46-0-0', price: 300 },
+    { id: 4, name: 'DAP 18-46-0', price: 1200 },
+    { id: 5, name: 'Azotobacter Bio Fertilizer', price: 80 },
+    { id: 6, name: 'Micronutrient Mix', price: 350 }
+  ];
+  return products.find(p => p.id === id);
+}
+
+function updateCartBadge() {
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = cart.length;
+  badge.style.display = cart.length > 0 ? 'flex' : 'none';
+}
+
+function showCart() {
+  if (cart.length === 0) {
+    alert('Your cart is empty!');
+  } else {
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    alert(`Cart Total: ₹${total}\nItems: ${cart.length}\n\nProceed to checkout? (Demo)`);
+  }
+}
+
+// Search functionality
+document.querySelector('input[placeholder="Search fertilizers..."]').addEventListener('input', function(e) {
+  console.log('Searching for:', e.target.value);
+});
+
+// Filter functionality
+document.querySelectorAll('select').forEach(select => {
+  select.addEventListener('change', function(e) {
+    console.log('Filtering by:', e.target.value);
+  });
+});
+</script>
+
+{% include 'footer.html' %} 

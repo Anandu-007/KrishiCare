@@ -1,0 +1,598 @@
+{% include 'header.html' %}
+
+<div class="container py-4">
+  <!-- Header Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="mb-1">
+            <i class="fas fa-tools me-2 text-success"></i>Krishi Bhavan Tools
+          </h2>
+          <p class="text-muted mb-0">Quality farming tools and equipment</p>
+        </div>
+        <a href="/farmers/dashboard/" class="btn btn-outline-secondary">
+          <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-box text-success mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-success">32</h4>
+          <p class="mb-0">Available Tools</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-tags text-primary mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-primary">8</h4>
+          <p class="mb-0">Categories</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-star text-warning mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-warning">4.5</h4>
+          <p class="mb-0">Average Rating</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-shipping-fast text-info mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-info">3-5</h4>
+          <p class="mb-0">Days Delivery</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search and Filter -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <input type="text" class="form-control" placeholder="Search tools...">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <select class="form-select">
+        <option selected>All Types</option>
+        <option>Hand Tools</option>
+        <option>Garden Tools</option>
+        <option>Irrigation</option>
+        <option>Harvesting</option>
+        <option>Storage</option>
+        <option>Safety Gear</option>
+        <option>Machinery</option>
+        <option>Accessories</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select class="form-select">
+        <option selected>Sort by</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Name: A to Z</option>
+        <option>Rating: High to Low</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select class="form-select">
+        <option selected>Price Range</option>
+        <option>Under ₹500</option>
+        <option>₹500 - ₹1000</option>
+        <option>₹1000 - ₹5000</option>
+        <option>Above ₹5000</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Tools Grid -->
+  <div class="row g-4">
+    <!-- Tool Product 1 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">In Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <small class="ms-1">(4.8)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/795548/FFFFFF?text=Garden+Spade" 
+                 alt="Garden Spade" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">Heavy Duty Garden Spade</h6>
+          <p class="card-text text-muted small">
+            Professional grade garden spade with wooden handle. Perfect for digging, 
+            planting, and soil preparation. Rust-resistant steel blade.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹850</strong>
+              <br><small class="text-muted">per piece</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-primary">1.2kg</strong>
+              <br><small class="text-muted">weight</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(1)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-success flex-fill" onclick="addToCart(1)">
+              <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Product 2 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">In Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="far fa-star text-warning"></i>
+            <small class="ms-1">(4.2)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/607D8B/FFFFFF?text=Watering+Can" 
+                 alt="Watering Can" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">Plastic Watering Can</h6>
+          <p class="card-text text-muted small">
+            Large capacity watering can with fine rose nozzle. Perfect for garden 
+            irrigation. Lightweight and durable plastic construction.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹450</strong>
+              <br><small class="text-muted">per piece</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-primary">5L</strong>
+              <br><small class="text-muted">capacity</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(2)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-success flex-fill" onclick="addToCart(2)">
+              <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Product 3 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-warning">Low Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <small class="ms-1">(4.7)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/FF5722/FFFFFF?text=Pruning+Shears" 
+                 alt="Pruning Shears" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">Professional Pruning Shears</h6>
+          <p class="card-text text-muted small">
+            High-quality pruning shears for trimming plants and trees. Sharp stainless 
+            steel blades with comfortable grip handles.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹650</strong>
+              <br><small class="text-muted">per piece</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-primary">250g</strong>
+              <br><small class="text-muted">weight</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(3)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-success flex-fill" onclick="addToCart(3)">
+              <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Product 4 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">In Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <small class="ms-1">(4.9)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/3F51B5/FFFFFF?text=Garden+Rake" 
+                 alt="Garden Rake" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">Steel Garden Rake</h6>
+          <p class="card-text text-muted small">
+            Heavy-duty steel rake for soil leveling and debris removal. 
+            Sturdy wooden handle with rust-resistant steel tines.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹750</strong>
+              <br><small class="text-muted">per piece</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-primary">1.5kg</strong>
+              <br><small class="text-muted">weight</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(4)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-success flex-fill" onclick="addToCart(4)">
+              <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Product 5 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-success">In Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="far fa-star text-warning"></i>
+            <small class="ms-1">(4.1)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/009688/FFFFFF?text=Garden+Hoe" 
+                 alt="Garden Hoe" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">Traditional Garden Hoe</h6>
+          <p class="card-text text-muted small">
+            Classic garden hoe for weeding and soil cultivation. 
+            Durable steel blade with ergonomic wooden handle.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹550</strong>
+              <br><small class="text-muted">per piece</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-primary">1.8kg</strong>
+              <br><small class="text-muted">weight</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(5)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-success flex-fill" onclick="addToCart(5)">
+              <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool Product 6 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card product-card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span class="badge bg-danger">Out of Stock</span>
+          <div class="rating">
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <i class="fas fa-star text-warning"></i>
+            <small class="ms-1">(4.8)</small>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <img src="https://via.placeholder.com/150x120/673AB7/FFFFFF?text=Harvesting+Sickle" 
+                 alt="Harvesting Sickle" class="product-image rounded">
+          </div>
+          
+          <h6 class="card-title text-center">Traditional Harvesting Sickle</h6>
+          <p class="card-text text-muted small">
+            Traditional curved sickle for harvesting grains and crops. 
+            Sharp steel blade with wooden handle grip.
+          </p>
+          
+          <div class="row text-center mb-3">
+            <div class="col-6">
+              <strong class="text-success">₹350</strong>
+              <br><small class="text-muted">per piece</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-danger">0</strong>
+              <br><small class="text-muted">available</small>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <small class="text-muted">
+              <i class="fas fa-certificate text-success me-1"></i>Government Certified
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProduct(6)">
+              <i class="fas fa-eye me-1"></i>View Details
+            </button>
+            <button class="btn btn-sm btn-secondary flex-fill" disabled>
+              <i class="fas fa-bell me-1"></i>Notify When Available
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Floating Button -->
+  <div class="floating-cart" onclick="showCart()">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-badge" id="cartBadge">0</span>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Tools pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<style>
+.product-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.product-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border: 1px solid #e9ecef;
+}
+
+.rating {
+  font-size: 0.8rem;
+}
+
+.floating-cart {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ff5722 0%, #f44336 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-cart:hover {
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 1px solid #dee2e6;
+}
+</style>
+
+<script>
+let cart = [];
+
+function viewProduct(productId) {
+  alert(`Viewing details for tool ${productId} (Demo)`);
+}
+
+function addToCart(productId) {
+  const product = getProductById(productId);
+  if (product) {
+    cart.push(product);
+    updateCartBadge();
+    alert(`${product.name} added to cart!`);
+  }
+}
+
+function getProductById(id) {
+  const products = [
+    { id: 1, name: 'Heavy Duty Garden Spade', price: 850 },
+    { id: 2, name: 'Plastic Watering Can', price: 450 },
+    { id: 3, name: 'Professional Pruning Shears', price: 650 },
+    { id: 4, name: 'Steel Garden Rake', price: 750 },
+    { id: 5, name: 'Traditional Garden Hoe', price: 550 },
+    { id: 6, name: 'Traditional Harvesting Sickle', price: 350 }
+  ];
+  return products.find(p => p.id === id);
+}
+
+function updateCartBadge() {
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = cart.length;
+  badge.style.display = cart.length > 0 ? 'flex' : 'none';
+}
+
+function showCart() {
+  if (cart.length === 0) {
+    alert('Your cart is empty!');
+  } else {
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    alert(`Cart Total: ₹${total}\nItems: ${cart.length}\n\nProceed to checkout? (Demo)`);
+  }
+}
+
+// Search functionality
+document.querySelector('input[placeholder="Search tools..."]').addEventListener('input', function(e) {
+  console.log('Searching for:', e.target.value);
+});
+
+// Filter functionality
+document.querySelectorAll('select').forEach(select => {
+  select.addEventListener('change', function(e) {
+    console.log('Filtering by:', e.target.value);
+  });
+});
+</script>
+
+{% include 'footer.html' %} 

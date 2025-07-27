@@ -1,0 +1,859 @@
+{% include 'header.html' %}
+
+<div class="container py-4">
+  <!-- Welcome Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card bg-gradient-primary text-white">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h2 class="mb-2">
+                <i class="fas fa-tractor me-2"></i>Welcome, Farmer!
+              </h2>
+              <p class="mb-0">Access all farming resources, schemes, and tools in one place</p>
+            </div>
+            <div class="col-md-4 text-end">
+              <div class="d-flex align-items-center justify-content-end">
+                <div class="me-3">
+                  <h4 class="mb-0">₹2,450</h4>
+                  <small>Total Earnings</small>
+                </div>
+                <div class="rounded-circle bg-white bg-opacity-25 p-3">
+                  <i class="fas fa-coins fa-2x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-seedling text-success mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-success">12</h4>
+          <p class="mb-0">Active Crops</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-gift text-primary mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-primary">8</h4>
+          <p class="mb-0">Available Schemes</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-box text-warning mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-warning">24</h4>
+          <p class="mb-0">Products Listed</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-leaf text-info mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-info">15</h4>
+          <p class="mb-0">Plant Detections</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Functionality Grid -->
+  <div class="row g-4">
+    <!-- Categories Section -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card dashboard-card h-100">
+        <div class="card-body text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-list-alt text-primary"></i>
+          </div>
+          <h5 class="card-title">View Categories</h5>
+          <p class="card-text">Browse farming categories and crop types</p>
+          <div class="dropdown">
+            <button class="btn btn-outline-primary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
+              Select Category
+            </button>
+            <ul class="dropdown-menu w-100">
+              <li><a class="dropdown-item" href="/farmers/category/vegetables/"><i class="fas fa-seedling me-2"></i>Vegetables</a></li>
+              <li><a class="dropdown-item" href="/farmers/category/fruits/"><i class="fas fa-apple-alt me-2"></i>Fruits</a></li>
+              <li><a class="dropdown-item" href="/farmers/category/grains/"><i class="fas fa-wheat-awn me-2"></i>Grains</a></li>
+              <li><a class="dropdown-item" href="/farmers/category/pulses/"><i class="fas fa-seedling me-2"></i>Pulses</a></li>
+              <li><a class="dropdown-item" href="/farmers/category/spices/"><i class="fas fa-leaf me-2"></i>Spices</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schemes Section -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card dashboard-card h-100">
+        <div class="card-body text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-gift text-success"></i>
+          </div>
+          <h5 class="card-title">Government Schemes</h5>
+          <p class="card-text">Explore available government support programs</p>
+          <a href="/farmers/schemes/" class="btn btn-outline-success w-100">
+            <i class="fas fa-external-link-alt me-2"></i>View Schemes
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Section -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card dashboard-card h-100">
+        <div class="card-body text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-box text-warning"></i>
+          </div>
+          <h5 class="card-title">Products</h5>
+          <p class="card-text">Buy Krishi Bhavan products here</p>
+                      <div class="d-grid gap-2">
+              <a href="/farmers/seeds-marketplace/" class="btn btn-outline-warning btn-sm">
+                <i class="fas fa-seedling me-1"></i>Seeds
+              </a>
+              <a href="/farmers/fertilizers-marketplace/" class="btn btn-outline-info btn-sm">
+                <i class="fas fa-leaf me-1"></i>Fertilizers
+              </a>
+              <a href="/farmers/tools-marketplace/" class="btn btn-outline-secondary btn-sm">
+                <i class="fas fa-tools me-1"></i>Tools
+              </a>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plant Detection Section -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card dashboard-card h-100">
+        <div class="card-body text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-camera text-info"></i>
+          </div>
+          <h5 class="card-title">Plant Detection</h5>
+          <p class="card-text">Identify plants and get health analysis</p>
+          <a href="/farmers/plant-detection/" class="btn btn-outline-info w-100">
+            <i class="fas fa-camera me-2"></i>Detect Plant
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activities Section -->
+  <div class="row mt-5">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="fas fa-history me-2"></i>Recent Activities</h5>
+        </div>
+        <div class="card-body">
+          <div class="activity-item d-flex align-items-center mb-3">
+            <div class="activity-icon bg-success text-white rounded-circle me-3">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="mb-1">New crop planted</h6>
+              <p class="mb-0 text-muted">Wheat seeds planted in Field A</p>
+              <small class="text-muted">2 hours ago</small>
+            </div>
+          </div>
+          
+          <div class="activity-item d-flex align-items-center mb-3">
+            <div class="activity-icon bg-primary text-white rounded-circle me-3">
+              <i class="fas fa-gift"></i>
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="mb-1">Scheme applied</h6>
+              <p class="mb-0 text-muted">PM-KISAN scheme application submitted</p>
+              <small class="text-muted">1 day ago</small>
+            </div>
+          </div>
+          
+          <div class="activity-item d-flex align-items-center mb-3">
+            <div class="activity-icon bg-warning text-white rounded-circle me-3">
+              <i class="fas fa-box"></i>
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="mb-1">Product listed</h6>
+              <p class="mb-0 text-muted">Organic tomatoes added to inventory</p>
+              <small class="text-muted">2 days ago</small>
+            </div>
+          </div>
+          
+          <div class="activity-item d-flex align-items-center">
+            <div class="activity-icon bg-info text-white rounded-circle me-3">
+              <i class="fas fa-camera"></i>
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="mb-1">Plant detected</h6>
+              <p class="mb-0 text-muted">Tomato plant identified - Healthy</p>
+              <small class="text-muted">3 days ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Complaints Section -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Register Complaint</h5>
+        </div>
+        <div class="card-body">
+          <form id="complaintForm">
+            <div class="mb-3">
+              <label for="complaintType" class="form-label">Complaint Type</label>
+              <select class="form-select" id="complaintType" required>
+                <option value="">Select complaint type</option>
+                <option value="scheme">Scheme Related</option>
+                <option value="product">Product Quality</option>
+                <option value="delivery">Delivery Issues</option>
+                <option value="payment">Payment Problems</option>
+                <option value="technical">Technical Support</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="complaintSubject" class="form-label">Subject</label>
+              <input type="text" class="form-control" id="complaintSubject" placeholder="Brief description of your complaint" required>
+            </div>
+            <div class="mb-3">
+              <label for="complaintDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="complaintDescription" rows="3" placeholder="Please provide detailed description of your complaint..." required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="complaintPriority" class="form-label">Priority</label>
+              <select class="form-select" id="complaintPriority" required>
+                <option value="">Select priority</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+              </select>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-warning">
+                <i class="fas fa-paper-plane me-2"></i>Submit Complaint
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Recent Complaints -->
+      
+    </div>
+  </div>
+
+  <!-- Featured Schemes -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <h4 class="mb-3"><i class="fas fa-star me-2"></i>Featured Schemes</h4>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h6 class="card-title text-success">PM-KISAN</h6>
+              <p class="card-text small">Direct income support of ₹6,000 per year to eligible farmer families</p>
+              <span class="badge bg-success">Active</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h6 class="card-title text-primary">PMFBY</h6>
+              <p class="card-text small">Crop insurance scheme to protect farmers against natural calamities</p>
+              <span class="badge bg-primary">New</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h6 class="card-title text-warning">Soil Health Card</h6>
+              <p class="card-text small">Free soil testing and recommendations for better crop yield</p>
+              <span class="badge bg-warning">Limited Time</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Chatbot -->
+<div class="chatbot-container" id="chatbotContainer">
+  <!-- Chatbot Toggle Button -->
+  <div class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">
+    <i class="fas fa-comments"></i>
+    <span class="notification-badge" id="notificationBadge">1</span>
+  </div>
+  
+  <!-- Chatbot Window -->
+  <div class="chatbot-window" id="chatbotWindow">
+    <div class="chatbot-header">
+      <div class="d-flex align-items-center">
+        <div class="chatbot-avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="ms-2">
+          <h6 class="mb-0">Krishi Assistant</h6>
+          <small class="text-muted">Online</small>
+        </div>
+      </div>
+      <button class="btn-close btn-close-white" onclick="toggleChatbot()"></button>
+    </div>
+    
+    <div class="chatbot-messages" id="chatbotMessages">
+      <!-- Welcome Message -->
+      <div class="message bot-message">
+        <div class="message-content">
+          <p>Hello! I'm your Krishi Assistant. How can I help you today?</p>
+          <small class="text-muted">Just now</small>
+        </div>
+      </div>
+      
+      <!-- Quick Options -->
+      <div class="message bot-message">
+        <div class="message-content">
+          <p>You can ask me about:</p>
+          <div class="quick-options">
+            <button class="quick-option" onclick="sendQuickMessage('How to add products?')">
+              <i class="fas fa-plus me-1"></i>Add Products
+            </button>
+            <button class="quick-option" onclick="sendQuickMessage('Government schemes')">
+              <i class="fas fa-gift me-1"></i>Schemes
+            </button>
+            <button class="quick-option" onclick="sendQuickMessage('Plant diseases')">
+              <i class="fas fa-leaf me-1"></i>Plant Care
+            </button>
+            <button class="quick-option" onclick="sendQuickMessage('Weather forecast')">
+              <i class="fas fa-cloud-sun me-1"></i>Weather
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chatbot-input">
+      <div class="input-group">
+        <input type="text" class="form-control" id="chatbotInput" 
+               placeholder="Type your message..." onkeypress="handleChatbotKeyPress(event)">
+        <button class="btn btn-success" onclick="sendMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #388e3c 0%, #4caf50 100%);
+}
+
+.dashboard-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.feature-icon i {
+  font-size: 2rem;
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* Chatbot Styles */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.chatbot-toggle {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #388e3c 0%, #4caf50 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.1);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.chatbot-window {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 350px;
+  height: 500px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chatbot-window.active {
+  display: flex;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chatbot-header {
+  background: linear-gradient(135deg, #388e3c 0%, #4caf50 100%);
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatbot-avatar {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.chatbot-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #f8f9fa;
+}
+
+.message {
+  margin-bottom: 15px;
+  display: flex;
+}
+
+.bot-message {
+  justify-content: flex-start;
+}
+
+.user-message {
+  justify-content: flex-end;
+}
+
+.message-content {
+  max-width: 80%;
+  padding: 10px 15px;
+  border-radius: 15px;
+  position: relative;
+}
+
+.bot-message .message-content {
+  background: white;
+  border: 1px solid #e9ecef;
+}
+
+.user-message .message-content {
+  background: #388e3c;
+  color: white;
+}
+
+.quick-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.quick-option {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.quick-option:hover {
+  background: #e9ecef;
+  border-color: #388e3c;
+}
+
+.chatbot-input {
+  padding: 15px;
+  background: white;
+  border-top: 1px solid #e9ecef;
+}
+
+.chatbot-input .form-control {
+  border-radius: 20px;
+  border: 1px solid #dee2e6;
+}
+
+.chatbot-input .btn {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chatbot-window {
+    width: 300px;
+    height: 400px;
+    bottom: 70px;
+    right: 10px;
+  }
+}
+
+/* Complaints Section Styling */
+.complaint-item {
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.complaint-item:hover {
+  background-color: #f8f9fa;
+}
+
+.complaint-item h6 {
+  color: #495057;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.complaint-item .badge {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+#complaintForm .form-control,
+#complaintForm .form-select {
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#complaintForm .form-control:focus,
+#complaintForm .form-select:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+#complaintForm .btn-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+#complaintForm .btn-warning:hover {
+  background: linear-gradient(135deg, #ff8f00 0%, #ff6f00 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+  color: #000;
+}
+
+.card-header h5 i,
+.card-header h6 i {
+  color: #ffc107;
+}
+</style>
+
+<script>
+// Add some interactivity
+document.addEventListener('DOMContentLoaded', function() {
+  // Animate cards on load
+  const cards = document.querySelectorAll('.dashboard-card');
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'all 0.5s ease';
+      
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 100);
+    }, index * 100);
+  });
+
+  // Add click handlers for demo (only for buttons without proper links)
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      // Only prevent default for buttons that don't have proper href or are placeholders
+      if ((this.textContent.includes('View') || this.textContent.includes('Detect') || this.textContent.includes('Apply')) && 
+          (this.getAttribute('href') === '#' || this.getAttribute('href') === null)) {
+        e.preventDefault();
+        alert('This feature will be implemented in the backend!');
+      }
+    });
+  });
+});
+
+// Chatbot Functions
+function toggleChatbot() {
+  const chatbotWindow = document.getElementById('chatbotWindow');
+  const notificationBadge = document.getElementById('notificationBadge');
+  
+  chatbotWindow.classList.toggle('active');
+  
+  // Hide notification badge when chat is opened
+  if (chatbotWindow.classList.contains('active')) {
+    notificationBadge.style.display = 'none';
+  }
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatbotInput');
+  const message = input.value.trim();
+  
+  if (message) {
+    addUserMessage(message);
+    input.value = '';
+    
+    // Simulate bot response
+    setTimeout(() => {
+      generateBotResponse(message);
+    }, 1000);
+  }
+}
+
+function sendQuickMessage(message) {
+  addUserMessage(message);
+  
+  // Simulate bot response
+  setTimeout(() => {
+    generateBotResponse(message);
+  }, 1000);
+}
+
+function addUserMessage(message) {
+  const messagesContainer = document.getElementById('chatbotMessages');
+  const messageDiv = document.createElement('div');
+  messageDiv.className = 'message user-message';
+  messageDiv.innerHTML = `
+    <div class="message-content">
+      <p>${message}</p>
+      <small class="text-muted">Just now</small>
+    </div>
+  `;
+  messagesContainer.appendChild(messageDiv);
+  scrollToBottom();
+}
+
+function addBotMessage(message) {
+  const messagesContainer = document.getElementById('chatbotMessages');
+  const messageDiv = document.createElement('div');
+  messageDiv.className = 'message bot-message';
+  messageDiv.innerHTML = `
+    <div class="message-content">
+      <p>${message}</p>
+      <small class="text-muted">Just now</small>
+    </div>
+  `;
+  messagesContainer.appendChild(messageDiv);
+  scrollToBottom();
+}
+
+function generateBotResponse(userMessage) {
+  const message = userMessage.toLowerCase();
+  let response = '';
+  
+  if (message.includes('add product') || message.includes('how to add')) {
+    response = "To add products, go to the 'View Categories' section and select a category. Then click 'Add New Product' and fill in the details like product name, description, price, quantity, and upload an image.";
+  } else if (message.includes('scheme') || message.includes('government')) {
+    response = "You can find government schemes in the 'Government Schemes' section. Popular schemes include PM-KISAN (₹6,000/year), PMFBY (crop insurance), and Soil Health Card (free soil testing).";
+  } else if (message.includes('plant') || message.includes('disease')) {
+    response = "Use the 'Plant Detection' feature to identify plants and check their health. Upload a photo of your plant and get instant analysis and care recommendations.";
+  } else if (message.includes('weather') || message.includes('forecast')) {
+    response = "I can help you with weather information! For accurate local weather forecasts, please check your local weather service or agricultural department website.";
+  } else if (message.includes('price') || message.includes('market')) {
+    response = "For current market prices, you can check the 'Products' section to see what other farmers are selling, or contact your local agricultural market.";
+  } else if (message.includes('fertilizer') || message.includes('pesticide')) {
+    response = "For fertilizer and pesticide recommendations, use the Plant Detection feature to identify your crop, and I can provide specific care advice.";
+  } else {
+    response = "I'm here to help with farming-related questions! You can ask me about adding products, government schemes, plant care, weather, market prices, and more.";
+  }
+  
+  addBotMessage(response);
+}
+
+function handleChatbotKeyPress(event) {
+  if (event.key === 'Enter') {
+    sendMessage();
+  }
+}
+
+function scrollToBottom() {
+  const messagesContainer = document.getElementById('chatbotMessages');
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+// Auto-hide notification badge after 5 seconds
+setTimeout(() => {
+  const notificationBadge = document.getElementById('notificationBadge');
+  notificationBadge.style.display = 'none';
+}, 5000);
+
+// Complaint Form Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const complaintForm = document.getElementById('complaintForm');
+  
+  if (complaintForm) {
+    complaintForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const complaintType = document.getElementById('complaintType').value;
+      const complaintSubject = document.getElementById('complaintSubject').value;
+      const complaintDescription = document.getElementById('complaintDescription').value;
+      const complaintPriority = document.getElementById('complaintPriority').value;
+      
+      // Validate form
+      if (!complaintType || !complaintSubject || !complaintDescription || !complaintPriority) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      
+      // Show success message
+      alert(`Complaint submitted successfully!\n\nType: ${complaintType}\nSubject: ${complaintSubject}\nPriority: ${complaintPriority}\n\nYour complaint has been registered and will be reviewed by our support team.`);
+      
+      // Reset form
+      complaintForm.reset();
+      
+      // Add to recent complaints (demo)
+      addComplaintToRecent(complaintSubject, complaintDescription, complaintPriority);
+    });
+  }
+});
+
+function addComplaintToRecent(subject, description, priority) {
+  const recentComplaintsContainer = document.querySelector('.card-body:has(.complaint-item)');
+  if (recentComplaintsContainer) {
+    const complaintDiv = document.createElement('div');
+    complaintDiv.className = 'complaint-item mb-2';
+    
+    const priorityClass = priority === 'urgent' ? 'bg-danger' : 
+                         priority === 'high' ? 'bg-warning' : 
+                         priority === 'medium' ? 'bg-info' : 'bg-secondary';
+    
+    complaintDiv.innerHTML = `
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <h6 class="mb-1">${subject}</h6>
+          <p class="mb-1 small text-muted">${description.substring(0, 50)}${description.length > 50 ? '...' : ''}</p>
+          <span class="badge ${priorityClass}">${priority.charAt(0).toUpperCase() + priority.slice(1)} Priority</span>
+        </div>
+        <small class="text-muted">Just now</small>
+      </div>
+    `;
+    
+    // Insert at the top
+    recentComplaintsContainer.insertBefore(complaintDiv, recentComplaintsContainer.firstChild);
+  }
+}
+
+</script>
+
+{% include 'footer.html' %} 
