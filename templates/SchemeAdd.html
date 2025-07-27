@@ -1,0 +1,65 @@
+{% include 'header.html' %}
+<div class="container py-5">
+  <h2 class="text-center fw-bold mb-4" style="color: #388e3c;">Add Scheme</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow p-4 mb-4">
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="scheme_name" class="form-label">Scheme Name</label>
+            <input type="text" class="form-control" id="scheme_name" name="scheme_name" placeholder="Enter scheme name" required>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="2" placeholder="Enter description" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input type="text" class="form-control" id="category" name="category" placeholder="Enter category" required>
+          </div>
+          <div class="mb-3">
+            <label for="eligible_crop" class="form-label">Eligible Crop</label>
+            <input type="text" class="form-control" id="eligible_crop" name="eligible_crop" placeholder="Enter eligible crop" required>
+          </div>
+          <div class="mb-3">
+            <label for="target_region" class="form-label">Target Region</label>
+            <input type="text" class="form-control" id="target_region" name="target_region" placeholder="Enter target region" required>
+          </div>
+          <div class="mb-3">
+            <label for="application_deadline" class="form-label">Application Deadline</label>
+            <input type="date" class="form-control" id="application_deadline" name="application_deadline" required>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success">Add Scheme</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <h3 class="fw-bold mb-3" style="color: #388e3c;">Existing Schemes</h3>
+  <div class="row g-4">
+    {% for scheme in schemes %}
+    <div class="col-md-4">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ scheme.scheme_name }}</h5>
+          <p class="card-text">{{ scheme.description }}</p>
+          <span class="badge bg-primary mb-1">{{ scheme.category }}</span>
+          <span class="badge bg-success mb-1">{{ scheme.eligible_crop }}</span>
+          <span class="badge bg-info mb-1">{{ scheme.target_region }}</span>
+          <p class="mt-2 mb-1"><strong>Deadline:</strong> {{ scheme.application_deadline }}</p>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit</button>
+            <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="text-center mt-3">
+    <a href="/admin/dashboard/" class="btn btn-outline-secondary">Back to Dashboard</a>
+  </div>
+</div>
+{% include 'footer.html' %} 

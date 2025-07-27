@@ -1,0 +1,95 @@
+{% include 'header.html' %}
+
+<div class="container py-5">
+  <h2 class="text-center fw-bold mb-4" style="color: #388e3c;">Approve Farmers</h2>
+  
+  <!-- Pending Farmers Section -->
+  
+
+  <!-- Approved Farmers Section -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h3 class="fw-bold mb-3" style="color: #388e3c;">
+        <i class="fas fa-check-circle me-2"></i>Approved Farmers ({{ approved_farmers.count }})
+      </h3>
+      {% if approved_farmers %}
+      <div class="row g-4">
+        {% for farmer in approved_farmers %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header bg-success text-white">
+              <h6 class="mb-0">Approved</h6>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title">{{ farmer.name }}</h6>
+              <p class="card-text">
+                <strong>Aadhaar:</strong> {{ farmer.aadhaar_number }}<br>
+                <strong>Place:</strong> {{ farmer.place }}<br>
+                <strong>Phone:</strong> {{ farmer.phone }}<br>
+                <strong>Type:</strong> {{ farmer.farmer_type }}<br>
+                <strong>Registered:</strong> {{ farmer.registered_date }}
+              </p>
+            </div>
+            <div class="card-footer bg-transparent">
+              <a href="/admin/farmer-products/" class="btn btn-warning btn-sm w-100">
+                <i class="fas fa-box me-1"></i>Products
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="alert alert-info text-center">
+        <i class="fas fa-info-circle me-2"></i>
+        No approved farmers yet.
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Statistics -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h3 class="fw-bold mb-3" style="color: #388e3c;">Farmer Statistics</h3>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card shadow text-center">
+            <div class="card-body">
+              <i class="fas fa-users feature-icon mb-2" style="font-size: 2rem; color: #388e3c;"></i>
+              <h4 class="text-success">{{ pending_farmers.count|add:approved_farmers.count }}</h4>
+              <p class="mb-0">Total Farmers</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow text-center">
+            <div class="card-body">
+              <i class="fas fa-clock feature-icon mb-2" style="font-size: 2rem; color: #ffc107;"></i>
+              <h4 class="text-warning">{{ pending_farmers.count }}</h4>
+              <p class="mb-0">Pending Approval</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow text-center">
+            <div class="card-body">
+              <i class="fas fa-check-circle feature-icon mb-2" style="font-size: 2rem; color: #28a745;"></i>
+              <h4 class="text-success">{{ approved_farmers.count }}</h4>
+              <p class="mb-0">Approved Farmers</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Dashboard -->
+  <div class="text-center">
+    <a href="/admin/dashboard/" class="btn btn-outline-secondary">
+      <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+    </a>
+  </div>
+</div>
+
+{% include 'footer.html' %} 

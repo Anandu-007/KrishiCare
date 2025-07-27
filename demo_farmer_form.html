@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Management - Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .feature-icon {
+            color: #388e3c;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-seedling me-2"></i>Farmer Management System
+            </a>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h2 class="text-center fw-bold mb-4" style="color: #388e3c;">Manage Farmers</h2>
+        
+        <!-- Add Farmer Form -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-plus me-2"></i>Add New Farmer</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="farmerForm">
+                            <div class="row g-3">
+                                <!-- Aadhaar Number -->
+                                <div class="col-md-6">
+                                    <label for="aadhaar_number" class="form-label">Aadhaar Number *</label>
+                                    <input type="text" class="form-control" id="aadhaar_number" name="aadhaar_number" 
+                                           maxlength="12" pattern="[0-9]{12}" required 
+                                           placeholder="Enter 12-digit Aadhaar number">
+                                    <div class="form-text">12-digit Aadhaar number (numbers only)</div>
+                                </div>
+                                
+                                <!-- Name -->
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required 
+                                           placeholder="Enter farmer's full name">
+                                </div>
+                                
+                                <!-- Place -->
+                                <div class="col-md-6">
+                                    <label for="place" class="form-label">Place/Village *</label>
+                                    <input type="text" class="form-control" id="place" name="place" required 
+                                           placeholder="Enter village/town name">
+                                </div>
+                                
+                                <!-- Phone -->
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required 
+                                           pattern="[0-9]{10}" maxlength="10" placeholder="Enter 10-digit phone number">
+                                    <div class="form-text">10-digit phone number</div>
+                                </div>
+                                
+                                <!-- Farmer Type -->
+                                <div class="col-md-6">
+                                    <label for="farmer_type" class="form-label">Farmer Type *</label>
+                                    <select class="form-select" id="farmer_type" name="farmer_type" required>
+                                        <option value="">Select farmer type</option>
+                                        <option value="small">Small</option>
+                                        <option value="marginal">Marginal</option>
+                                        <option value="sc">SC</option>
+                                        <option value="st">ST</option>
+                                        <option value="organic">Organic</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Land Size -->
+                                <div class="col-md-6">
+                                    <label for="land_size" class="form-label">Land Size (acres)</label>
+                                    <input type="number" class="form-control" id="land_size" name="land_size" 
+                                           step="0.01" min="0" placeholder="Enter land size in acres">
+                                </div>
+                                
+                                <!-- Photo -->
+                                <div class="col-md-6">
+                                    <label for="photo" class="form-label">Photo</label>
+                                    <input type="file" class="form-control" id="photo" name="photo" 
+                                           accept="image/*">
+                                    <div class="form-text">Upload farmer's photo (optional)</div>
+                                </div>
+                                
+                                <!-- Address -->
+                                <div class="col-md-6">
+                                    <label for="address" class="form-label">Address</label>
+                                    <textarea class="form-control" id="address" name="address" rows="3" 
+                                              placeholder="Enter complete address (optional)"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <button type="reset" class="btn btn-outline-secondary me-md-2">
+                                    <i class="fas fa-undo me-1"></i>Reset Form
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-save me-1"></i>Add Farmer
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Farmers List -->
+        <div class="row">
+            <div class="col-12">
+                <h3 class="fw-bold mb-3" style="color: #388e3c;">
+                    <i class="fas fa-users me-2"></i>Registered Farmers
+                </h3>
+                
+                <!-- Sample Farmers -->
+                <div class="row g-4" id="farmersList">
+                    <!-- Sample Farmer 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Approved</span>
+                                <small class="text-muted">Dec 15, 2024</small>
+                            </div>
+                            
+                            <div class="card-body">
+                                <div class="text-center mb-3">
+                                    <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center" 
+                                         style="width: 80px; height: 80px;">
+                                        <i class="fas fa-user text-muted" style="font-size: 2rem;"></i>
+                                    </div>
+                                </div>
+                                
+                                <h6 class="card-title text-center">Rajesh Kumar</h6>
+                                <p class="card-text">
+                                    <strong>Aadhaar:</strong> 123456789012<br>
+                                    <strong>Place:</strong> Village A<br>
+                                    <strong>Phone:</strong> 9876543210<br>
+                                    <strong>Type:</strong> 
+                                    <span class="badge bg-info">Small</span><br>
+                                    <strong>Land:</strong> 2.5 acres<br>
+                                    <strong>Address:</strong> Village A, District X, State Y
+                                </p>
+                            </div>
+                            
+                            <div class="card-footer bg-transparent">
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye me-1"></i>View
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning">
+                                        <i class="fas fa-edit me-1"></i>Edit
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash me-1"></i>Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample Farmer 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span class="badge bg-warning">Pending</span>
+                                <small class="text-muted">Dec 14, 2024</small>
+                            </div>
+                            
+                            <div class="card-body">
+                                <div class="text-center mb-3">
+                                    <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center" 
+                                         style="width: 80px; height: 80px;">
+                                        <i class="fas fa-user text-muted" style="font-size: 2rem;"></i>
+                                    </div>
+                                </div>
+                                
+                                <h6 class="card-title text-center">Priya Sharma</h6>
+                                <p class="card-text">
+                                    <strong>Aadhaar:</strong> 987654321098<br>
+                                    <strong>Place:</strong> Village B<br>
+                                    <strong>Phone:</strong> 8765432109<br>
+                                    <strong>Type:</strong> 
+                                    <span class="badge bg-info">Marginal</span><br>
+                                    <strong>Land:</strong> 1.0 acres<br>
+                                    <strong>Address:</strong> Village B, District Y, State Z
+                                </p>
+                            </div>
+                            
+                            <div class="card-footer bg-transparent">
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye me-1"></i>View
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning">
+                                        <i class="fas fa-edit me-1"></i>Edit
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash me-1"></i>Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample Farmer 3 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span class="badge bg-success">Approved</span>
+                                <small class="text-muted">Dec 13, 2024</small>
+                            </div>
+                            
+                            <div class="card-body">
+                                <div class="text-center mb-3">
+                                    <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center" 
+                                         style="width: 80px; height: 80px;">
+                                        <i class="fas fa-user text-muted" style="font-size: 2rem;"></i>
+                                    </div>
+                                </div>
+                                
+                                <h6 class="card-title text-center">Amit Patel</h6>
+                                <p class="card-text">
+                                    <strong>Aadhaar:</strong> 456789012345<br>
+                                    <strong>Place:</strong> Village C<br>
+                                    <strong>Phone:</strong> 7654321098<br>
+                                    <strong>Type:</strong> 
+                                    <span class="badge bg-info">Organic</span><br>
+                                    <strong>Land:</strong> 5.0 acres<br>
+                                    <strong>Address:</strong> Village C, District Z, State A
+                                </p>
+                            </div>
+                            
+                            <div class="card-footer bg-transparent">
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye me-1"></i>View
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning">
+                                        <i class="fas fa-edit me-1"></i>Edit
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash me-1"></i>Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form validation
+        document.getElementById('aadhaar_number').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        document.getElementById('phone').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Form submission (demo)
+        document.getElementById('farmerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const farmerData = Object.fromEntries(formData);
+            
+            // Create new farmer card
+            const newFarmerCard = createFarmerCard(farmerData);
+            
+            // Add to the list
+            document.getElementById('farmersList').insertBefore(newFarmerCard, document.getElementById('farmersList').firstChild);
+            
+            // Show success message
+            alert('Farmer added successfully!');
+            
+            // Reset form
+            this.reset();
+        });
+
+        function createFarmerCard(farmerData) {
+            const card = document.createElement('div');
+            card.className = 'col-md-6 col-lg-4';
+            card.innerHTML = `
+                <div class="card shadow h-100">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="badge bg-warning">Pending</span>
+                        <small class="text-muted">${new Date().toLocaleDateString()}</small>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center" 
+                                 style="width: 80px; height: 80px;">
+                                <i class="fas fa-user text-muted" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                        
+                        <h6 class="card-title text-center">${farmerData.name}</h6>
+                        <p class="card-text">
+                            <strong>Aadhaar:</strong> ${farmerData.aadhaar_number}<br>
+                            <strong>Place:</strong> ${farmerData.place}<br>
+                            <strong>Phone:</strong> ${farmerData.phone}<br>
+                            <strong>Type:</strong> 
+                            <span class="badge bg-info">${farmerData.farmer_type}</span><br>
+                            ${farmerData.land_size ? `<strong>Land:</strong> ${farmerData.land_size} acres<br>` : ''}
+                            ${farmerData.address ? `<strong>Address:</strong> ${farmerData.address}` : ''}
+                        </p>
+                    </div>
+                    
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i>View
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning">
+                                <i class="fas fa-edit me-1"></i>Edit
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-trash me-1"></i>Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+    </script>
+</body>
+</html> 

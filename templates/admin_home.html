@@ -1,0 +1,320 @@
+{% include 'header.html' %}
+
+<div class="container py-5">
+  <!-- Welcome Section -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card shadow border-0" style="background: linear-gradient(135deg, #388e3c 0%, #4caf50 100%);">
+        <div class="card-body text-white p-4">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h2 class="fw-bold mb-2">Welcome to KrishiCare Admin Dashboard</h2>
+              <p class="mb-0 opacity-75">Manage farmers, inventory, schemes, and monitor system activities from one central location.</p>
+            </div>
+            <div class="col-md-4 text-center">
+              <i class="fas fa-seedling" style="font-size: 4rem; opacity: 0.8;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Overview -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h4 class="fw-bold mb-3" style="color: #388e3c;">
+        <i class="fas fa-chart-bar me-2"></i>System Overview
+      </h4>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0 text-center">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-users text-primary me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-primary">156</h3>
+          </div>
+          <p class="mb-0 fw-bold">Total Farmers</p>
+          <small class="text-muted">+12 this month</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0 text-center">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-clock text-warning me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-warning">23</h3>
+          </div>
+          <p class="mb-0 fw-bold">Pending Approvals</p>
+          <small class="text-muted">Requires attention</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0 text-center">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-boxes text-success me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-success">89</h3>
+          </div>
+          <p class="mb-0 fw-bold">Active Products</p>
+          <small class="text-muted">In stock</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0 text-center">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-gift text-danger me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-danger">15</h3>
+          </div>
+          <p class="mb-0 fw-bold">Active Schemes</p>
+          <small class="text-muted">Government programs</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Tiles -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h4 class="fw-bold mb-3" style="color: #388e3c;">
+        <i class="fas fa-cogs me-2"></i>Management Tools
+      </h4>
+    </div>
+    
+    <!-- Farmers Tile -->
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card dashboard-tile text-center shadow h-100">
+        <div class="card-body py-4">
+          <i class="fa fa-tractor fa-2x mb-3 text-success"></i>
+          <h5 class="card-title">Farmer Management</h5>
+          <p class="card-text">Register, approve, and manage farmer accounts. Monitor farmer activities and maintain comprehensive records.</p>
+        </div>
+        <div class="card-footer bg-white border-0 d-flex justify-content-center gap-2 pb-3">
+          <a href="/admin/farmers/" class="btn btn-outline-success btn-sm">View Farmers</a>
+          <a href="/admin/approve-farmers/" class="btn btn-outline-primary btn-sm">Approve Farmers</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Users Tile -->
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card dashboard-tile text-center shadow h-100">
+        <div class="card-body py-4">
+          <i class="fa fa-users fa-2x mb-3 text-primary"></i>
+          <h5 class="card-title">User Management</h5>
+          <p class="card-text">Manage system users, monitor login activities, and maintain user access controls and permissions.</p>
+        </div>
+        <div class="card-footer bg-white border-0 d-flex justify-content-center pb-3">
+          <a href="/admin/users/" class="btn btn-outline-success btn-sm">View Users</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Inventory Tile -->
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card dashboard-tile text-center shadow h-100">
+        <div class="card-body py-4">
+          <i class="fa fa-boxes fa-2x mb-3 text-warning"></i>
+          <h5 class="card-title">Inventory Management</h5>
+          <p class="card-text">Manage agricultural supplies including seeds, fertilizers, and farming tools. Track stock levels and sales.</p>
+        </div>
+        <div class="card-footer bg-white border-0 d-flex justify-content-center gap-2 pb-3">
+          <a href="/admin/inventory/seed/" class="btn btn-outline-success btn-sm">Seeds</a>
+          <a href="/admin/inventory/fertilizer/" class="btn btn-outline-warning btn-sm">Fertilizers</a>
+          <a href="/admin/inventory/tool/" class="btn btn-outline-info btn-sm">Tools</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scheme Tile -->
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card dashboard-tile text-center shadow h-100">
+        <div class="card-body py-4">
+          <i class="fa fa-gift fa-2x mb-3 text-danger"></i>
+          <h5 class="card-title">Government Schemes</h5>
+          <p class="card-text">Create and manage government agricultural schemes, subsidies, and support programs for farmers.</p>
+        </div>
+        <div class="card-footer bg-white border-0 d-flex justify-content-center pb-3">
+          <a href="/admin/scheme/add/" class="btn btn-outline-success btn-sm">Add Scheme</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Complaints Tile -->
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card dashboard-tile text-center shadow h-100">
+        <div class="card-body py-4">
+          <i class="fa fa-exclamation-circle fa-2x mb-3 text-secondary"></i>
+          <h5 class="card-title">Support & Complaints</h5>
+          <p class="card-text">Handle farmer complaints, provide support, and maintain customer satisfaction through timely responses.</p>
+        </div>
+        <div class="card-footer bg-white border-0 d-flex justify-content-center gap-2 pb-3">
+          <a href="/admin/complaints/" class="btn btn-outline-success btn-sm">View Complaints</a>
+          <a href="#" class="btn btn-outline-info btn-sm disabled">Feedback</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Reports Tile -->
+    
+    
+    <!-- Settings Tile -->
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card dashboard-tile text-center shadow h-100">
+        <div class="card-body py-4">
+          <i class="fa fa-cog fa-2x mb-3 text-dark"></i>
+          <h5 class="card-title">Product Categories</h5>
+          <p class="card-text">Add farmer product Categories</p>
+        </div>
+        <div class="card-footer bg-white border-0 d-flex justify-content-center gap-2 pb-3">
+          <a href="#" class="btn btn-outline-success btn-sm disabled">Categories</a>
+        
+        </div>
+      </div>
+    </div>
+    
+    <!-- Plant Detection Tile -->
+   
+
+  <!-- Recent Activities & Quick Actions -->
+  <div class="row mb-5">
+    <!-- Recent Activities -->
+    <div class="col-md-8">
+      <div class="card shadow border-0">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">
+            <i class="fas fa-history me-2"></i>Recent Activities
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="activity-item d-flex align-items-center mb-3">
+            <div class="activity-icon bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <div>
+              <strong>New Farmer Registration</strong>
+              <p class="mb-0 text-muted">Rajesh Kumar registered as a Small farmer from Village A</p>
+              <small class="text-muted">2 hours ago</small>
+            </div>
+          </div>
+          <div class="activity-item d-flex align-items-center mb-3">
+            <div class="activity-icon bg-warning text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+              <i class="fas fa-box"></i>
+            </div>
+            <div>
+              <strong>Inventory Update</strong>
+              <p class="mb-0 text-muted">Added 50kg of Organic Fertilizer to inventory</p>
+              <small class="text-muted">4 hours ago</small>
+            </div>
+          </div>
+          <div class="activity-item d-flex align-items-center mb-3">
+            <div class="activity-icon bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+              <i class="fas fa-gift"></i>
+            </div>
+            <div>
+              <strong>New Scheme Added</strong>
+              <p class="mb-0 text-muted">PM-KISAN scheme updated with new eligibility criteria</p>
+              <small class="text-muted">1 day ago</small>
+            </div>
+          </div>
+          <div class="activity-item d-flex align-items-center mb-3">
+            <div class="activity-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+              <i class="fas fa-check"></i>
+            </div>
+            <div>
+              <strong>Farmer Approved</strong>
+              <p class="mb-0 text-muted">Priya Sharma's application has been approved</p>
+              <small class="text-muted">2 days ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quick Actions -->
+
+
+  <!-- System Information -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow border-0">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">
+            <i class="fas fa-info-circle me-2"></i>System Information
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <strong>Platform:</strong> KrishiCare v2.1
+            </div>
+            <div class="col-md-3 mb-3">
+              <strong>Last Updated:</strong> December 15, 2024
+            </div>
+            <div class="col-md-3 mb-3">
+              <strong>Database:</strong> SQLite (Development)
+            </div>
+            <div class="col-md-3 mb-3">
+              <strong>Status:</strong> <span class="badge bg-success">Online</span>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="fw-bold">Features Available:</h6>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-check text-success me-2"></i>Farmer Registration & Approval</li>
+                <li><i class="fas fa-check text-success me-2"></i>Inventory Management</li>
+                <li><i class="fas fa-check text-success me-2"></i>Government Schemes</li>
+                <li><i class="fas fa-check text-success me-2"></i>Plant Detection AI</li>
+                <li><i class="fas fa-check text-success me-2"></i>Complaint Management</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h6 class="fw-bold">Coming Soon:</h6>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-clock text-warning me-2"></i>Advanced Analytics Dashboard</li>
+                <li><i class="fas fa-clock text-warning me-2"></i>Weather Integration</li>
+                <li><i class="fas fa-clock text-warning me-2"></i>Mobile App</li>
+                <li><i class="fas fa-clock text-warning me-2"></i>Payment Gateway</li>
+                <li><i class="fas fa-clock text-warning me-2"></i>Multi-language Support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.dashboard-tile {
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 12px;
+}
+
+.dashboard-tile:hover {
+  box-shadow: 0 8px 24px rgba(56,142,60,0.15);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.activity-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-icon {
+  flex-shrink: 0;
+}
+</style>
+
+{% include 'footer.html' %} 

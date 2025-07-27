@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Farmers - Complete Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .feature-icon {
+            color: #388e3c;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #388e3c;
+            color: white;
+            border-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-seedling me-2"></i>Farmer Management System
+            </a>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h2 class="text-center fw-bold mb-4" style="color: #388e3c;">Manage Farmers</h2>
+        
+        <!-- Add Farmer Form -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-plus me-2"></i>Add New Farmer</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="farmerForm">
+                            <div class="row g-3">
+                                <!-- Aadhaar Number -->
+                                <div class="col-md-6">
+                                    <label for="aadhaar_number" class="form-label">Aadhaar Number *</label>
+                                    <input type="text" class="form-control" id="aadhaar_number" name="aadhaar_number" 
+                                           maxlength="12" pattern="[0-9]{12}" required 
+                                           placeholder="Enter 12-digit Aadhaar number">
+                                    <div class="form-text">12-digit Aadhaar number (numbers only)</div>
+                                </div>
+                                
+                                <!-- Name -->
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required 
+                                           placeholder="Enter farmer's full name">
+                                </div>
+                                
+                                <!-- Place -->
+                                <div class="col-md-6">
+                                    <label for="place" class="form-label">Place/Village *</label>
+                                    <input type="text" class="form-control" id="place" name="place" required 
+                                           placeholder="Enter village/town name">
+                                </div>
+                                
+                                <!-- Phone -->
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required 
+                                           pattern="[0-9]{10}" maxlength="10" placeholder="Enter 10-digit phone number">
+                                    <div class="form-text">10-digit phone number</div>
+                                </div>
+                                
+                                <!-- Farmer Type -->
+                                <div class="col-md-6">
+                                    <label for="farmer_type" class="form-label">Farmer Type *</label>
+                                    <select class="form-select" id="farmer_type" name="farmer_type" required>
+                                        <option value="">Select farmer type</option>
+                                        <option value="small">Small</option>
+                                        <option value="marginal">Marginal</option>
+                                        <option value="sc">SC</option>
+                                        <option value="st">ST</option>
+                                        <option value="organic">Organic</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Land Size -->
+                                <div class="col-md-6">
+                                    <label for="land_size" class="form-label">Land Size (acres)</label>
+                                    <input type="number" class="form-control" id="land_size" name="land_size" 
+                                           step="0.01" min="0" placeholder="Enter land size in acres">
+                                </div>
+                                
+                                <!-- Photo -->
+                                <div class="col-md-6">
+                                    <label for="photo" class="form-label">Photo</label>
+                                    <input type="file" class="form-control" id="photo" name="photo" 
+                                           accept="image/*">
+                                    <div class="form-text">Upload farmer's photo (optional)</div>
+                                </div>
+                                
+                                <!-- Address -->
+                                <div class="col-md-6">
+                                    <label for="address" class="form-label">Address</label>
+                                    <textarea class="form-control" id="address" name="address" rows="3" 
+                                              placeholder="Enter complete address (optional)"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <button type="reset" class="btn btn-outline-secondary me-md-2">
+                                    <i class="fas fa-undo me-1"></i>Reset Form
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-save me-1"></i>Add Farmer
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        <div id="messages"></div>
+
+        <!-- Farmers List with Approval/Rejection -->
+        <div class="row">
+            <div class="col-12">
+                <h3 class="fw-bold mb-3" style="color: #388e3c;">
+                    <i class="fas fa-users me-2"></i>Registered Farmers
+                </h3>
+                
+                <!-- Filter Tabs -->
+                <ul class="nav nav-tabs mb-4" id="farmerTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab">
+                            <i class="fas fa-list me-1"></i>All Farmers (5)
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab">
+                            <i class="fas fa-clock me-1"></i>Pending (3)
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="approved-tab" data-bs-toggle="tab" data-bs-target="#approved" type="button" role="tab">
+                            <i class="fas fa-check me-1"></i>Approved (2)
+                        </button>
+                    </li>
+                </ul>
+                
+                <!-- Tab Content -->
+                <div class="tab-content" id="farmerTabsContent">
+                    <!-- All Farmers Tab -->
+                    <div class="tab-pane fade show active" id="all" role="tabpanel">
+                        <div class="row g-4" id="allFarmersList">
+                            <!-- Farmers will be dynamically added here -->
+                        </div>
+                    </div>
+
+                    <!-- Pending Farmers Tab -->
+                    <div class="tab-pane fade" id="pending" role="tabpanel">
+                        <div class="row g-4" id="pendingFarmersList">
+                            <!-- Pending farmers will be shown here -->
+                        </div>
+                    </div>
+
+                    <!-- Approved Farmers Tab -->
+                    <div class="tab-pane fade" id="approved" role="tabpanel">
+                        <div class="row g-4" id="approvedFarmersList">
+                            <!-- Approved farmers will be shown here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Dashboard -->
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample data
+        const farmers = [
+            {
+                id: 1,
+                name: 'Rajesh Kumar',
+                aadhaar_number: '123456789012',
+                place: 'Village A',
+                phone: '9876543210',
+                farmer_type: 'Small',
+                land_size: '2.5',
+                address: 'Village A, District X, State Y',
+                status: 'pending',
+                registered_date: '2024-12-15'
+            },
+            {
+                id: 2,
+                name: 'Priya Sharma',
+                aadhaar_number: '987654321098',
+                place: 'Village B',
+                phone: '8765432109',
+                farmer_type: 'Marginal',
+                land_size: '1.0',
+                address: 'Village B, District Y, State Z',
+                status: 'pending',
+                registered_date: '2024-12-14'
+            },
+            {
+                id: 3,
+                name: 'Suresh Patel',
+                aadhaar_number: '456789012345',
+                place: 'Village C',
+                phone: '7654321098',
+                farmer_type: 'SC',
+                land_size: '3.0',
+                address: 'Village C, District Z, State A',
+                status: 'pending',
+                registered_date: '2024-12-13'
+            },
+            {
+                id: 4,
+                name: 'Amit Patel',
+                aadhaar_number: '789012345678',
+                place: 'Village D',
+                phone: '6543210987',
+                farmer_type: 'Organic',
+                land_size: '5.0',
+                address: 'Village D, District Z, State A',
+                status: 'approved',
+                registered_date: '2024-12-10'
+            },
+            {
+                id: 5,
+                name: 'Lakshmi Devi',
+                aadhaar_number: '321098765432',
+                place: 'Village E',
+                phone: '5432109876',
+                farmer_type: 'ST',
+                land_size: '1.5',
+                address: 'Village E, District Y, State B',
+                status: 'approved',
+                registered_date: '2024-12-08'
+            }
+        ];
+
+        // Form validation
+        document.getElementById('aadhaar_number').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        document.getElementById('phone').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Form submission
+        document.getElementById('farmerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const farmerData = Object.fromEntries(formData);
+            
+            // Add new farmer to the list
+            const newFarmer = {
+                id: farmers.length + 1,
+                name: farmerData.name,
+                aadhaar_number: farmerData.aadhaar_number,
+                place: farmerData.place,
+                phone: farmerData.phone,
+                farmer_type: farmerData.farmer_type,
+                land_size: farmerData.land_size || '0',
+                address: farmerData.address || '',
+                status: 'pending',
+                registered_date: new Date().toISOString().split('T')[0]
+            };
+            
+            farmers.push(newFarmer);
+            renderFarmers();
+            showMessage('Farmer added successfully!', 'success');
+            this.reset();
+        });
+
+        // Render farmers
+        function renderFarmers() {
+            const allFarmersList = document.getElementById('allFarmersList');
+            const pendingFarmersList = document.getElementById('pendingFarmersList');
+            const approvedFarmersList = document.getElementById('approvedFarmersList');
+            
+            allFarmersList.innerHTML = '';
+            pendingFarmersList.innerHTML = '';
+            approvedFarmersList.innerHTML = '';
+            
+            farmers.forEach(farmer => {
+                const farmerCard = createFarmerCard(farmer);
+                allFarmersList.appendChild(farmerCard.cloneNode(true));
+                
+                if (farmer.status === 'pending') {
+                    pendingFarmersList.appendChild(farmerCard.cloneNode(true));
+                } else if (farmer.status === 'approved') {
+                    approvedFarmersList.appendChild(farmerCard.cloneNode(true));
+                }
+            });
+        }
+
+        // Create farmer card
+        function createFarmerCard(farmer) {
+            const card = document.createElement('div');
+            card.className = 'col-md-6 col-lg-4';
+            card.innerHTML = `
+                <div class="card shadow h-100">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="badge ${farmer.status === 'approved' ? 'bg-success' : 'bg-warning'}">
+                            ${farmer.status === 'approved' ? 'Approved' : 'Pending Approval'}
+                        </span>
+                        <small class="text-muted">${farmer.registered_date}</small>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center" 
+                                 style="width: 80px; height: 80px;">
+                                <i class="fas fa-user text-muted" style="font-size: 2rem;"></i>
+                            </div>
+                        </div>
+                        
+                        <h6 class="card-title text-center">${farmer.name}</h6>
+                        <p class="card-text">
+                            <strong>Aadhaar:</strong> ${farmer.aadhaar_number}<br>
+                            <strong>Place:</strong> ${farmer.place}<br>
+                            <strong>Phone:</strong> ${farmer.phone}<br>
+                            <strong>Type:</strong> 
+                            <span class="badge bg-info">${farmer.farmer_type}</span><br>
+                            ${farmer.land_size ? `<strong>Land:</strong> ${farmer.land_size} acres<br>` : ''}
+                            ${farmer.address ? `<strong>Address:</strong> ${farmer.address}` : ''}
+                        </p>
+                    </div>
+                    
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex gap-2 mb-2">
+                            <button class="btn btn-sm btn-outline-primary flex-fill">
+                                <i class="fas fa-eye me-1"></i>View
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning flex-fill">
+                                <i class="fas fa-edit me-1"></i>Edit
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger flex-fill">
+                                <i class="fas fa-trash me-1"></i>Delete
+                            </button>
+                        </div>
+                        <div class="d-flex gap-2">
+                            ${farmer.status === 'pending' ? 
+                                `<button class="btn btn-sm btn-success flex-fill" onclick="approveFarmer(${farmer.id})">
+                                    <i class="fas fa-check me-1"></i>Approve
+                                </button>
+                                <button class="btn btn-sm btn-danger flex-fill" onclick="rejectFarmer(${farmer.id})">
+                                    <i class="fas fa-times me-1"></i>Reject
+                                </button>` :
+                                `<button class="btn btn-sm btn-warning flex-fill" onclick="revokeApproval(${farmer.id})">
+                                    <i class="fas fa-undo me-1"></i>Revoke Approval
+                                </button>`
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Show message
+        function showMessage(message, type) {
+            const messagesDiv = document.getElementById('messages');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                <i class="fas fa-info-circle me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            messagesDiv.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 3000);
+        }
+
+        // Approval functions
+        function approveFarmer(farmerId) {
+            if (confirm('Are you sure you want to approve this farmer?')) {
+                const farmer = farmers.find(f => f.id === farmerId);
+                if (farmer) {
+                    farmer.status = 'approved';
+                    renderFarmers();
+                    showMessage(`Farmer ${farmer.name} has been approved successfully!`, 'success');
+                }
+            }
+        }
+
+        function rejectFarmer(farmerId) {
+            if (confirm('Are you sure you want to reject this farmer?')) {
+                const farmer = farmers.find(f => f.id === farmerId);
+                if (farmer) {
+                    farmers.splice(farmers.indexOf(farmer), 1);
+                    renderFarmers();
+                    showMessage(`Farmer ${farmer.name} has been rejected.`, 'warning');
+                }
+            }
+        }
+
+        function revokeApproval(farmerId) {
+            if (confirm('Are you sure you want to revoke approval for this farmer?')) {
+                const farmer = farmers.find(f => f.id === farmerId);
+                if (farmer) {
+                    farmer.status = 'pending';
+                    renderFarmers();
+                    showMessage(`Approval revoked for farmer ${farmer.name}.`, 'warning');
+                }
+            }
+        }
+
+        // Initialize
+        renderFarmers();
+    </script>
+</body>
+</html> 

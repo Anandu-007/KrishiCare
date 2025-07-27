@@ -1,0 +1,393 @@
+{% include 'header.html' %}
+
+<div class="container py-4">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="text-center fw-bold mb-4" style="color: #388e3c;">
+        <i class="fas fa-box me-2"></i>Products Added by Farmers
+      </h3>
+      
+      <!-- Statistics Cards -->
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+              <i class="fas fa-boxes fa-2x mb-2"></i>
+              <h5 class="card-title">Total Products</h5>
+              <h3 class="mb-0">24</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-success text-white">
+            <div class="card-body text-center">
+              <i class="fas fa-users fa-2x mb-2"></i>
+              <h5 class="card-title">Active Farmers</h5>
+              <h3 class="mb-0">18</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-info text-white">
+            <div class="card-body text-center">
+              <i class="fas fa-tags fa-2x mb-2"></i>
+              <h5 class="card-title">Categories</h5>
+              <h3 class="mb-0">8</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-warning text-white">
+            <div class="card-body text-center">
+              <i class="fas fa-chart-line fa-2x mb-2"></i>
+              <h5 class="card-title">Total Value</h5>
+              <h3 class="mb-0">₹45K</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter and Search -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search products...">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select">
+            <option selected>All Categories</option>
+            <option>Vegetables</option>
+            <option>Fruits</option>
+            <option>Grains</option>
+            <option>Dairy</option>
+            <option>Poultry</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select">
+            <option selected>Sort by</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Name: A to Z</option>
+            <option>Quantity: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="row g-4">
+                    <!-- Product 1 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card shadow h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <span class="badge bg-success">In Stock</span>
+                  <small class="text-muted">Added: Dec 15, 2024</small>
+                </div>
+                <div class="card-body">
+                  <div class="text-center mb-3">
+                    <div class="rounded bg-light d-inline-flex align-items-center justify-content-center" 
+                         style="width: 100px; height: 80px;">
+                      <i class="fas fa-carrot text-success" style="font-size: 2rem;"></i>
+                    </div>
+                  </div>
+                  <h6 class="card-title text-center">Fresh Organic Carrots</h6>
+                  <p class="card-text text-muted small">
+                    Freshly harvested organic carrots from our farm. Rich in vitamins and minerals, perfect for healthy cooking.
+                  </p>
+                  <div class="row text-center">
+                    <div class="col-6">
+                      <strong class="text-success">₹45/kg</strong>
+                      <br><small class="text-muted">Price</small>
+                    </div>
+                    <div class="col-6">
+                      <strong class="text-primary">50 kg</strong>
+                      <br><small class="text-muted">Available</small>
+                    </div>
+                  </div>
+                  <div class="mt-3">
+                    <small class="text-muted">
+                      <i class="fas fa-user me-1"></i>Farmer: Rajesh Kumar
+                    </small>
+                  </div>
+                </div>
+                <div class="card-footer bg-transparent">
+                  <button class="btn btn-sm btn-outline-primary w-100">
+                    <i class="fas fa-eye me-1"></i>View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+
+                    <!-- Product 2 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card shadow h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <span class="badge bg-success">In Stock</span>
+                  <small class="text-muted">Added: Dec 14, 2024</small>
+                </div>
+                <div class="card-body">
+                  <div class="text-center mb-3">
+                    <div class="rounded bg-light d-inline-flex align-items-center justify-content-center" 
+                         style="width: 100px; height: 80px;">
+                      <i class="fas fa-apple-alt text-danger" style="font-size: 2rem;"></i>
+                    </div>
+                  </div>
+                  <h6 class="card-title text-center">Sweet Red Apples</h6>
+                  <p class="card-text text-muted small">
+                    Juicy red apples grown without pesticides. Perfect for eating fresh or making desserts.
+                  </p>
+                  <div class="row text-center">
+                    <div class="col-6">
+                      <strong class="text-success">₹120/kg</strong>
+                      <br><small class="text-muted">Price</small>
+                    </div>
+                    <div class="col-6">
+                      <strong class="text-primary">25 kg</strong>
+                      <br><small class="text-muted">Available</small>
+                    </div>
+                  </div>
+                  <div class="mt-3">
+                    <small class="text-muted">
+                      <i class="fas fa-user me-1"></i>Farmer: Priya Sharma
+                    </small>
+                  </div>
+                </div>
+                <div class="card-footer bg-transparent">
+                  <button class="btn btn-sm btn-outline-primary w-100">
+                    <i class="fas fa-eye me-1"></i>View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+
+        <!-- Product 3 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="badge bg-warning">Low Stock</span>
+              <small class="text-muted">Added: Dec 13, 2024</small>
+            </div>
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <div class="rounded bg-light d-inline-flex align-items-center justify-content-center" 
+                     style="width: 100px; height: 80px;">
+                  <i class="fas fa-seedling text-success" style="font-size: 2rem;"></i>
+                </div>
+              </div>
+              <h6 class="card-title text-center">Basmati Rice</h6>
+              <p class="card-text text-muted small">
+                Premium quality basmati rice, aromatic and long-grained. Perfect for biryanis and pulao.
+              </p>
+              <div class="row text-center">
+                <div class="col-6">
+                  <strong class="text-success">₹85/kg</strong>
+                  <br><small class="text-muted">Price</small>
+                </div>
+                <div class="col-6">
+                  <strong class="text-warning">8 kg</strong>
+                  <br><small class="text-muted">Available</small>
+                </div>
+              </div>
+              <div class="mt-3">
+                <small class="text-muted">
+                  <i class="fas fa-user me-1"></i>Farmer: Suresh Patel
+                </small>
+              </div>
+            </div>
+            <div class="card-footer bg-transparent">
+              <button class="btn btn-sm btn-outline-primary w-100">
+                <i class="fas fa-eye me-1"></i>View Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="badge bg-success">In Stock</span>
+              <small class="text-muted">Added: Dec 12, 2024</small>
+            </div>
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <div class="rounded bg-light d-inline-flex align-items-center justify-content-center" 
+                     style="width: 100px; height: 80px;">
+                  <i class="fas fa-egg text-warning" style="font-size: 2rem;"></i>
+                </div>
+              </div>
+              <h6 class="card-title text-center">Fresh Farm Eggs</h6>
+              <p class="card-text text-muted small">
+                Fresh eggs from free-range chickens. Rich in protein and essential nutrients.
+              </p>
+              <div class="row text-center">
+                <div class="col-6">
+                  <strong class="text-success">₹8/egg</strong>
+                  <br><small class="text-muted">Price</small>
+                </div>
+                <div class="col-6">
+                  <strong class="text-primary">200 eggs</strong>
+                  <br><small class="text-muted">Available</small>
+                </div>
+              </div>
+              <div class="mt-3">
+                <small class="text-muted">
+                  <i class="fas fa-user me-1"></i>Farmer: Amit Patel
+                </small>
+              </div>
+            </div>
+            <div class="card-footer bg-transparent">
+              <button class="btn btn-sm btn-outline-primary w-100">
+                <i class="fas fa-eye me-1"></i>View Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="badge bg-danger">Out of Stock</span>
+              <small class="text-muted">Added: Dec 10, 2024</small>
+            </div>
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <div class="rounded bg-light d-inline-flex align-items-center justify-content-center" 
+                     style="width: 100px; height: 80px;">
+                  <i class="fas fa-cheese text-warning" style="font-size: 2rem;"></i>
+                </div>
+              </div>
+              <h6 class="card-title text-center">Homemade Cheese</h6>
+              <p class="card-text text-muted small">
+                Traditional homemade cheese made from pure cow milk. Rich and creamy texture.
+              </p>
+              <div class="row text-center">
+                <div class="col-6">
+                  <strong class="text-success">₹350/kg</strong>
+                  <br><small class="text-muted">Price</small>
+                </div>
+                <div class="col-6">
+                  <strong class="text-danger">0 kg</strong>
+                  <br><small class="text-muted">Available</small>
+                </div>
+              </div>
+              <div class="mt-3">
+                <small class="text-muted">
+                  <i class="fas fa-user me-1"></i>Farmer: Lakshmi Devi
+                </small>
+              </div>
+            </div>
+            <div class="card-footer bg-transparent">
+              <button class="btn btn-sm btn-outline-primary w-100">
+                <i class="fas fa-eye me-1"></i>View Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="badge bg-success">In Stock</span>
+              <small class="text-muted">Added: Dec 08, 2024</small>
+            </div>
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <div class="rounded bg-light d-inline-flex align-items-center justify-content-center" 
+                     style="width: 100px; height: 80px;">
+                  <i class="fas fa-leaf text-success" style="font-size: 2rem;"></i>
+                </div>
+              </div>
+              <h6 class="card-title text-center">Fresh Spinach</h6>
+              <p class="card-text text-muted small">
+                Organic spinach leaves, rich in iron and vitamins. Perfect for salads and cooking.
+              </p>
+              <div class="row text-center">
+                <div class="col-6">
+                  <strong class="text-success">₹30/kg</strong>
+                  <br><small class="text-muted">Price</small>
+                </div>
+                <div class="col-6">
+                  <strong class="text-primary">15 kg</strong>
+                  <br><small class="text-muted">Available</small>
+                </div>
+              </div>
+              <div class="mt-3">
+                <small class="text-muted">
+                  <i class="fas fa-user me-1"></i>Farmer: Rajesh Kumar
+                </small>
+              </div>
+            </div>
+            <div class="card-footer bg-transparent">
+              <button class="btn btn-sm btn-outline-primary w-100">
+                <i class="fas fa-eye me-1"></i>View Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <nav aria-label="Products pagination" class="mt-4">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Back to Dashboard -->
+  <div class="text-center mt-4">
+    <a href="/admin/dashboard/" class="btn btn-outline-secondary">
+      <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+    </a>
+  </div>
+</div>
+
+<script>
+// Search functionality (demo)
+document.querySelector('input[placeholder="Search products..."]').addEventListener('input', function(e) {
+  console.log('Searching for:', e.target.value);
+});
+
+// Category filter (demo)
+document.querySelector('select').addEventListener('change', function(e) {
+  console.log('Filtering by category:', e.target.value);
+});
+
+// Sort functionality (demo)
+document.querySelectorAll('select')[1].addEventListener('change', function(e) {
+  console.log('Sorting by:', e.target.value);
+});
+
+// View details function
+function viewProductDetails(productId) {
+  alert('Viewing details for product ' + productId);
+}
+
+// Edit product function
+function editProduct(productId) {
+  alert('Editing product ' + productId);
+}
+
+// Delete product function
+function deleteProduct(productId) {
+  if (confirm('Are you sure you want to delete this product?')) {
+    alert('Product ' + productId + ' deleted successfully!');
+  }
+}
+</script>
+
+{% include 'footer.html' %} 

@@ -1,0 +1,25 @@
+{% include 'header.html' %}
+<div class="container py-5">
+  <h2 class="text-center fw-bold mb-4" style="color: #388e3c;">View Complaints</h2>
+  <div class="row g-4">
+    {% for complaint in complaints %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-2">{{ complaint.subject }}</h5>
+          <p class="mb-1"><strong>From:</strong> {{ complaint.submitted_by }} <span class="badge bg-secondary">{{ complaint.user_type }}</span></p>
+          <p class="mb-1"><strong>Date:</strong> {{ complaint.submitted_date }}</p>
+          <p class="mb-2"><strong>Message:</strong> {{ complaint.message }}</p>
+          <div class="d-flex justify-content-center mt-3">
+            <button class="btn btn-primary btn-sm">Reply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="text-center mt-4">
+    <a href="/admin/dashboard/" class="btn btn-outline-secondary">Back to Dashboard</a>
+  </div>
+</div>
+{% include 'footer.html' %} 
