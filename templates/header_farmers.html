@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KrishiCare - Farmers</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --text: #222;
+      --navbar-bg: linear-gradient(90deg, #388e3c 0%, #81c784 100%);
+      --navbar-link: #fff;
+      --navbar-link-active: #fff;
+      --card-bg: #fff;
+      --card-shadow: 0 2px 8px rgba(56, 142, 60, 0.08);
+      --card-shadow-hover: 0 4px 16px rgba(56, 142, 60, 0.15);
+      --feature-icon: #388e3c;
+      --footer-bg: #388e3c;
+      --footer-text: #fff;
+      --tab-bg: #fff;
+      --tab-border: #e0e0e0;
+    }
+    body {
+      background-color: #f8f9fa;
+      color: var(--text);
+    }
+    .navbar {
+      background: linear-gradient(90deg, #388e3c 0%, #81c784 100%);
+      padding: 0.5rem 1rem;
+      min-height: 60px;
+    }
+    .navbar-brand, .nav-link, .navbar-nav .nav-link.active {
+      color: #fff !important;
+      font-weight: 500;
+    }
+    .navbar-brand {
+      font-size: 1.25rem !important;
+      padding: 0.25rem 0;
+    }
+    .nav-link {
+      padding: 0.5rem 0.75rem !important;
+      font-size: 0.9rem;
+    }
+    .navbar-nav{
+        align-items: right;
+        display: flex;
+    }
+    
+
+    .btn-success {
+      background-color: #388e3c !important;
+      border-color: #388e3c !important;
+    }
+    .btn-outline-success {
+      color: #388e3c !important;
+      border-color: #388e3c !important;
+    }
+    .btn-outline-success:hover {
+      background-color: #81c784 !important;
+      color: #fff !important;
+    }
+    .hero {
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      min-height: 350px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      position: relative;
+    }
+    .hero-overlay {
+      background: rgba(56, 142, 60, 0.7);
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+    }
+    .feature-icon {
+      font-size: 2rem;
+      color: var(--feature-icon);
+      margin-bottom: 0.5rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border: none;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: var(--card-shadow-hover);
+    }
+    .about-img {
+      border-radius: 1rem;
+      width: 100%;
+      object-fit: cover;
+      max-height: 250px;
+    }
+    .footer {
+      background: #388e3c;
+      color: #fff;
+      padding: 1rem 0;
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .nav-tabs .nav-link.active {
+      background-color: #388e3c !important;
+      color: #fff !important;
+      border-color: #388e3c #388e3c #fff;
+    }
+    .nav-tabs .nav-link {
+      color: #222 !important;
+      font-weight: 500;
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-bottom: none;
+    }
+    .tab-content {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-top: none;
+      padding: 2rem 1rem 1rem 1rem;
+      border-radius: 0 0 1rem 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    /* Dropdown styling */
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-radius: 8px;
+      margin-top: 8px;
+      display: none;
+      position: absolute;
+      z-index: 1000;
+    }
+    
+    .dropdown-menu.show {
+      display: block !important;
+    }
+    
+    .dropdown-item {
+      padding: 8px 16px;
+      color: #333;
+      transition: all 0.2s;
+    }
+    
+    .dropdown-item:hover {
+      background-color: #f8f9fa;
+      color: #388e3c;
+    }
+    
+    .dropdown-divider {
+      margin: 4px 0;
+      border-color: #e9ecef;
+    }
+    
+    .navbar-nav .dropdown-menu {
+      background: #fff;
+    }
+
+    /* Farmer-specific styling */
+    .farmer-navbar .navbar-brand {
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    
+    .farmer-navbar .nav-link {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .farmer-navbar .dropdown-item {
+      font-weight: 500;
+    }
+    
+    .farmer-navbar .dropdown-item i {
+      width: 20px;
+      text-align: center;
+      margin-right: 8px;
+    }
+    
+    /* Compact navbar styling */
+    .farmer-navbar .container {
+      padding: 0 1rem;
+    }
+    
+    .farmer-navbar .navbar-toggler {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+    
+    .farmer-navbar .navbar-nav {
+      align-items: center;
+    }
+
+    /* Floating Chatbot Styles */
+    .chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .chatbot-toggle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #388e3c 0%, #81c784 100%);
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(56, 142, 60, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .chatbot-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(56, 142, 60, 0.4);
+    }
+
+    .chatbot-toggle .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #ff4757;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .chatbot-window {
+      position: absolute;
+      bottom: 80px;
+      right: 0;
+      width: 350px;
+      height: 500px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: slideIn 0.3s ease;
+      z-index: 1001;
+    }
+
+
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .chatbot-header {
+      background: linear-gradient(135deg, #388e3c 0%, #81c784 100%);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chatbot-header h6 {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .chatbot-header .status {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0.3; }
+    }
+
+    .chatbot-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 8px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s;
+      z-index: 1002;
+    }
+
+    .chatbot-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .chatbot-close:active {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .chatbot-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #f8f9fa;
+    }
+
+    .message {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .message-content {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .message.bot .message-content {
+      background: white;
+      color: #333;
+      border: 1px solid #e9ecef;
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.user .message-content {
+      background: linear-gradient(135deg, #388e3c 0%, #81c784 100%);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message-time {
+      font-size: 11px;
+      color: #6c757d;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    .chatbot-input {
+      padding: 15px 20px;
+      background: white;
+      border-top: 1px solid #e9ecef;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chatbot-input input {
+      flex: 1;
+      border: 1px solid #e9ecef;
+      border-radius: 20px;
+      padding: 10px 15px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .chatbot-input input:focus {
+      border-color: #388e3c;
+    }
+
+    .chatbot-send {
+      background: linear-gradient(135deg, #388e3c 0%, #81c784 100%);
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+
+    .chatbot-send:hover {
+      transform: scale(1.1);
+    }
+
+    .quick-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .quick-reply {
+      background: white;
+      border: 1px solid #e9ecef;
+      border-radius: 15px;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quick-reply:hover {
+      background: #388e3c;
+      color: white;
+      border-color: #388e3c;
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 18px;
+      border: 1px solid #e9ecef;
+      width: fit-content;
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background: #6c757d;
+      border-radius: 50%;
+      animation: typing 1.4s infinite;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-10px); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .chatbot-window {
+        width: 300px;
+        height: 400px;
+        right: -10px;
+      }
+      
+      .chatbot-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+    }
+    
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg farmer-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="/farmers/dashboard/">
+        <i class="fas fa-tractor me-2"></i>KrishiCare Farmers
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div>
+        <ul class="navbar-nav">
+          <!-- Farmer Dashboard -->
+          <li class="nav-item">
+            <a class="nav-link active" href="/farmers/dashboard/">
+              <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+            </a>
+          </li>
+
+          <!-- Marketplace -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="marketplaceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-shopping-cart me-1"></i>Marketplace
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="marketplaceDropdown">
+              <li><a class="dropdown-item" href="/farmers/seeds-marketplace/">
+                <i class="fas fa-seedling"></i>Seeds Marketplace
+              </a></li>
+              <li><a class="dropdown-item" href="/farmers/fertilizers-marketplace/">
+                <i class="fas fa-flask"></i>Fertilizers Marketplace
+              </a></li>
+              <li><a class="dropdown-item" href="/farmers/tools-marketplace/">
+                <i class="fas fa-tools"></i>Tools Marketplace
+              </a></li>
+            </ul>
+          </li>
+
+          <!-- Categories -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-list-alt me-1"></i>Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+              <li><a class="dropdown-item" href="/farmers/category/vegetables/">
+                <i class="fas fa-seedling"></i>Vegetables
+              </a></li>
+              <li><a class="dropdown-item" href="/farmers/category/fruits/">
+                <i class="fas fa-apple-alt"></i>Fruits
+              </a></li>
+              <li><a class="dropdown-item" href="/farmers/category/grains/">
+                <i class="fas fa-wheat-awn"></i>Grains
+              </a></li>
+              <li><a class="dropdown-item" href="/farmers/category/pulses/">
+                <i class="fas fa-seedling"></i>Pulses
+              </a></li>
+              <li><a class="dropdown-item" href="/farmers/category/spices/">
+                <i class="fas fa-leaf"></i>Spices
+              </a></li>
+            </ul>
+          </li>
+
+          <!-- Schemes -->
+          <li class="nav-item">
+            <a class="nav-link" href="/farmers/schemes/">
+              <i class="fas fa-gift me-1"></i>Government Schemes
+            </a>
+          </li>
+
+          <!-- Plant Detection -->
+          <li class="nav-item">
+            <a class="nav-link" href="/farmers/plant-detection/">
+              <i class="fas fa-leaf me-1"></i>Plant Detection
+            </a>
+          </li>
+
+          <!-- Account -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user me-1"></i>Account
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+              <li><a class="dropdown-item" href="/home/">
+                <i class="fas fa-home"></i>Main Site
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/login/">
+                <i class="fas fa-sign-out-alt"></i>Logout
+              </a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Simple Working Chatbot -->
+  <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+    <!-- Toggle Button -->
+    <button style="width: 60px; height: 60px; border-radius: 50%; background: #388e3c; color: white; border: none; font-size: 24px; cursor: pointer;" onclick="testToggle();">
+      💬
+    </button>
+
+    <!-- Chatbot Window -->
+    <div id="testChatbot" style="position: absolute; bottom: 80px; right: 0; width: 300px; height: 400px; background: white; border: 2px solid #388e3c; border-radius: 10px; display: none; flex-direction: column;">
+      <!-- Header -->
+      <div style="background: #388e3c; color: white; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+        <h6 style="margin: 0;">KrishiCare Assistant</h6>
+        <button style="background: none; border: none; color: white; font-size: 18px; cursor: pointer;" onclick="testClose();">✕</button>
+      </div>
+      
+      <!-- Content -->
+      <div style="flex: 1; padding: 20px; background: #f8f9fa;">
+        <p><strong>👋 Hello! I'm your KrishiCare Assistant</strong></p>
+        <p>How can I help you today? I can assist with:</p>
+        <ul>
+          <li>Farming queries</li>
+          <li>Product information</li>
+          <li>Scheme applications</li>
+          <li>Technical support</li>
+        </ul>
+        <p>Click the X button to close this chatbot.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Initialize Bootstrap Dropdowns -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Test if Bootstrap is loaded
+      if (typeof bootstrap !== 'undefined') {
+        console.log('Bootstrap is loaded');
+        
+        // Initialize dropdowns manually
+        const dropdowns = document.querySelectorAll('.dropdown-toggle');
+        dropdowns.forEach(function(dropdownToggle) {
+          dropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const dropdownMenu = this.nextElementSibling;
+            const isOpen = dropdownMenu.classList.contains('show');
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+              menu.classList.remove('show');
+            });
+            
+            // Toggle current dropdown
+            if (!isOpen) {
+              dropdownMenu.classList.add('show');
+            }
+          });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+              menu.classList.remove('show');
+            });
+          }
+        });
+        
+        console.log('Custom dropdown handlers added to', dropdowns.length, 'dropdowns');
+      } else {
+        console.log('Bootstrap not loaded');
+      }
+    });
+  </script>
+
+  <!-- Chatbot JavaScript -->
+  <script>
+    // Simple test functions that work
+    let testOpen = false;
+    
+    function testToggle() {
+      const testChatbot = document.getElementById('testChatbot');
+      console.log('Test toggle clicked, current state:', testOpen);
+      
+      if (testOpen) {
+        testChatbot.style.display = 'none';
+        testOpen = false;
+        console.log('Test chatbot closed');
+      } else {
+        testChatbot.style.display = 'flex';
+        testOpen = true;
+        console.log('Test chatbot opened');
+      }
+      
+      console.log('Final test state:', testOpen, 'Display:', testChatbot.style.display);
+    }
+    
+    function testClose() {
+      const testChatbot = document.getElementById('testChatbot');
+      testChatbot.style.display = 'none';
+      testOpen = false;
+      console.log('Test chatbot closed via close button');
+    }
+    
+    // Global functions for quick replies
+    function sendQuickReply(text) {
+      const chatbotMessages = document.getElementById('chatbotMessages');
+      if (!chatbotMessages) return;
+      
+      addMessage(text, 'user');
+      showTypingIndicator();
+      
+      setTimeout(() => {
+        hideTypingIndicator();
+        let response = "I'll help you with that! Please provide more details so I can assist you better.";
+        
+        if (text.includes('scheme')) {
+          response = "For scheme applications, you can visit the Government Schemes section. I can guide you through the process step by step.";
+        } else if (text.includes('product')) {
+          response = "Check out our marketplace for the best agricultural products. We have seeds, fertilizers, and tools from trusted suppliers.";
+        } else if (text.includes('plant')) {
+          response = "For plant care and disease detection, try our Plant Detection feature. Upload a photo and get instant analysis!";
+        }
+        
+        addMessage(response, 'bot');
+      }, 1000);
+    }
+
+    // Simple message handling
+    document.addEventListener('DOMContentLoaded', function() {
+      const chatbotInput = document.getElementById('chatbotInput');
+      const chatbotSend = document.getElementById('chatbotSend');
+      const chatbotMessages = document.getElementById('chatbotMessages');
+
+      // Send message on Enter key
+      chatbotInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          sendMessage();
+        }
+      });
+
+      // Send message on button click
+      chatbotSend.addEventListener('click', sendMessage);
+
+      // Send message function
+      function sendMessage() {
+        const message = chatbotInput.value.trim();
+        if (message) {
+          addMessage(message, 'user');
+          chatbotInput.value = '';
+          
+          showTypingIndicator();
+          
+          setTimeout(() => {
+            hideTypingIndicator();
+            const responses = [
+              "Thank you for your message! I'll help you with that. Our team will get back to you soon.",
+              "Great question! Let me connect you with the right information.",
+              "I understand your concern. Here's what I can tell you about that...",
+              "Thanks for reaching out! I'm here to help with your farming needs."
+            ];
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            addMessage(randomResponse, 'bot');
+          }, 1500);
+        }
+      }
+
+      // Add message to chat
+      function addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
+        contentDiv.innerHTML = text;
+        
+        messageDiv.appendChild(contentDiv);
+        
+        const timeDiv = document.createElement('div');
+        timeDiv.className = 'message-time';
+        timeDiv.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.appendChild(timeDiv);
+        
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      // Show typing indicator
+      function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot';
+        typingDiv.id = 'typingIndicator';
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'typing-indicator';
+        contentDiv.innerHTML = `
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        `;
+        
+        typingDiv.appendChild(contentDiv);
+        chatbotMessages.appendChild(typingDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      // Hide typing indicator
+      function hideTypingIndicator() {
+        const typingIndicator = document.getElementById('typingIndicator');
+        if (typingIndicator) {
+          typingIndicator.remove();
+        }
+      }
+    });
+  </script> 

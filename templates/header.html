@@ -28,10 +28,20 @@
     }
     .navbar {
       background: linear-gradient(90deg, #388e3c 0%, #81c784 100%);
+      padding: 0.5rem 1rem;
+      min-height: 60px;
     }
     .navbar-brand, .nav-link, .navbar-nav .nav-link.active {
       color: #fff !important;
       font-weight: 500;
+    }
+    .navbar-brand {
+      font-size: 1.25rem !important;
+      padding: 0.25rem 0;
+    }
+    .nav-link {
+      padding: 0.5rem 0.75rem !important;
+      font-size: 0.9rem;
     }
     .navbar-nav{
         align-items: right;
@@ -115,35 +125,178 @@
       border-radius: 0 0 1rem 1rem;
       margin-bottom: 2rem;
     }
+    
+    /* Dropdown styling */
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+    
+    .dropdown-item {
+      padding: 8px 16px;
+      color: #333;
+      transition: all 0.2s;
+    }
+    
+    .dropdown-item:hover {
+      background-color: #f8f9fa;
+      color: #388e3c;
+    }
+    
+    .dropdown-divider {
+      margin: 4px 0;
+      border-color: #e9ecef;
+    }
+    
+    .navbar-nav .dropdown-menu {
+      background: #fff;
+    }
+
+    /* Admin-specific styling */
+    .admin-navbar .navbar-brand {
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    
+    .admin-navbar .nav-link {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .admin-navbar .dropdown-item {
+      font-weight: 500;
+    }
+    
+    .admin-navbar .dropdown-item i {
+      width: 20px;
+      text-align: center;
+      margin-right: 8px;
+    }
+    
+    /* Compact navbar styling for admin */
+    .admin-navbar .container {
+      padding: 0 1rem;
+    }
+    
+    .admin-navbar .navbar-toggler {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+    
+    .admin-navbar .navbar-nav {
+      align-items: center;
+    }
   </style>
 </head>
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg admin-navbar">
     <div class="container">
-      <a class="navbar-brand" href="#">KrishiCare</a>
+      <a class="navbar-brand" href="/admin/dashboard/">
+        <i class="fas fa-seedling me-2"></i>KrishiCare Admin
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div>
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link active" href="/home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
-          
-          
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Register
+          <!-- Admin Dashboard -->
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/dashboard/">
+              <i class="fas fa-tachometer-alt me-1"></i>Dashboard
             </a>
-            <ul class="dropdown-menu" aria-labelledby="registerDropdown">
-              <li><a class="dropdown-item" href="/register_user">User</a></li>
-              <li><a class="dropdown-item" href="/register_farmer">Farmer</a></li>
+          </li>
+
+          <!-- Farmer Management -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="farmerManagementDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-tractor me-1"></i>Farmer Management
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="farmerManagementDropdown">
+              <li><a class="dropdown-item" href="/admin/farmers/">
+                <i class="fas fa-users"></i>View All Farmers
+              </a></li>
+              <li><a class="dropdown-item" href="/admin/approve-farmers/">
+                <i class="fas fa-check-circle"></i>Approve Farmers
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/admin/farmer-products/1/">
+                <i class="fas fa-box"></i>Farmer Products
+              </a></li>
+            </ul>
+          </li>
+
+          <!-- User Management -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userManagementDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-friends me-1"></i>User Management
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userManagementDropdown">
+              <li><a class="dropdown-item" href="/admin/users/">
+                <i class="fas fa-users"></i>View All Users
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/admin/complaints/">
+                <i class="fas fa-exclamation-circle"></i>Handle Complaints
+              </a></li>
+            </ul>
+          </li>
+
+          <!-- Inventory Management -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="inventoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-boxes me-1"></i>Inventory
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="inventoryDropdown">
+              <li><a class="dropdown-item" href="/admin/inventory/seed/">
+                <i class="fas fa-seedling"></i>Seed Inventory
+              </a></li>
+              <li><a class="dropdown-item" href="/admin/inventory/fertilizer/">
+                <i class="fas fa-flask"></i>Fertilizer Inventory
+              </a></li>
+              <li><a class="dropdown-item" href="/admin/inventory/tool/">
+                <i class="fas fa-tools"></i>Tool Inventory
+              </a></li>
+            </ul>
+          </li>
+
+          <!-- Scheme Management -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="schemeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-gift me-1"></i>Schemes
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="schemeDropdown">
+              <li><a class="dropdown-item" href="/admin/scheme/add/">
+                <i class="fas fa-plus"></i>Add New Scheme
+              </a></li>
+              <li><a class="dropdown-item" href="/admin/scheme/applications/">
+                <i class="fas fa-file-alt"></i>View Applications
+              </a></li>
+            </ul>
+          </li>
+
+          <!-- System -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="systemDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-cog me-1"></i>System
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="systemDropdown">
+              <li><a class="dropdown-item" href="/home/">
+                <i class="fas fa-home"></i>Main Site
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/djadmin/">
+                <i class="fas fa-database"></i>Django Admin
+              </a></li>
+              <li><a class="dropdown-item" href="/login/">
+                <i class="fas fa-sign-out-alt"></i>Logout
+              </a></li>
             </ul>
           </li>
 
         </ul>
-
       </div>
     </div>
-  </nav>
+  </nav> 
