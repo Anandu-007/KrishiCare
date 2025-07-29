@@ -1,4 +1,4 @@
-{% include 'header.html' %}
+{% include 'header_farmers.html' %}
 
 <div class="container py-4">
   <!-- Welcome Section -->
@@ -74,24 +74,35 @@
   <div class="row g-4">
     <!-- Categories Section -->
     <div class="col-md-6 col-lg-3">
-      <div class="card dashboard-card h-100">
+      <div class="card dashboard-card h-100 dropdown-card">
         <div class="card-body text-center">
           <div class="feature-icon mb-3">
             <i class="fas fa-list-alt text-primary"></i>
           </div>
           <h5 class="card-title">View Categories</h5>
           <p class="card-text">Browse farming categories and crop types</p>
-          <div class="dropdown">
-            <button class="btn btn-outline-primary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
-              Select Category
+          <div class="new-dropdown">
+            <button class="btn btn-outline-primary w-100" type="button" onclick="showCategories()">
+              <i class="fas fa-list me-2"></i>Select Category
+              <i class="fas fa-chevron-down ms-2"></i>
             </button>
-            <ul class="dropdown-menu w-100">
-              <li><a class="dropdown-item" href="/farmers/category/vegetables/"><i class="fas fa-seedling me-2"></i>Vegetables</a></li>
-              <li><a class="dropdown-item" href="/farmers/category/fruits/"><i class="fas fa-apple-alt me-2"></i>Fruits</a></li>
-              <li><a class="dropdown-item" href="/farmers/category/grains/"><i class="fas fa-wheat-awn me-2"></i>Grains</a></li>
-              <li><a class="dropdown-item" href="/farmers/category/pulses/"><i class="fas fa-seedling me-2"></i>Pulses</a></li>
-              <li><a class="dropdown-item" href="/farmers/category/spices/"><i class="fas fa-leaf me-2"></i>Spices</a></li>
-            </ul>
+            <div class="category-menu" id="categoryMenu">
+              <a href="/farmers/category/vegetables/" class="menu-item">
+                <i class="fas fa-seedling me-2"></i>Vegetables
+              </a>
+              <a href="/farmers/category/fruits/" class="menu-item">
+                <i class="fas fa-apple-alt me-2"></i>Fruits
+              </a>
+              <a href="/farmers/category/grains/" class="menu-item">
+                <i class="fas fa-wheat-awn me-2"></i>Grains
+              </a>
+              <a href="/farmers/category/pulses/" class="menu-item">
+                <i class="fas fa-seedling me-2"></i>Pulses
+              </a>
+              <a href="/farmers/category/spices/" class="menu-item">
+                <i class="fas fa-leaf me-2"></i>Spices
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -373,6 +384,22 @@
   transition: transform 0.2s, box-shadow 0.2s;
   border: none;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  overflow: visible;
+}
+
+.dashboard-card .card-body {
+  overflow: visible !important;
+  position: relative;
+}
+
+.dashboard-card {
+  overflow: visible !important;
+}
+
+/* Ensure the card with dropdown is above other elements */
+.dropdown-card {
+  z-index: 999999;
+  position: relative;
 }
 
 .dashboard-card:hover {
@@ -406,10 +433,77 @@
 .dropdown-menu {
   border: none;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  z-index: 1050;
+  position: absolute;
+  min-width: 100%;
 }
 
 .dropdown-item:hover {
   background-color: #f8f9fa;
+}
+
+/* New Clean Dropdown */
+.new-dropdown {
+  position: relative;
+  width: 100%;
+  z-index: 999999;
+}
+
+.category-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  z-index: 999999;
+  margin-top: 8px;
+  padding: 8px 0;
+  display: none;
+}
+
+.category-menu.show {
+  display: block;
+  background: #f8f9fa;
+  border: 2px solid #007bff;
+}
+
+.menu-item {
+  display: block;
+  padding: 12px 16px;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:hover {
+  background-color: #f8f9fa;
+  color: #388e3c;
+  padding-left: 20px;
+}
+
+/* Ensure dropdown container has proper positioning */
+.dropdown {
+  position: relative;
+}
+
+/* Fix dropdown button styling */
+.dropdown-toggle::after {
+  margin-left: 0.5em;
+}
+
+/* Ensure dropdown menu appears above other elements */
+.dropdown-menu.show {
+  display: block;
+  z-index: 1050;
 }
 
 /* Chatbot Styles */
@@ -795,6 +889,45 @@ setTimeout(() => {
   const notificationBadge = document.getElementById('notificationBadge');
   notificationBadge.style.display = 'none';
 }, 5000);
+
+// Clean dropdown function
+function showCategories() {
+  const menu = document.getElementById('categoryMenu');
+  
+  if (menu.classList.contains('show')) {
+    menu.classList.remove('show');
+    console.log('Categories hidden');
+  } else {
+    menu.classList.add('show');
+    console.log('Categories shown');
+    
+    // Log all menu items
+    const items = menu.querySelectorAll('.menu-item');
+    console.log('Menu items found:', items.length);
+    items.forEach((item, index) => {
+      console.log(`Item ${index + 1}:`, item.textContent.trim());
+    });
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('categoryMenu');
+  const dropdown = document.querySelector('.new-dropdown');
+  
+  if (!e.target.closest('.new-dropdown')) {
+    menu.classList.remove('show');
+  }
+});
+
+// Close dropdown when clicking on menu items
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('menu-item')) {
+    const menu = document.getElementById('categoryMenu');
+    menu.classList.remove('show');
+    console.log('Category selected:', e.target.textContent.trim());
+  }
+});
 
 // Complaint Form Functionality
 document.addEventListener('DOMContentLoaded', function() {

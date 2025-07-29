@@ -1,0 +1,772 @@
+{% include 'header.html' %}
+
+<style>
+  /* Clean and consistent styling for fertilizer inventory */
+  .card {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .badge {
+    font-size: 0.75rem;
+  }
+  
+  .table td {
+    vertical-align: middle;
+  }
+</style>
+
+<div class="container py-5">
+  <!-- Header Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="fw-bold mb-1" style="color: #388e3c;">
+            <i class="fas fa-leaf me-2"></i>Fertilizers Inventory Management
+          </h2>
+          <p class="text-muted mb-0">Manage fertilizer products and track farmer orders</p>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addFertilizerModal">
+            <i class="fas fa-plus me-2"></i>Add New Fertilizer
+          </button>
+          <a href="/admin/dashboard/" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-boxes text-primary me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-primary">18</h3>
+          </div>
+          <p class="mb-0 fw-bold">Total Fertilizer Products</p>
+          <small class="text-muted">Available in inventory</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-shopping-cart text-success me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-success">89</h3>
+          </div>
+          <p class="mb-0 fw-bold">Total Orders</p>
+          <small class="text-muted">Placed by farmers</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-clock text-warning me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-warning">15</h3>
+          </div>
+          <p class="mb-0 fw-bold">Pending Orders</p>
+          <small class="text-muted">Awaiting processing</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-rupee-sign text-info me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-info">₹32,450</h3>
+          </div>
+          <p class="mb-0 fw-bold">Total Revenue</p>
+          <small class="text-muted">This month</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs Navigation -->
+  <ul class="nav nav-tabs mb-4" id="fertilizerTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab">
+        <i class="fas fa-shopping-cart me-2"></i>Farmer Orders
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="inventory-tab" data-bs-toggle="tab" data-bs-target="#inventory" type="button" role="tab">
+        <i class="fas fa-boxes me-2"></i>Fertilizer Inventory
+      </button>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content" id="fertilizerTabContent">
+    <!-- Farmer Orders Tab -->
+    <div class="tab-pane fade show active" id="orders" role="tabpanel">
+      <!-- Search and Filter -->
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search orders by farmer name or order ID...">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <select class="form-select">
+            <option selected>All Status</option>
+            <option>Pending</option>
+            <option>Processing</option>
+            <option>Shipped</option>
+            <option>Delivered</option>
+            <option>Cancelled</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select class="form-select">
+            <option selected>All Fertilizers</option>
+            <option>NPK Fertilizer</option>
+            <option>Urea</option>
+            <option>DAP</option>
+            <option>Organic Fertilizer</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <input type="date" class="form-control" placeholder="Date">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-outline-primary w-100">
+            <i class="fas fa-filter me-1"></i>Filter
+          </button>
+        </div>
+      </div>
+
+      <!-- Orders Table -->
+      <div class="card shadow border-0">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">
+            <i class="fas fa-list me-2"></i>Recent Farmer Orders
+          </h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Order ID</th>
+                  <th>Farmer Details</th>
+                  <th>Fertilizer Product</th>
+                  <th>Quantity</th>
+                  <th>Total Amount</th>
+                  <th>Order Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Order 1 -->
+                <tr>
+                  <td>
+                    <span class="fw-bold text-primary">#FERT-001</span>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px; flex-shrink: 0;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div style="flex: 1; min-width: 0;">
+                        <div class="fw-bold">Amit Singh</div>
+                        <small class="text-muted">Aadhaar: 111222333444</small>
+                        <br><small class="text-muted">Village E, District M</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="https://via.placeholder.com/40x30/4CAF50/FFFFFF?text=NPK" class="rounded me-2" alt="NPK Fertilizer" style="flex-shrink: 0;">
+                      <div style="flex: 1; min-width: 0;">
+                        <div class="fw-bold">NPK Fertilizer</div>
+                        <small class="text-muted">20-20-20 Grade</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="badge bg-light text-dark">25 kg</span>
+                  </td>
+                  <td>
+                    <span class="fw-bold text-success">₹1,250</span>
+                  </td>
+                  <td>
+                    <small>Dec 15, 2024</small>
+                    <br><small class="text-muted">11:45 AM</small>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning">Pending</span>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" title="View Details">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-success" title="Process Order">
+                        <i class="fas fa-check"></i>
+                      </button>
+                      <button class="btn btn-outline-info" title="Contact Farmer">
+                        <i class="fas fa-phone"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Order 2 -->
+                <tr>
+                  <td>
+                    <span class="fw-bold text-primary">#FERT-002</span>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px; flex-shrink: 0;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div style="flex: 1; min-width: 0;">
+                        <div class="fw-bold">Sunita Devi</div>
+                        <small class="text-muted">Aadhaar: 555666777888</small>
+                        <br><small class="text-muted">Village F, District N</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="https://via.placeholder.com/40x30/2196F3/FFFFFF?text=Urea" class="rounded me-2" alt="Urea" style="flex-shrink: 0;">
+                      <div style="flex: 1; min-width: 0;">
+                        <div class="fw-bold">Urea Fertilizer</div>
+                        <small class="text-muted">46% Nitrogen</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="badge bg-light text-dark">50 kg</span>
+                  </td>
+                  <td>
+                    <span class="fw-bold text-success">₹1,800</span>
+                  </td>
+                  <td>
+                    <small>Dec 14, 2024</small>
+                    <br><small class="text-muted">3:20 PM</small>
+                  </td>
+                  <td>
+                    <span class="badge bg-info">Processing</span>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" title="View Details">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-success" title="Ship Order">
+                        <i class="fas fa-shipping-fast"></i>
+                      </button>
+                      <button class="btn btn-outline-info" title="Contact Farmer">
+                        <i class="fas fa-phone"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Order 3 -->
+                <tr>
+                  <td>
+                    <span class="fw-bold text-primary">#FERT-003</span>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px; flex-shrink: 0;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div style="flex: 1; min-width: 0;">
+                        <div class="fw-bold">Ramesh Kumar</div>
+                        <small class="text-muted">Aadhaar: 999000111222</small>
+                        <br><small class="text-muted">Village G, District O</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="https://via.placeholder.com/40x30/FF9800/FFFFFF?text=DAP" class="rounded me-2" alt="DAP" style="flex-shrink: 0;">
+                      <div style="flex: 1; min-width: 0;">
+                        <div class="fw-bold">DAP Fertilizer</div>
+                        <small class="text-muted">18-46-0 Grade</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="badge bg-light text-dark">30 kg</span>
+                  </td>
+                  <td>
+                    <span class="fw-bold text-success">₹2,100</span>
+                  </td>
+                  <td>
+                    <small>Dec 13, 2024</small>
+                    <br><small class="text-muted">10:15 AM</small>
+                  </td>
+                  <td>
+                    <span class="badge bg-success">Delivered</span>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" title="View Details">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" title="View Delivery">
+                        <i class="fas fa-truck"></i>
+                      </button>
+                      <button class="btn btn-outline-info" title="Contact Farmer">
+                        <i class="fas fa-phone"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Order 4 -->
+                <tr>
+                  <td>
+                    <span class="fw-bold text-primary">#FERT-004</span>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px; flex-shrink: 0;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div style="flex: 1; min-width: 0;">
+                        <div class="fw-bold">Geeta Patel</div>
+                        <small class="text-muted">Aadhaar: 333444555666</small>
+                        <br><small class="text-muted">Village H, District P</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="https://via.placeholder.com/40x30/9C27B0/FFFFFF?text=Org" class="rounded me-2" alt="Organic Fertilizer" style="flex-shrink: 0;">
+                      <div style="flex: 1; min-width: 0;">
+                        <div class="fw-bold">Organic Fertilizer</div>
+                        <small class="text-muted">Vermicompost</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="badge bg-light text-dark">40 kg</span>
+                  </td>
+                  <td>
+                    <span class="fw-bold text-success">₹1,600</span>
+                  </td>
+                  <td>
+                    <small>Dec 12, 2024</small>
+                    <br><small class="text-muted">5:30 PM</small>
+                  </td>
+                  <td>
+                    <span class="badge bg-secondary">Cancelled</span>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" title="View Details">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-warning" title="Reopen Order">
+                        <i class="fas fa-redo"></i>
+                      </button>
+                      <button class="btn btn-outline-info" title="Contact Farmer">
+                        <i class="fas fa-phone"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer bg-light">
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">Showing 4 of 89 orders</small>
+            <nav>
+              <ul class="pagination pagination-sm mb-0">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fertilizer Inventory Tab -->
+    <div class="tab-pane fade" id="inventory" role="tabpanel">
+      <!-- Search and Filter -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search fertilizers...">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select">
+            <option selected>All Categories</option>
+            <option>NPK</option>
+            <option>Urea</option>
+            <option>DAP</option>
+            <option>Organic</option>
+            <option>Micronutrients</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select">
+            <option selected>Sort by</option>
+            <option>Name: A to Z</option>
+            <option>Stock: High to Low</option>
+            <option>Price: Low to High</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Fertilizer Products Grid -->
+      <div class="row g-4">
+        <!-- NPK Fertilizer -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="badge bg-success">In Stock</span>
+              <small class="text-muted">Fertilizer</small>
+            </div>
+            
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <img src="https://via.placeholder.com/100x80/4CAF50/FFFFFF?text=NPK" alt="NPK Fertilizer" class="rounded">
+              </div>
+              
+              <h6 class="card-title text-center">NPK Fertilizer</h6>
+              <p class="card-text text-muted small">20-20-20 grade balanced fertilizer for all crops</p>
+              
+              <div class="row text-center">
+                <div class="col-6">
+                  <strong class="text-primary">₹50</strong>
+                  <br><small class="text-muted">Price/kg</small>
+                </div>
+                <div class="col-6">
+                  <strong class="text-success">120</strong>
+                  <br><small class="text-muted">Stock (kg)</small>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-footer bg-transparent">
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary flex-fill">
+                  <i class="fas fa-eye me-1"></i>View
+                </button>
+                <button class="btn btn-sm btn-outline-warning flex-fill">
+                  <i class="fas fa-edit me-1"></i>Edit
+                </button>
+                <button class="btn btn-sm btn-outline-danger flex-fill">
+                  <i class="fas fa-trash me-1"></i>Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Urea Fertilizer -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="badge bg-warning">Low Stock</span>
+              <small class="text-muted">Fertilizer</small>
+            </div>
+            
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <img src="https://via.placeholder.com/100x80/2196F3/FFFFFF?text=Urea" alt="Urea Fertilizer" class="rounded">
+              </div>
+              
+              <h6 class="card-title text-center">Urea Fertilizer</h6>
+              <p class="card-text text-muted small">46% nitrogen content for leafy growth</p>
+              
+              <div class="row text-center">
+                <div class="col-6">
+                  <strong class="text-primary">₹36</strong>
+                  <br><small class="text-muted">Price/kg</small>
+                </div>
+                <div class="col-6">
+                  <strong class="text-warning">25</strong>
+                  <br><small class="text-muted">Stock (kg)</small>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-footer bg-transparent">
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary flex-fill">
+                  <i class="fas fa-eye me-1"></i>View
+                </button>
+                <button class="btn btn-sm btn-outline-warning flex-fill">
+                  <i class="fas fa-edit me-1"></i>Edit
+                </button>
+                <button class="btn btn-sm btn-outline-danger flex-fill">
+                  <i class="fas fa-trash me-1"></i>Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAP Fertilizer -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="badge bg-danger">Out of Stock</span>
+              <small class="text-muted">Fertilizer</small>
+            </div>
+            
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <img src="https://via.placeholder.com/100x80/FF9800/FFFFFF?text=DAP" alt="DAP Fertilizer" class="rounded">
+              </div>
+              
+              <h6 class="card-title text-center">DAP Fertilizer</h6>
+              <p class="card-text text-muted small">18-46-0 grade for root development</p>
+              
+              <div class="row text-center">
+                <div class="col-6">
+                  <strong class="text-primary">₹70</strong>
+                  <br><small class="text-muted">Price/kg</small>
+                </div>
+                <div class="col-6">
+                  <strong class="text-danger">0</strong>
+                  <br><small class="text-muted">Stock (kg)</small>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-footer bg-transparent">
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary flex-fill">
+                  <i class="fas fa-eye me-1"></i>View
+                </button>
+                <button class="btn btn-sm btn-outline-warning flex-fill">
+                  <i class="fas fa-edit me-1"></i>Edit
+                </button>
+                <button class="btn btn-sm btn-outline-danger flex-fill">
+                  <i class="fas fa-trash me-1"></i>Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Organic Fertilizer -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="badge bg-success">In Stock</span>
+              <small class="text-muted">Fertilizer</small>
+            </div>
+            
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <img src="https://via.placeholder.com/100x80/9C27B0/FFFFFF?text=Org" alt="Organic Fertilizer" class="rounded">
+              </div>
+              
+              <h6 class="card-title text-center">Organic Fertilizer</h6>
+              <p class="card-text text-muted small">Vermicompost for organic farming</p>
+              
+              <div class="row text-center">
+                <div class="col-6">
+                  <strong class="text-primary">₹40</strong>
+                  <br><small class="text-muted">Price/kg</small>
+                </div>
+                <div class="col-6">
+                  <strong class="text-success">85</strong>
+                  <br><small class="text-muted">Stock (kg)</small>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-footer bg-transparent">
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary flex-fill">
+                  <i class="fas fa-eye me-1"></i>View
+                </button>
+                <button class="btn btn-sm btn-outline-warning flex-fill">
+                  <i class="fas fa-edit me-1"></i>Edit
+                </button>
+                <button class="btn btn-sm btn-outline-danger flex-fill">
+                  <i class="fas fa-trash me-1"></i>Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Micronutrient Fertilizer -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="badge bg-info">In Stock</span>
+              <small class="text-muted">Fertilizer</small>
+            </div>
+            
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <img src="https://via.placeholder.com/100x80/00BCD4/FFFFFF?text=Micro" alt="Micronutrient Fertilizer" class="rounded">
+              </div>
+              
+              <h6 class="card-title text-center">Micronutrient Mix</h6>
+              <p class="card-text text-muted small">Essential micronutrients for crop health</p>
+              
+              <div class="row text-center">
+                <div class="col-6">
+                  <strong class="text-primary">₹120</strong>
+                  <br><small class="text-muted">Price/kg</small>
+                </div>
+                <div class="col-6">
+                  <strong class="text-info">45</strong>
+                  <br><small class="text-muted">Stock (kg)</small>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-footer bg-transparent">
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary flex-fill">
+                  <i class="fas fa-eye me-1"></i>View
+                </button>
+                <button class="btn btn-sm btn-outline-warning flex-fill">
+                  <i class="fas fa-edit me-1"></i>Edit
+                </button>
+                <button class="btn btn-sm btn-outline-danger flex-fill">
+                  <i class="fas fa-trash me-1"></i>Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Potash Fertilizer -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="badge bg-warning">Low Stock</span>
+              <small class="text-muted">Fertilizer</small>
+            </div>
+            
+            <div class="card-body">
+              <div class="text-center mb-3">
+                <img src="https://via.placeholder.com/100x80/795548/FFFFFF?text=Potash" alt="Potash Fertilizer" class="rounded">
+              </div>
+              
+              <h6 class="card-title text-center">Potash Fertilizer</h6>
+              <p class="card-text text-muted small">Potassium rich fertilizer for fruit development</p>
+              
+              <div class="row text-center">
+                <div class="col-6">
+                  <strong class="text-primary">₹55</strong>
+                  <br><small class="text-muted">Price/kg</small>
+                </div>
+                <div class="col-6">
+                  <strong class="text-warning">18</strong>
+                  <br><small class="text-muted">Stock (kg)</small>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-footer bg-transparent">
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary flex-fill">
+                  <i class="fas fa-eye me-1"></i>View
+                </button>
+                <button class="btn btn-sm btn-outline-warning flex-fill">
+                  <i class="fas fa-edit me-1"></i>Edit
+                </button>
+                <button class="btn btn-sm btn-outline-danger flex-fill">
+                  <i class="fas fa-trash me-1"></i>Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Fertilizer Modal -->
+<div class="modal fade" id="addFertilizerModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Fertilizer Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="product_name" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="product_name" placeholder="Enter product name" required>
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" id="category" required>
+              <option value="">Select Category</option>
+              <option value="npk">NPK</option>
+              <option value="urea">Urea</option>
+              <option value="dap">DAP</option>
+              <option value="organic">Organic</option>
+              <option value="micronutrients">Micronutrients</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" placeholder="Enter description"></textarea>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="price" class="form-label">Price per kg (₹)</label>
+                <input type="number" class="form-control" id="price" placeholder="0.00" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="stock" class="form-label">Stock Quantity (kg)</label>
+                <input type="number" class="form-control" id="stock" placeholder="0" required>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Product Image</label>
+            <input type="file" class="form-control" id="image" accept="image/*">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success">Add Fertilizer Product</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'footer.html' %} 

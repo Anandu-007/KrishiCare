@@ -1,0 +1,458 @@
+{% include 'header_users.html' %}
+
+<div class="container py-4">
+  <!-- Welcome Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card bg-gradient-success text-white">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h2 class="mb-2">
+                <i class="fas fa-user me-2"></i>Welcome, User!
+              </h2>
+              <p class="mb-0">Access schemes, products, and manage your complaints</p>
+            </div>
+            <div class="col-md-4 text-end">
+              <div class="d-flex align-items-center justify-content-end">
+                <div class="me-3">
+                  <h4 class="mb-0">User ID: #12345</h4>
+                  <small>Active Account</small>
+                </div>
+                <div class="rounded-circle bg-white bg-opacity-25 p-3">
+                  <i class="fas fa-user-circle fa-2x"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Functionality Cards -->
+  <div class="row g-4 mb-4">
+    <!-- Schemes Card -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card dashboard-card h-100 functionality-card">
+        <div class="card-body text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-gift text-success"></i>
+          </div>
+          <h5 class="card-title">Schemes</h5>
+          <p class="card-text">Browse and apply for government schemes and subsidies</p>
+          <div class="button-container">
+            <a href="/users/schemes/" class="btn btn-outline-success w-100">
+              <i class="fas fa-external-link-alt me-2"></i>View Schemes
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Card -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card dashboard-card h-100 functionality-card">
+        <div class="card-body text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-box text-primary"></i>
+          </div>
+          <h5 class="card-title">Products</h5>
+          <p class="card-text">Explore agricultural products and marketplace</p>
+          <div class="button-container">
+            <a href="/users/products/" class="btn btn-outline-primary w-100">
+              <i class="fas fa-shopping-cart me-2"></i>Buy products
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Complaints Card -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card dashboard-card h-100 functionality-card">
+        <div class="card-body text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-exclamation-triangle text-warning"></i>
+          </div>
+          <h5 class="card-title">Complaints</h5>
+          <p class="card-text">Manage your complaints and feedback</p>
+          <div class="button-container">
+            <div class="dropdown">
+              <button class="btn btn-outline-warning dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
+                <i class="fas fa-cog me-2"></i>Manage Complaints
+              </button>
+              <ul class="dropdown-menu w-100">
+                <li><a class="dropdown-item" href="/users/complaints/view-reply/">
+                  <i class="fas fa-eye me-2"></i>View & Reply
+                </a></li>
+                <li><a class="dropdown-item" href="/users/complaints/feedback/">
+                  <i class="fas fa-comment me-2"></i>Feedback
+                </a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plant Detection Card -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card dashboard-card h-100 functionality-card">
+        <div class="card-body text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-camera text-info"></i>
+          </div>
+          <h5 class="card-title">Plant Detection</h5>
+          <p class="card-text">Identify plants and get health analysis</p>
+          <div class="button-container">
+            <a href="/users/plant-detection/" class="btn btn-outline-info w-100">
+              <i class="fas fa-camera me-2"></i>Detect Plant
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-gift text-success mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-success">5</h4>
+          <p class="mb-0">Applied Schemes</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-shopping-cart text-primary mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-primary">12</h4>
+          <p class="mb-0">Orders Placed</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-exclamation-circle text-warning mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-warning">3</h4>
+          <p class="mb-0">Active Complaints</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-check-circle text-info mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-info">8</h4>
+          <p class="mb-0">Resolved Issues</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activity and Quick Actions -->
+  <div class="row">
+    <!-- Recent Activity -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="fas fa-history me-2"></i>Recent Activity</h5>
+        </div>
+        <div class="card-body">
+          <div class="activity-item d-flex align-items-center mb-3">
+            <div class="activity-icon bg-success text-white rounded-circle me-3">
+              <i class="fas fa-gift"></i>
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="mb-1">Scheme Applied</h6>
+              <p class="mb-0 text-muted">PM-KISAN scheme application submitted</p>
+              <small class="text-muted">2 hours ago</small>
+            </div>
+          </div>
+          
+          <div class="activity-item d-flex align-items-center mb-3">
+            <div class="activity-icon bg-primary text-white rounded-circle me-3">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="mb-1">Order Placed</h6>
+              <p class="mb-0 text-muted">Wheat seeds ordered - Order #1234</p>
+              <small class="text-muted">1 day ago</small>
+            </div>
+          </div>
+          
+          <div class="activity-item d-flex align-items-center mb-3">
+            <div class="activity-icon bg-warning text-white rounded-circle me-3">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="mb-1">Complaint Filed</h6>
+              <p class="mb-0 text-muted">Product quality issue reported</p>
+              <small class="text-muted">2 days ago</small>
+            </div>
+          </div>
+          
+          <div class="activity-item d-flex align-items-center">
+            <div class="activity-icon bg-info text-white rounded-circle me-3">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="mb-1">Issue Resolved</h6>
+              <p class="mb-0 text-muted">Delivery delay complaint resolved</p>
+              <small class="text-muted">3 days ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-grid gap-2">
+            <a href="/users/profile/" class="btn btn-outline-secondary">
+              <i class="fas fa-user-edit me-2"></i>Update Profile
+            </a>
+            <a href="/users/orders/" class="btn btn-outline-info">
+              <i class="fas fa-list me-2"></i>View Orders
+            </a>
+            <a href="/users/schemes/applied/" class="btn btn-outline-success">
+              <i class="fas fa-clipboard-list me-2"></i>Applied Schemes
+            </a>
+            <a href="/users/support/" class="btn btn-outline-warning">
+              <i class="fas fa-headset me-2"></i>Get Support
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.dashboard-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
+
+.activity-item {
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.activity-item:hover {
+  background-color: #f8f9fa;
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  z-index: 9999 !important;
+  position: absolute !important;
+  margin-top: 0.125rem;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item i {
+  width: 20px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+/* Ensure cards don't interfere with dropdown */
+.dashboard-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Force dropdown to appear above everything */
+.dropdown-menu.show {
+  z-index: 9999 !important;
+  position: absolute !important;
+}
+
+/* Button container for consistent alignment */
+.button-container {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+}
+
+/* Specific styling for complaints card dropdown */
+.card-body .dropdown {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+}
+
+.card-body .dropdown-menu {
+  z-index: 9999 !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+/* Ensure buttons have consistent height and alignment */
+.btn {
+  height: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  padding: 0.375rem 0.75rem !important;
+}
+
+/* Force all card bodies to have consistent structure */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-body .feature-icon {
+  flex-shrink: 0;
+}
+
+.card-body .card-title {
+  flex-shrink: 0;
+}
+
+.card-body .card-text {
+  flex-shrink: 0;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.card-body .button-container {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+/* Specific styling for functionality cards */
+.functionality-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.functionality-card .card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.functionality-card .button-container {
+  margin-top: 0;
+  height: 38px;
+}
+
+/* Ensure all buttons in functionality cards are perfectly aligned */
+.functionality-card .btn {
+  height: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, #388e3c 0%, #81c784 100%);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Animate cards on load
+  const cards = document.querySelectorAll('.dashboard-card');
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'all 0.5s ease';
+      
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 100);
+    }, index * 100);
+  });
+
+  // Add click handlers for demo (excluding dropdown buttons and buttons with proper hrefs)
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      // Skip dropdown buttons and buttons with proper hrefs
+      if (this.classList.contains('dropdown-toggle') || this.getAttribute('href') || this.closest('.dropdown')) {
+        return;
+      }
+      
+      // Only prevent default for buttons that don't have proper href or are placeholders
+      if ((this.textContent.includes('View') || this.textContent.includes('Browse')) && 
+          (this.getAttribute('href') === '#' || this.getAttribute('href') === null)) {
+        e.preventDefault();
+        alert('This feature will be implemented in the backend!');
+      }
+    });
+  });
+});
+</script>
+
+{% include 'footer.html' %} 

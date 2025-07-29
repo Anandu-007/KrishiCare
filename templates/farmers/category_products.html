@@ -1,4 +1,4 @@
-{% include 'header.html' %}
+{% include 'header_farmers.html' %}
 
 <div class="container py-4">
   <!-- Header Section -->
@@ -11,75 +11,21 @@
           </h2>
           <p class="text-muted mb-0">Manage your {{ category_name|lower }} products and inventory</p>
         </div>
-        <a href="/farmers/dashboard/" class="btn btn-outline-secondary">
-          <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
-        </a>
+        <div class="d-flex gap-2">
+          <a href="/farmers/dashboard/" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+          </a>
+          {% if category_name == "Vegetables" or category_name == "Fruits" or category_name == "Grains" %}
+          <button class="btn btn-success" id="addProductBtn" data-bs-toggle="modal" data-bs-target="#addProductModal">
+            <i class="fas fa-plus me-2"></i>Add Product
+          </button>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Add New Product Section -->
-  <div class="row mb-4">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="mb-0">
-            <i class="fas fa-plus me-2"></i>Add New {{ category_name }} Product
-          </h5>
-        </div>
-        <div class="card-body">
-          <form method="post" enctype="multipart/form-data" id="addProductForm">
-            {% csrf_token %}
-            <div class="row">
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="product_name" class="form-label">Product Name</label>
-                  <input type="text" class="form-control" id="product_name" name="product_name" 
-                         placeholder="Enter product name" required>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="price" class="form-label">Price (₹)</label>
-                  <input type="number" class="form-control" id="price" name="price" 
-                         placeholder="Enter price per unit" step="0.01" required>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="quantity" class="form-label">Quantity</label>
-                  <input type="number" class="form-control" id="quantity" name="quantity" 
-                         placeholder="Enter available quantity" required>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="image" class="form-label">Product Image</label>
-                  <input type="file" class="form-control" id="image" name="image" 
-                         accept="image/*" required>
-                </div>
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" id="description" name="description" rows="3" 
-                        placeholder="Enter product description" required></textarea>
-            </div>
-            <div class="d-flex gap-2">
-              <button type="submit" class="btn btn-success">
-                <i class="fas fa-plus me-2"></i>Add Product
-              </button>
-              <button type="reset" class="btn btn-outline-secondary">
-                <i class="fas fa-undo me-2"></i>Reset Form
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- Search and Filter -->
   <div class="row mb-4">
@@ -181,6 +127,328 @@
     {% endfor %}
   </div>
 
+  <!-- View Orders Section -->
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-gradient-success text-white">
+          <h5 class="mb-0">
+            <i class="fas fa-shopping-cart me-2"></i>View Orders - {{ category_name }} Products
+          </h5>
+        </div>
+        <div class="card-body">
+          <!-- Orders Search and Filter -->
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search orders..." id="orderSearchInput">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <select class="form-select" id="orderStatusFilter">
+                <option selected value="">All Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <select class="form-select" id="orderSortFilter">
+                <option selected value="">Sort by</option>
+                <option value="date">Order Date</option>
+                <option value="amount">Order Amount</option>
+                <option value="status">Status</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Orders Statistics -->
+          <div class="row mb-4">
+            <div class="col-md-3 mb-3">
+              <div class="card text-center border-0 shadow-sm">
+                <div class="card-body">
+                  <i class="fas fa-shopping-bag text-primary mb-2" style="font-size: 2rem;"></i>
+                  <h4 class="text-primary mb-1">15</h4>
+                  <p class="mb-0 text-muted">Total Orders</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="card text-center border-0 shadow-sm">
+                <div class="card-body">
+                  <i class="fas fa-clock text-warning mb-2" style="font-size: 2rem;"></i>
+                  <h4 class="text-warning mb-1">5</h4>
+                  <p class="mb-0 text-muted">Pending</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="card text-center border-0 shadow-sm">
+                <div class="card-body">
+                  <i class="fas fa-truck text-info mb-2" style="font-size: 2rem;"></i>
+                  <h4 class="text-info mb-1">3</h4>
+                  <p class="mb-0 text-muted">Shipped</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="card text-center border-0 shadow-sm">
+                <div class="card-body">
+                  <i class="fas fa-check-circle text-success mb-2" style="font-size: 2rem;"></i>
+                  <h4 class="text-success mb-1">7</h4>
+                  <p class="mb-0 text-muted">Delivered</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Orders Table -->
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th><i class="fas fa-hashtag me-1"></i>Order ID</th>
+                  <th><i class="fas fa-user me-1"></i>Customer</th>
+                  <th><i class="fas fa-box me-1"></i>Product</th>
+                  <th><i class="fas fa-sort-numeric-up me-1"></i>Quantity</th>
+                  <th><i class="fas fa-rupee-sign me-1"></i>Amount</th>
+                  <th><i class="fas fa-calendar me-1"></i>Order Date</th>
+                  <th><i class="fas fa-info-circle me-1"></i>Status</th>
+                  <th><i class="fas fa-cogs me-1"></i>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#ORD001</strong></td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2" 
+                           style="width: 30px; height: 30px;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <strong>Rajesh Kumar</strong><br>
+                        <small class="text-muted">rajesh@email.com</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="https://via.placeholder.com/40x40" alt="Product" class="rounded me-2">
+                      <div>
+                        <strong>Organic Tomatoes</strong><br>
+                        <small class="text-muted">Fresh from farm</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge bg-light text-dark">5 kg</span></td>
+                  <td><strong class="text-success">₹250</strong></td>
+                  <td>Dec 15, 2024</td>
+                  <td><span class="badge bg-warning">Pending</span></td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" title="View Details">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-success" title="Confirm Order">
+                        <i class="fas fa-check"></i>
+                      </button>
+                      <button class="btn btn-outline-info" title="Ship Order">
+                        <i class="fas fa-truck"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>#ORD002</strong></td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center me-2" 
+                           style="width: 30px; height: 30px;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <strong>Priya Sharma</strong><br>
+                        <small class="text-muted">priya@email.com</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="https://via.placeholder.com/40x40" alt="Product" class="rounded me-2">
+                      <div>
+                        <strong>Fresh Carrots</strong><br>
+                        <small class="text-muted">Organic variety</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge bg-light text-dark">3 kg</span></td>
+                  <td><strong class="text-success">₹180</strong></td>
+                  <td>Dec 14, 2024</td>
+                  <td><span class="badge bg-info">Shipped</span></td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" title="View Details">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-success" title="Mark Delivered">
+                        <i class="fas fa-check-double"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" title="Track Order">
+                        <i class="fas fa-map-marker-alt"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>#ORD003</strong></td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center me-2" 
+                           style="width: 30px; height: 30px;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <strong>Amit Patel</strong><br>
+                        <small class="text-muted">amit@email.com</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="https://via.placeholder.com/40x40" alt="Product" class="rounded me-2">
+                      <div>
+                        <strong>Green Peas</strong><br>
+                        <small class="text-muted">Sweet variety</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge bg-light text-dark">2 kg</span></td>
+                  <td><strong class="text-success">₹120</strong></td>
+                  <td>Dec 13, 2024</td>
+                  <td><span class="badge bg-success">Delivered</span></td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" title="View Details">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" title="View Receipt">
+                        <i class="fas fa-receipt"></i>
+                      </button>
+                      <button class="btn btn-outline-info" title="Contact Customer">
+                        <i class="fas fa-phone"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>#ORD004</strong></td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center me-2" 
+                           style="width: 30px; height: 30px;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <strong>Sunita Verma</strong><br>
+                        <small class="text-muted">sunita@email.com</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="https://via.placeholder.com/40x40" alt="Product" class="rounded me-2">
+                      <div>
+                        <strong>Fresh Onions</strong><br>
+                        <small class="text-muted">Red variety</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge bg-light text-dark">4 kg</span></td>
+                  <td><strong class="text-success">₹200</strong></td>
+                  <td>Dec 12, 2024</td>
+                  <td><span class="badge bg-warning">Pending</span></td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" title="View Details">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-success" title="Confirm Order">
+                        <i class="fas fa-check"></i>
+                      </button>
+                      <button class="btn btn-outline-danger" title="Cancel Order">
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>#ORD005</strong></td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center me-2" 
+                           style="width: 30px; height: 30px;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <strong>Vikram Singh</strong><br>
+                        <small class="text-muted">vikram@email.com</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="https://via.placeholder.com/40x40" alt="Product" class="rounded me-2">
+                      <div>
+                        <strong>Potatoes</strong><br>
+                        <small class="text-muted">Fresh harvest</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge bg-light text-dark">6 kg</span></td>
+                  <td><strong class="text-success">₹300</strong></td>
+                  <td>Dec 11, 2024</td>
+                  <td><span class="badge bg-success">Delivered</span></td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" title="View Details">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" title="View Receipt">
+                        <i class="fas fa-receipt"></i>
+                      </button>
+                      <button class="btn btn-outline-info" title="Contact Customer">
+                        <i class="fas fa-phone"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <nav aria-label="Orders pagination" class="mt-4">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Statistics -->
   <div class="row mt-5">
     <div class="col-12">
@@ -266,6 +534,45 @@
   background-color: #2e7d32;
   border-color: #2e7d32;
 }
+
+/* Orders Section Styles */
+.bg-gradient-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(40, 167, 69, 0.05);
+}
+
+.btn-group-sm .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.2rem;
+}
+
+.btn-group-sm .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.table th {
+  border-top: none;
+  font-weight: 600;
+  color: #495057;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.rounded-circle {
+  border: 2px solid rgba(255,255,255,0.2);
+}
 </style>
 
 <script>
@@ -309,6 +616,239 @@ document.querySelectorAll('select').forEach(select => {
     console.log('Sorting by:', e.target.value);
   });
 });
+
+// Orders Section Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Order search functionality
+  const orderSearchInput = document.getElementById('orderSearchInput');
+  if (orderSearchInput) {
+    orderSearchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const orderRows = document.querySelectorAll('tbody tr');
+      
+      orderRows.forEach(function(row) {
+        const orderId = row.querySelector('td:first-child strong').textContent.toLowerCase();
+        const customerName = row.querySelector('td:nth-child(2) strong').textContent.toLowerCase();
+        const productName = row.querySelector('td:nth-child(3) strong').textContent.toLowerCase();
+        
+        if (orderId.includes(searchTerm) || customerName.includes(searchTerm) || productName.includes(searchTerm)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  // Order status filter functionality
+  const orderStatusFilter = document.getElementById('orderStatusFilter');
+  if (orderStatusFilter) {
+    orderStatusFilter.addEventListener('change', function() {
+      const filterValue = this.value;
+      const orderRows = document.querySelectorAll('tbody tr');
+      
+      orderRows.forEach(function(row) {
+        if (filterValue === '') {
+          row.style.display = '';
+        } else {
+          const status = row.querySelector('td:nth-child(7) .badge').textContent.trim();
+          if (status === filterValue) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        }
+      });
+    });
+  }
+
+  // Order sort functionality
+  const orderSortFilter = document.getElementById('orderSortFilter');
+  if (orderSortFilter) {
+    orderSortFilter.addEventListener('change', function() {
+      const sortValue = this.value;
+      const tbody = document.querySelector('tbody');
+      const orderRows = Array.from(tbody.querySelectorAll('tr'));
+      
+      if (sortValue === 'date') {
+        orderRows.sort(function(a, b) {
+          const dateA = new Date(a.querySelector('td:nth-child(6)').textContent);
+          const dateB = new Date(b.querySelector('td:nth-child(6)').textContent);
+          return dateB - dateA; // Newest first
+        });
+      } else if (sortValue === 'amount') {
+        orderRows.sort(function(a, b) {
+          const amountA = parseFloat(a.querySelector('td:nth-child(5) strong').textContent.replace('₹', ''));
+          const amountB = parseFloat(b.querySelector('td:nth-child(5) strong').textContent.replace('₹', ''));
+          return amountB - amountA; // Highest first
+        });
+      } else if (sortValue === 'status') {
+        orderRows.sort(function(a, b) {
+          const statusA = a.querySelector('td:nth-child(7) .badge').textContent;
+          const statusB = b.querySelector('td:nth-child(7) .badge').textContent;
+          return statusA.localeCompare(statusB);
+        });
+      }
+      
+      orderRows.forEach(function(row) {
+        tbody.appendChild(row);
+      });
+    });
+  }
+
+  // Order action buttons functionality
+  document.querySelectorAll('.btn-group-sm .btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const action = this.title;
+      const orderId = this.closest('tr').querySelector('td:first-child strong').textContent;
+      
+      if (action.includes('View Details')) {
+        alert(`Viewing order details for ${orderId}`);
+      } else if (action.includes('Confirm Order')) {
+        if (confirm(`Are you sure you want to confirm ${orderId}?`)) {
+          alert(`Order ${orderId} confirmed successfully!`);
+          // Update status badge to "Confirmed"
+          const statusBadge = this.closest('tr').querySelector('td:nth-child(7) .badge');
+          statusBadge.textContent = 'Confirmed';
+          statusBadge.className = 'badge bg-primary';
+        }
+      } else if (action.includes('Ship Order')) {
+        if (confirm(`Are you sure you want to ship ${orderId}?`)) {
+          alert(`Order ${orderId} shipped successfully!`);
+          // Update status badge to "Shipped"
+          const statusBadge = this.closest('tr').querySelector('td:nth-child(7) .badge');
+          statusBadge.textContent = 'Shipped';
+          statusBadge.className = 'badge bg-info';
+        }
+      } else if (action.includes('Mark Delivered')) {
+        if (confirm(`Are you sure you want to mark ${orderId} as delivered?`)) {
+          alert(`Order ${orderId} marked as delivered!`);
+          // Update status badge to "Delivered"
+          const statusBadge = this.closest('tr').querySelector('td:nth-child(7) .badge');
+          statusBadge.textContent = 'Delivered';
+          statusBadge.className = 'badge bg-success';
+        }
+      } else if (action.includes('Cancel Order')) {
+        if (confirm(`Are you sure you want to cancel ${orderId}?`)) {
+          alert(`Order ${orderId} cancelled successfully!`);
+          // Update status badge to "Cancelled"
+          const statusBadge = this.closest('tr').querySelector('td:nth-child(7) .badge');
+          statusBadge.textContent = 'Cancelled';
+          statusBadge.className = 'badge bg-danger';
+        }
+      } else if (action.includes('View Receipt')) {
+        alert(`Viewing receipt for ${orderId}`);
+      } else if (action.includes('Contact Customer')) {
+        alert(`Opening contact form for ${orderId}`);
+      } else if (action.includes('Track Order')) {
+        alert(`Opening tracking page for ${orderId}`);
+      }
+    });
+  });
+
+  // Form submission functionality for modal
+  const addProductForm = document.getElementById('addProductForm');
+  if (addProductForm) {
+    addProductForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(this);
+      const productName = formData.get('product_name');
+      const price = formData.get('price');
+      const quantity = formData.get('quantity');
+      const description = formData.get('description');
+      const image = formData.get('image');
+      
+      // Validate form
+      if (!productName || !price || !quantity || !description || !image) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
+      // Show success message (replace with actual form submission)
+      alert(`Product "${productName}" added successfully!`);
+      
+      // Reset form
+      this.reset();
+      
+      // Close the modal
+      const modal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
+      if (modal) {
+        modal.hide();
+      }
+    });
+  }
+});
 </script>
+
+<!-- Add Product Modal -->
+{% if category_name == "Vegetables" or category_name == "Fruits" or category_name == "Grains" %}
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addProductModalLabel">
+          <i class="fas fa-plus me-2"></i>Add New {{ category_name }} Product
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" enctype="multipart/form-data" id="addProductForm">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="product_name" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="product_name" name="product_name" 
+                       placeholder="Enter product name" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="price" class="form-label">Price (₹)</label>
+                <input type="number" class="form-control" id="price" name="price" 
+                       placeholder="Enter price per unit" step="0.01" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" 
+                       placeholder="Enter available quantity" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="image" class="form-label">Product Image</label>
+                <input type="file" class="form-control" id="image" name="image" 
+                       accept="image/*" required>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" 
+                      placeholder="Enter product description" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="fas fa-times me-2"></i>Cancel
+        </button>
+        <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('addProductForm').reset()">
+          <i class="fas fa-undo me-2"></i>Reset
+        </button>
+        <button type="submit" form="addProductForm" class="btn btn-success">
+          <i class="fas fa-plus me-2"></i>Add Product
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 
 {% include 'footer.html' %} 

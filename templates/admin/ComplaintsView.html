@@ -1,0 +1,350 @@
+{% include 'header.html' %}
+<div class="container py-5">
+  <h2 class="text-center fw-bold mb-4" style="color: #388e3c;">
+    <i class="fas fa-exclamation-triangle me-2"></i>View Complaints
+  </h2>
+  
+  <!-- Search and Filter -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <input type="text" class="form-control" placeholder="Search complaints..." id="searchInput">
+      </div>
+    </div>
+    <div class="col-md-3">
+      <select class="form-select" id="statusFilter">
+        <option selected value="">All Status</option>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select class="form-select" id="priorityFilter">
+        <option selected value="">All Priorities</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-md-3 mb-3">
+      <div class="card text-center border-0 shadow-sm">
+        <div class="card-body">
+          <i class="fas fa-exclamation-triangle text-primary mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-primary mb-1">{{ complaints|length }}</h4>
+          <p class="mb-0 text-muted">Total Complaints</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card text-center border-0 shadow-sm">
+        <div class="card-body">
+          <i class="fas fa-clock text-warning mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-warning mb-1">3</h4>
+          <p class="mb-0 text-muted">Pending</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card text-center border-0 shadow-sm">
+        <div class="card-body">
+          <i class="fas fa-spinner text-info mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-info mb-1">2</h4>
+          <p class="mb-0 text-muted">In Progress</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card text-center border-0 shadow-sm">
+        <div class="card-body">
+          <i class="fas fa-check-circle text-success mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-success mb-1">3</h4>
+          <p class="mb-0 text-muted">Resolved</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Complaints Cards -->
+  <div class="row" id="complaintsContainer">
+    {% for complaint in complaints %}
+    <div class="col-md-6 col-lg-4 mb-4 complaint-card">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-header bg-gradient-primary text-white py-3 position-relative">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <h6 class="mb-1 text-truncate">{{ complaint.subject }}</h6>
+              <small class="opacity-75">Complaint ID: #{{ complaint.id|stringformat:"03d" }}</small>
+            </div>
+            <div class="text-end">
+              <span class="badge {% if complaint.status == 'Pending' %}bg-warning{% elif complaint.status == 'In Progress' %}bg-info{% else %}bg-success{% endif %}">
+                {{ complaint.status }}
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="complaint-info">
+            <div class="info-item d-flex align-items-center mb-3">
+              <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                   style="width: 35px; height: 35px;">
+                <i class="fas fa-user text-primary"></i>
+              </div>
+              <div>
+                <small class="text-muted d-block">Submitted By</small>
+                <strong>{{ complaint.submitted_by }}</strong>
+                <span class="badge bg-secondary ms-2">{{ complaint.user_type }}</span>
+              </div>
+            </div>
+            
+            <div class="info-item d-flex align-items-center mb-3">
+              <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                   style="width: 35px; height: 35px;">
+                <i class="fas fa-tag text-success"></i>
+              </div>
+              <div>
+                <small class="text-muted d-block">Category</small>
+                <strong>{{ complaint.category }}</strong>
+              </div>
+            </div>
+            
+            <div class="info-item d-flex align-items-center mb-3">
+              <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                   style="width: 35px; height: 35px;">
+                <i class="fas fa-exclamation text-danger"></i>
+              </div>
+              <div>
+                <small class="text-muted d-block">Priority</small>
+                <span class="badge {% if complaint.priority == 'High' %}bg-danger{% elif complaint.priority == 'Medium' %}bg-warning{% else %}bg-success{% endif %}">
+                  {{ complaint.priority }}
+                </span>
+              </div>
+            </div>
+            
+            <div class="info-item d-flex align-items-center mb-3">
+              <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                   style="width: 35px; height: 35px;">
+                <i class="fas fa-calendar-alt text-info"></i>
+              </div>
+              <div>
+                <small class="text-muted d-block">Submitted Date</small>
+                <strong>{{ complaint.submitted_date }}</strong>
+              </div>
+            </div>
+            
+            <div class="info-item">
+              <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                   style="width: 35px; height: 35px;">
+                <i class="fas fa-comment text-secondary"></i>
+              </div>
+              <div>
+                <small class="text-muted d-block">Message</small>
+                <p class="mb-0 text-truncate" style="max-width: 200px;">{{ complaint.message }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-white border-0 pt-0">
+          <div class="btn-group w-100" role="group">
+            <button class="btn btn-outline-primary btn-sm view-complaint-btn" title="View Details" data-complaint-id="{{ complaint.id }}">
+              <i class="fas fa-eye me-1"></i>View
+            </button>
+            <button class="btn btn-outline-success btn-sm resolve-complaint-btn" title="Mark as Resolved" data-complaint-id="{{ complaint.id }}">
+              <i class="fas fa-check me-1"></i>Resolve
+            </button>
+            <button class="btn btn-outline-info btn-sm reply-complaint-btn" title="Reply to Complaint" data-complaint-id="{{ complaint.id }}">
+              <i class="fas fa-reply me-1"></i>Reply
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+      <div class="card shadow border-0">
+        <div class="card-body text-center py-5">
+          <i class="fas fa-inbox text-muted mb-3" style="font-size: 4rem;"></i>
+          <h4 class="text-muted">No Complaints Found</h4>
+          <p class="text-muted">There are currently no complaints in the system.</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <!-- Pagination -->
+  {% if complaints %}
+  <div class="row mt-4">
+    <div class="col-12">
+      <nav aria-label="Complaints pagination">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  {% endif %}
+  
+  <div class="text-center mt-4">
+    <a href="/admin/dashboard/" class="btn btn-outline-secondary">
+      <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+    </a>
+  </div>
+</div>
+
+<style>
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.card-header {
+  border-bottom: none;
+}
+
+.info-icon {
+  transition: all 0.3s ease;
+}
+
+.complaint-card:hover .info-icon {
+  transform: scale(1.05);
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.text-truncate {
+  max-width: 100%;
+}
+</style>
+
+<script>
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function() {
+  const searchTerm = this.value.toLowerCase();
+  const complaintCards = document.querySelectorAll('.complaint-card');
+  
+  complaintCards.forEach(function(card) {
+    const subject = card.querySelector('h6').textContent.toLowerCase();
+    const submittedBy = card.querySelector('.info-item strong').textContent.toLowerCase();
+    const message = card.querySelector('.text-truncate').textContent.toLowerCase();
+    const category = card.querySelectorAll('.info-item strong')[1].textContent.toLowerCase();
+    
+    if (subject.includes(searchTerm) || submittedBy.includes(searchTerm) || 
+        message.includes(searchTerm) || category.includes(searchTerm)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+});
+
+// Status filter functionality
+document.getElementById('statusFilter').addEventListener('change', function() {
+  const filterValue = this.value;
+  const complaintCards = document.querySelectorAll('.complaint-card');
+  
+  complaintCards.forEach(function(card) {
+    if (filterValue === '') {
+      card.style.display = 'block';
+    } else {
+      const status = card.querySelector('.badge').textContent.trim();
+      if (status === filterValue) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    }
+  });
+});
+
+// Priority filter functionality
+document.getElementById('priorityFilter').addEventListener('change', function() {
+  const filterValue = this.value;
+  const complaintCards = document.querySelectorAll('.complaint-card');
+  
+  complaintCards.forEach(function(card) {
+    if (filterValue === '') {
+      card.style.display = 'block';
+    } else {
+      const priority = card.querySelectorAll('.badge')[1].textContent.trim();
+      if (priority === filterValue) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    }
+  });
+});
+
+// Complaint action functions
+function viewComplaint(complaintId) {
+  alert('View complaint details for complaint ID: ' + complaintId);
+}
+
+function resolveComplaint(complaintId) {
+  if (confirm('Are you sure you want to mark this complaint as resolved?')) {
+    alert('Complaint resolved successfully! Complaint ID: ' + complaintId);
+    // Here you would typically make an AJAX call to update the complaint status
+  }
+}
+
+function replyComplaint(complaintId) {
+  alert('Reply to complaint for complaint ID: ' + complaintId);
+}
+
+// Event listeners for complaint action buttons
+document.addEventListener('DOMContentLoaded', function() {
+  // View complaint buttons
+  document.querySelectorAll('.view-complaint-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const complaintId = this.getAttribute('data-complaint-id');
+      viewComplaint(complaintId);
+    });
+  });
+
+  // Resolve complaint buttons
+  document.querySelectorAll('.resolve-complaint-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const complaintId = this.getAttribute('data-complaint-id');
+      resolveComplaint(complaintId);
+    });
+  });
+
+  // Reply complaint buttons
+  document.querySelectorAll('.reply-complaint-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const complaintId = this.getAttribute('data-complaint-id');
+      replyComplaint(complaintId);
+    });
+  });
+});
+</script>
+
+{% include 'footer.html' %} 

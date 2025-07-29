@@ -1,0 +1,463 @@
+{% include 'header.html' %}
+
+<div class="container py-5">
+  <!-- Header Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="fw-bold mb-1" style="color: #388e3c;">
+            <i class="fas fa-file-alt me-2"></i>Scheme Applications
+          </h2>
+          <p class="text-muted mb-0">Review and manage farmer applications for government schemes</p>
+        </div>
+        <div class="d-flex gap-2">
+          <a href="/admin/scheme/add/" class="btn btn-success">
+            <i class="fas fa-plus me-2"></i>Add New Scheme
+          </a>
+          <a href="/admin/dashboard/" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-file-alt text-primary me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-primary">45</h3>
+          </div>
+          <p class="mb-0 fw-bold">Total Applications</p>
+          <small class="text-muted">This month</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-clock text-warning me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-warning">18</h3>
+          </div>
+          <p class="mb-0 fw-bold">Pending Review</p>
+          <small class="text-muted">Requires attention</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-check-circle text-success me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-success">22</h3>
+          </div>
+          <p class="mb-0 fw-bold">Approved</p>
+          <small class="text-muted">Successfully processed</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card shadow border-0">
+        <div class="card-body text-center">
+          <div class="d-flex align-items-center justify-content-center mb-2">
+            <i class="fas fa-times-circle text-danger me-2" style="font-size: 1.5rem;"></i>
+            <h3 class="mb-0 text-danger">5</h3>
+          </div>
+          <p class="mb-0 fw-bold">Rejected</p>
+          <small class="text-muted">Not eligible</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search and Filter Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow border-0">
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="searchInput" class="form-label">Search Applications</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                <input type="text" class="form-control" id="searchInput" placeholder="Search by farmer name, scheme name...">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label for="schemeFilter" class="form-label">Filter by Scheme</label>
+              <select class="form-select" id="schemeFilter">
+                <option value="">All Schemes</option>
+                <option value="pm-kisan">PM-KISAN</option>
+                <option value="crop-insurance">Crop Insurance</option>
+                <option value="fertilizer-subsidy">Fertilizer Subsidy</option>
+                <option value="organic-farming">Organic Farming Support</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="statusFilter" class="form-label">Filter by Status</label>
+              <select class="form-select" id="statusFilter">
+                <option value="">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">&nbsp;</label>
+              <button class="btn btn-primary w-100" onclick="filterApplications()">
+                <i class="fas fa-filter me-1"></i>Filter
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Applications Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow border-0">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">
+            <i class="fas fa-list me-2"></i>Scheme Applications
+          </h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Application ID</th>
+                  <th>Farmer Details</th>
+                  <th>Scheme Applied</th>
+                  <th>Application Date</th>
+                  <th>Status</th>
+                  <th>Documents</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Application 1 -->
+                <tr>
+                  <td>
+                    <span class="fw-bold text-primary">#APP-001</span>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <div class="fw-bold">Rajesh Kumar</div>
+                        <small class="text-muted">Aadhaar: 111222333444</small>
+                        <br><small class="text-muted">Village A, District X</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <div class="fw-bold">PM-KISAN</div>
+                      <small class="text-muted">Direct income support of ₹6000/year</small>
+                    </div>
+                  </td>
+                  <td>
+                    <small>Dec 15, 2024</small>
+                    <br><small class="text-muted">11:45 AM</small>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning">Pending Review</span>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-info" title="View Documents">
+                        <i class="fas fa-file-alt"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" title="Download">
+                        <i class="fas fa-download"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-success" title="Approve" onclick="approveApplication('APP-001')">
+                        <i class="fas fa-check"></i>
+                      </button>
+                      <button class="btn btn-outline-danger" title="Reject" onclick="rejectApplication('APP-001')">
+                        <i class="fas fa-times"></i>
+                      </button>
+                      <button class="btn btn-outline-primary" title="View Details" onclick="viewApplicationDetails('APP-001')">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Application 2 -->
+                <tr>
+                  <td>
+                    <span class="fw-bold text-primary">#APP-002</span>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <div class="fw-bold">Sunita Devi</div>
+                        <small class="text-muted">Aadhaar: 555666777888</small>
+                        <br><small class="text-muted">Village B, District Y</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <div class="fw-bold">Crop Insurance</div>
+                      <small class="text-muted">Comprehensive crop insurance</small>
+                    </div>
+                  </td>
+                  <td>
+                    <small>Dec 14, 2024</small>
+                    <br><small class="text-muted">3:20 PM</small>
+                  </td>
+                  <td>
+                    <span class="badge bg-success">Approved</span>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-info" title="View Documents">
+                        <i class="fas fa-file-alt"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" title="Download">
+                        <i class="fas fa-download"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-secondary" title="View Details" onclick="viewApplicationDetails('APP-002')">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-info" title="Send Notification">
+                        <i class="fas fa-bell"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Application 3 -->
+                <tr>
+                  <td>
+                    <span class="fw-bold text-primary">#APP-003</span>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <div class="fw-bold">Amit Singh</div>
+                        <small class="text-muted">Aadhaar: 999000111222</small>
+                        <br><small class="text-muted">Village C, District Z</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <div class="fw-bold">Fertilizer Subsidy</div>
+                      <small class="text-muted">Subsidy on fertilizers for small farmers</small>
+                    </div>
+                  </td>
+                  <td>
+                    <small>Dec 13, 2024</small>
+                    <br><small class="text-muted">10:15 AM</small>
+                  </td>
+                  <td>
+                    <span class="badge bg-danger">Rejected</span>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-info" title="View Documents">
+                        <i class="fas fa-file-alt"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" title="Download">
+                        <i class="fas fa-download"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-secondary" title="View Details" onclick="viewApplicationDetails('APP-003')">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn btn-outline-warning" title="Reconsider">
+                        <i class="fas fa-redo"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Application 4 -->
+                <tr>
+                  <td>
+                    <span class="fw-bold text-primary">#APP-004</span>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center me-2" style="width: 35px; height: 35px;">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                        <div class="fw-bold">Priya Sharma</div>
+                        <small class="text-muted">Aadhaar: 333444555666</small>
+                        <br><small class="text-muted">Village D, District W</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <div class="fw-bold">Organic Farming Support</div>
+                      <small class="text-muted">Support for organic farming practices</small>
+                    </div>
+                  </td>
+                  <td>
+                    <small>Dec 12, 2024</small>
+                    <br><small class="text-muted">5:30 PM</small>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning">Pending Review</span>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-info" title="View Documents">
+                        <i class="fas fa-file-alt"></i>
+                      </button>
+                      <button class="btn btn-outline-secondary" title="Download">
+                        <i class="fas fa-download"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-success" title="Approve" onclick="approveApplication('APP-004')">
+                        <i class="fas fa-check"></i>
+                      </button>
+                      <button class="btn btn-outline-danger" title="Reject" onclick="rejectApplication('APP-004')">
+                        <i class="fas fa-times"></i>
+                      </button>
+                      <button class="btn btn-outline-primary" title="View Details" onclick="viewApplicationDetails('APP-004')">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <nav aria-label="Applications pagination">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- Application Details Modal -->
+<div class="modal fade" id="applicationDetailsModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Application Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="applicationDetailsContent">
+          <!-- Content will be loaded dynamically -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Approve</button>
+        <button type="button" class="btn btn-danger">Reject</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function filterApplications() {
+  const searchTerm = document.getElementById('searchInput').value;
+  const schemeFilter = document.getElementById('schemeFilter').value;
+  const statusFilter = document.getElementById('statusFilter').value;
+  
+  // This will be implemented with backend integration
+  console.log('Filtering applications:', { searchTerm, schemeFilter, statusFilter });
+}
+
+function approveApplication(appId) {
+  if (confirm('Are you sure you want to approve this application?')) {
+    // This will be implemented with backend integration
+    console.log('Approving application:', appId);
+    alert('Application approved successfully!');
+  }
+}
+
+function rejectApplication(appId) {
+  if (confirm('Are you sure you want to reject this application?')) {
+    // This will be implemented with backend integration
+    console.log('Rejecting application:', appId);
+    alert('Application rejected successfully!');
+  }
+}
+
+function viewApplicationDetails(appId) {
+  // This will be implemented with backend integration
+  console.log('Viewing application details:', appId);
+  
+  // For now, show a sample modal
+  const modal = new bootstrap.Modal(document.getElementById('applicationDetailsModal'));
+  document.getElementById('applicationDetailsContent').innerHTML = `
+    <div class="row">
+      <div class="col-md-6">
+        <h6>Farmer Information</h6>
+        <p><strong>Name:</strong> Sample Farmer</p>
+        <p><strong>Aadhaar:</strong> 123456789012</p>
+        <p><strong>Village:</strong> Sample Village</p>
+        <p><strong>Land Size:</strong> 2.5 acres</p>
+      </div>
+      <div class="col-md-6">
+        <h6>Scheme Information</h6>
+        <p><strong>Scheme:</strong> PM-KISAN</p>
+        <p><strong>Applied Date:</strong> Dec 15, 2024</p>
+        <p><strong>Status:</strong> Pending Review</p>
+        <p><strong>Documents:</strong> Aadhaar, Land Records</p>
+      </div>
+    </div>
+  `;
+  modal.show();
+}
+</script>
+
+{% include 'footer.html' %} 

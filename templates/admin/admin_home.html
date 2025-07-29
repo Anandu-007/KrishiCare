@@ -94,8 +94,12 @@
           <p class="card-text">Register, approve, and manage farmer accounts. Monitor farmer activities and maintain comprehensive records.</p>
         </div>
         <div class="card-footer bg-white border-0 d-flex justify-content-center gap-2 pb-3">
-          <a href="/admin/farmers/" class="btn btn-outline-success btn-sm">View Farmers</a>
-          <a href="/admin/approve-farmers/" class="btn btn-outline-primary btn-sm">Approve Farmers</a>
+          <a href="/admin/farmers/" class="btn btn-outline-success btn-sm">
+            <i class="fas fa-users me-1"></i>View Farmers
+          </a>
+          <a href="/admin/approve-farmers/" class="btn btn-outline-primary btn-sm">
+            <i class="fas fa-check-circle me-1"></i>Approved Farmers
+          </a>
         </div>
       </div>
     </div>
@@ -109,7 +113,9 @@
           <p class="card-text">Manage system users, monitor login activities, and maintain user access controls and permissions.</p>
         </div>
         <div class="card-footer bg-white border-0 d-flex justify-content-center pb-3">
-          <a href="/admin/users/" class="btn btn-outline-success btn-sm">View Users</a>
+          <a href="/admin/users/" class="btn btn-outline-success btn-sm w-100">
+            <i class="fas fa-user-friends me-1"></i>View Users
+          </a>
         </div>
       </div>
     </div>
@@ -122,10 +128,16 @@
           <h5 class="card-title">Inventory Management</h5>
           <p class="card-text">Manage agricultural supplies including seeds, fertilizers, and farming tools. Track stock levels and sales.</p>
         </div>
-        <div class="card-footer bg-white border-0 d-flex justify-content-center gap-2 pb-3">
-          <a href="/admin/inventory/seed/" class="btn btn-outline-success btn-sm">Seeds</a>
-          <a href="/admin/inventory/fertilizer/" class="btn btn-outline-warning btn-sm">Fertilizers</a>
-          <a href="/admin/inventory/tool/" class="btn btn-outline-info btn-sm">Tools</a>
+        <div class="card-footer bg-white border-0 d-flex flex-column gap-2 pb-3">
+          <a href="/admin/inventory/seed/" class="btn btn-outline-success btn-sm w-100">
+            <i class="fas fa-seedling me-1"></i>Seeds
+          </a>
+          <a href="/admin/inventory/fertilizer/" class="btn btn-outline-warning btn-sm w-100">
+            <i class="fas fa-flask me-1"></i>Fertilizers
+          </a>
+          <a href="/admin/inventory/tool/" class="btn btn-outline-info btn-sm w-100">
+            <i class="fas fa-tools me-1"></i>Tools
+          </a>
         </div>
       </div>
     </div>
@@ -138,8 +150,9 @@
           <h5 class="card-title">Government Schemes</h5>
           <p class="card-text">Create and manage government agricultural schemes, subsidies, and support programs for farmers.</p>
         </div>
-        <div class="card-footer bg-white border-0 d-flex justify-content-center pb-3">
+        <div class="card-footer bg-white border-0 d-flex justify-content-center gap-2 pb-3">
           <a href="/admin/scheme/add/" class="btn btn-outline-success btn-sm">Add Scheme</a>
+          <a href="/admin/scheme/applications/" class="btn btn-outline-primary btn-sm">View Applications</a>
         </div>
       </div>
     </div>
@@ -236,6 +249,37 @@
     </div>
     
     <!-- Quick Actions -->
+    <div class="col-md-4">
+      <div class="card shadow border-0">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">
+            <i class="fas fa-bolt me-2"></i>Quick Actions
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="d-grid gap-2">
+            <a href="/admin/farmers/" class="btn btn-success btn-sm">
+              <i class="fas fa-users me-2"></i>View All Farmers
+            </a>
+            <a href="/admin/approve-farmers/" class="btn btn-primary btn-sm">
+              <i class="fas fa-check-circle me-2"></i>Approve Pending Farmers
+            </a>
+            <a href="/admin/users/" class="btn btn-info btn-sm">
+              <i class="fas fa-user-friends me-2"></i>View All Users
+            </a>
+            <a href="/admin/inventory/seed/" class="btn btn-warning btn-sm">
+              <i class="fas fa-seedling me-2"></i>Manage Seeds
+            </a>
+            <a href="/admin/inventory/fertilizer/" class="btn btn-secondary btn-sm">
+              <i class="fas fa-flask me-2"></i>Manage Fertilizers
+            </a>
+            <a href="/admin/inventory/tool/" class="btn btn-dark btn-sm">
+              <i class="fas fa-tools me-2"></i>Manage Tools
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
   <!-- System Information -->

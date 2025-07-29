@@ -12,9 +12,10 @@ urlpatterns = [
     path('inventory/fertilizer/', views.inventory_fertilizer, name='InventoryFertilizer'),
     path('inventory/tool/', views.inventory_tool, name='InventoryTool'),
     path('scheme/add/', views.scheme_add, name='SchemeAdd'),
+    path('scheme/applications/', views.scheme_applications, name='SchemeApplications'),
     path('complaints/', views.complaints_view, name='ComplaintsView'),
     path('approve-farmers/', views.approve_farmers, name='approve_farmers'),
-    path('farmer-products/', views.farmer_products, name='farmer_products'),
+    path('farmer-products/<int:farmer_id>/', views.farmer_products, name='farmer_products'),
 
     # Non-admin URLs (when accessed via root /)
     path('home/',views.home,name='home'),

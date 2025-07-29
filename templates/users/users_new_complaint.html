@@ -1,0 +1,134 @@
+{% include 'header_users.html' %}
+
+<div class="container py-4">
+  <!-- Header Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="mb-1">
+            <i class="fas fa-plus-circle me-2 text-primary"></i>Submit New Complaint
+          </h2>
+          <p class="text-muted mb-0">We're here to help! Please provide details about your issue.</p>
+        </div>
+        <a href="/users/dashboard/" class="btn btn-outline-secondary">
+          <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Complaint Form -->
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow border-0">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">
+            <i class="fas fa-exclamation-triangle me-2"></i>Complaint Details
+          </h5>
+        </div>
+        <div class="card-body p-4">
+          <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Complaint Type -->
+            <div class="mb-3">
+              <label for="complaint_type" class="form-label fw-bold">
+                <i class="fas fa-tag me-1"></i>Complaint Type *
+              </label>
+              <select class="form-select" id="complaint_type" name="complaint_type" required>
+                <option value="">Select complaint type</option>
+                {% for type in complaint_types %}
+                <option value="{{ type }}">{{ type }}</option>
+                {% endfor %}
+              </select>
+              <div class="form-text">Choose the category that best describes your issue</div>
+            </div>
+
+            <!-- Subject -->
+            <div class="mb-3">
+              <label for="subject" class="form-label fw-bold">
+                <i class="fas fa-heading me-1"></i>Subject *
+              </label>
+              <input type="text" class="form-control" id="subject" name="subject" 
+                     placeholder="Brief description of your complaint" required>
+              <div class="form-text">Provide a clear, concise title for your complaint</div>
+            </div>
+
+            <!-- Priority -->
+            <div class="mb-3">
+              <label for="priority" class="form-label fw-bold">
+                <i class="fas fa-flag me-1"></i>Priority Level *
+              </label>
+              <select class="form-select" id="priority" name="priority" required>
+                <option value="">Select priority level</option>
+                {% for priority in priority_levels %}
+                <option value="{{ priority }}">{{ priority }}</option>
+                {% endfor %}
+              </select>
+              <div class="form-text">How urgent is this issue for you?</div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+              <label for="description" class="form-label fw-bold">
+                <i class="fas fa-align-left me-1"></i>Detailed Description *
+              </label>
+              <textarea class="form-control" id="description" name="description" rows="6" 
+                        placeholder="Please provide detailed information about your complaint, including any relevant dates, order numbers, or specific incidents..." required></textarea>
+              <div class="form-text">The more details you provide, the better we can assist you</div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex gap-3">
+              <button type="submit" class="btn btn-primary flex-fill">
+                <i class="fas fa-paper-plane me-2"></i>Submit Complaint
+              </button>
+              <a href="/users/complaints/view-reply/" class="btn btn-outline-secondary">
+                <i class="fas fa-times me-2"></i>Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Help Section -->
+      <div class="card mt-4 border-0 bg-light">
+        <div class="card-body">
+          <h6 class="fw-bold text-primary">
+            <i class="fas fa-info-circle me-2"></i>Need Help?
+          </h6>
+          <p class="mb-2">Before submitting a complaint, you might want to:</p>
+          <ul class="mb-0">
+            <li>Check our <a href="#" class="text-decoration-none">FAQ section</a> for common solutions</li>
+            <li>Review your <a href="/users/complaints/view-reply/" class="text-decoration-none">existing complaints</a> to see if your issue is already being addressed</li>
+            <li>Contact our support team directly for urgent matters</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.form-control:focus, .form-select:focus {
+  border-color: #388e3c;
+  box-shadow: 0 0 0 0.2rem rgba(56, 142, 60, 0.25);
+}
+
+.btn-primary {
+  background-color: #388e3c;
+  border-color: #388e3c;
+}
+
+.btn-primary:hover {
+  background-color: #2e7d32;
+  border-color: #2e7d32;
+}
+
+.card-header.bg-primary {
+  background-color: #388e3c !important;
+}
+</style>
+
+{% include 'footer.html' %} 

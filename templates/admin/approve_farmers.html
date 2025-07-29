@@ -1,0 +1,364 @@
+{% include 'header.html' %}
+<div class="container py-5">
+  <h2 class="text-center fw-bold mb-4" style="color: #388e3c;">
+    <i class="fas fa-user-check me-2"></i>Approve Farmers
+  </h2>
+  
+  <!-- Search and Filter -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <input type="text" class="form-control" placeholder="Search farmers..." id="searchInput">
+      </div>
+    </div>
+    <div class="col-md-3">
+      <select class="form-select" id="statusFilter">
+        <option selected value="">All Status</option>
+        <option value="approved">Approved</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select class="form-select" id="sortFilter">
+        <option selected value="">Sort by</option>
+        <option value="name">Name: A to Z</option>
+        <option value="date">Registration Date</option>
+        <option value="status">Status</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card text-center border-0 shadow-sm">
+        <div class="card-body">
+          <i class="fas fa-users text-primary mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-primary mb-1">{{ approved_farmers|length }}</h4>
+          <p class="mb-0 text-muted">Total Approved Farmers</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card text-center border-0 shadow-sm">
+        <div class="card-body">
+          <i class="fas fa-check-circle text-success mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-success mb-1">{{ approved_farmers|length }}</h4>
+          <p class="mb-0 text-muted">Approved Farmers</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card text-center border-0 shadow-sm">
+        <div class="card-body">
+          <i class="fas fa-percentage text-info mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-info mb-1">100%</h4>
+          <p class="mb-0 text-muted">Approval Rate</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Approved Farmers Section -->
+  {% if approved_farmers %}
+  <div class="row mb-4">
+    <div class="col-12">
+      <h4 class="fw-bold mb-3" style="color: #28a745;">
+        <i class="fas fa-check-circle me-2"></i>Approved Farmers ({{ approved_farmers|length }})
+      </h4>
+    </div>
+  </div>
+  <div class="row" id="approvedFarmersContainer">
+    {% for farmer in approved_farmers %}
+    <div class="col-md-6 col-lg-4 mb-4 farmer-card approved-farmer">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-header bg-gradient-success text-white text-center py-3 position-relative">
+          <div class="farmer-avatar mb-2">
+            <div class="rounded-circle bg-white bg-opacity-25 d-inline-flex align-items-center justify-content-center" 
+                 style="width: 60px; height: 60px;">
+              <i class="fas fa-user fa-2x"></i>
+            </div>
+          </div>
+          <h5 class="mb-0">{{ farmer.name }}</h5>
+          <small class="opacity-75">Farmer ID: #{{ farmer.id|stringformat:"03d" }}</small>
+          
+          <!-- Status Badge -->
+          <div class="position-absolute top-0 end-0 m-2">
+            <span class="badge bg-success">
+              <i class="fas fa-check me-1"></i>Approved
+            </span>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="farmer-info">
+            <div class="info-item d-flex align-items-center mb-3">
+              <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                   style="width: 35px; height: 35px;">
+                <i class="fas fa-phone text-primary"></i>
+              </div>
+              <div>
+                <small class="text-muted d-block">Phone Number</small>
+                <strong>{{ farmer.phone }}</strong>
+              </div>
+            </div>
+            
+            <div class="info-item d-flex align-items-center mb-3">
+              <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                   style="width: 35px; height: 35px;">
+                <i class="fas fa-map-marker-alt text-success"></i>
+              </div>
+              <div>
+                <small class="text-muted d-block">Location</small>
+                <strong>{{ farmer.place }}</strong>
+              </div>
+            </div>
+            
+            <div class="info-item d-flex align-items-center mb-3">
+              <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                   style="width: 35px; height: 35px;">
+                <i class="fas fa-id-card text-info"></i>
+              </div>
+              <div>
+                <small class="text-muted d-block">Aadhaar Number</small>
+                <strong>{{ farmer.aadhaar_number }}</strong>
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-6">
+                <div class="info-item d-flex align-items-center">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-2" 
+                       style="width: 30px; height: 30px;">
+                    <i class="fas fa-tag text-warning"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Type</small>
+                    <strong class="text-warning">{{ farmer.farmer_type }}</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="info-item d-flex align-items-center">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-2" 
+                       style="width: 30px; height: 30px;">
+                    <i class="fas fa-calendar-alt text-secondary"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Registration</small>
+                    <strong class="text-secondary">{{ farmer.registered_date }}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-white border-0 pt-0">
+          <div class="btn-group w-100" role="group">
+            <button class="btn btn-outline-primary btn-sm view-farmer-btn" title="View Details" data-farmer-id="{{ farmer.id }}">
+              <i class="fas fa-eye me-1"></i>View
+            </button>
+            <button class="btn btn-outline-success btn-sm products-btn" title="View Products" data-farmer-id="{{ farmer.id }}">
+              <i class="fas fa-box me-1"></i>Products
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- No Farmers Message -->
+  {% if not approved_farmers %}
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow border-0">
+        <div class="card-body text-center py-5">
+          <i class="fas fa-users text-muted mb-3" style="font-size: 4rem;"></i>
+          <h4 class="text-muted">No Farmers Found</h4>
+          <p class="text-muted">There are currently no farmers registered in the system.</p>
+          <button class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Add New Farmer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  
+  <div class="text-center mt-4">
+    <a href="/admin/dashboard/" class="btn btn-outline-secondary">
+      <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+    </a>
+  </div>
+</div>
+
+<style>
+.bg-gradient-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ffca2c 100%);
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, #388e3c 0%, #4caf50 100%);
+}
+
+.farmer-card {
+  transition: all 0.3s ease;
+}
+
+.farmer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+.info-item {
+  transition: all 0.2s ease;
+}
+
+.info-item:hover {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 8px;
+  margin: -8px;
+}
+
+.info-icon {
+  transition: all 0.2s ease;
+}
+
+.info-item:hover .info-icon {
+  background-color: #e9ecef !important;
+  transform: scale(1.1);
+}
+
+.btn-group .btn {
+  border-radius: 0;
+}
+
+.btn-group .btn:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.btn-group .btn:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-header {
+  border-bottom: none;
+}
+
+.farmer-avatar {
+  transition: all 0.3s ease;
+}
+
+.farmer-card:hover .farmer-avatar {
+  transform: scale(1.05);
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+</style>
+
+<script>
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function() {
+  const searchTerm = this.value.toLowerCase();
+  const farmerCards = document.querySelectorAll('.farmer-card');
+  
+  farmerCards.forEach(function(card) {
+    const farmerName = card.querySelector('h5').textContent.toLowerCase();
+    const farmerPhone = card.querySelector('.info-item strong').textContent.toLowerCase();
+    const farmerPlace = card.querySelectorAll('.info-item strong')[1].textContent.toLowerCase();
+    const farmerAadhaar = card.querySelectorAll('.info-item strong')[2].textContent.toLowerCase();
+    
+    if (farmerName.includes(searchTerm) || farmerPhone.includes(searchTerm) || 
+        farmerPlace.includes(searchTerm) || farmerAadhaar.includes(searchTerm)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+});
+
+// Filter functionality
+document.getElementById('statusFilter').addEventListener('change', function() {
+  const filterValue = this.value;
+  const approvedCards = document.querySelectorAll('.approved-farmer');
+  
+  if (filterValue === '') {
+    approvedCards.forEach(function(card) { card.style.display = 'block'; });
+  } else if (filterValue === 'approved') {
+    approvedCards.forEach(function(card) { card.style.display = 'block'; });
+  }
+});
+
+// Sort functionality
+document.getElementById('sortFilter').addEventListener('change', function() {
+  const sortValue = this.value;
+  const approvedContainer = document.getElementById('approvedFarmersContainer');
+  
+  if (sortValue === 'name') {
+    // Sort approved farmers
+    const approvedCards = Array.from(approvedContainer.querySelectorAll('.farmer-card'));
+    approvedCards.sort(function(a, b) {
+      const nameA = a.querySelector('h5').textContent;
+      const nameB = b.querySelector('h5').textContent;
+      return nameA.localeCompare(nameB);
+    });
+    approvedCards.forEach(function(card) { approvedContainer.appendChild(card); });
+  } else if (sortValue === 'date') {
+    // Sort by registration date
+    const approvedCards = Array.from(approvedContainer.querySelectorAll('.farmer-card'));
+    approvedCards.sort(function(a, b) {
+      const dateA = a.querySelector('.text-secondary').textContent;
+      const dateB = b.querySelector('.text-secondary').textContent;
+      return new Date(dateA) - new Date(dateB);
+    });
+    approvedCards.forEach(function(card) { approvedContainer.appendChild(card); });
+  }
+});
+
+// Farmer action functions
+function viewFarmer(farmerId) {
+  alert('View farmer details for farmer ID: ' + farmerId);
+}
+
+function viewFarmerProducts(farmerId) {
+  // Redirect to farmer products page
+  window.location.href = '/admin/farmer-products/' + farmerId + '/';
+}
+
+// Event listeners for farmer action buttons
+document.addEventListener('DOMContentLoaded', function() {
+  // View farmer buttons
+  document.querySelectorAll('.view-farmer-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const farmerId = this.getAttribute('data-farmer-id');
+      viewFarmer(farmerId);
+    });
+  });
+  
+  // Products buttons
+  document.querySelectorAll('.products-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const farmerId = this.getAttribute('data-farmer-id');
+      viewFarmerProducts(farmerId);
+    });
+  });
+});
+</script>
+
+{% include 'footer.html' %} 

@@ -1,0 +1,184 @@
+{% include 'header_users.html' %}
+
+<div class="container py-4">
+  <!-- Header Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="mb-1">
+            <i class="fas fa-exclamation-triangle me-2 text-warning"></i>My Complaints & Support
+          </h2>
+          <p class="text-muted mb-0">View your complaints and responses from our support team</p>
+        </div>
+        <div>
+          <a href="/users/complaints/new/" class="btn btn-success me-2">
+            <i class="fas fa-plus me-2"></i>New Complaint
+          </a>
+          <a href="/users/dashboard/" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-exclamation-circle text-warning mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-warning">{{ total_complaints }}</h4>
+          <p class="mb-0">Total Complaints</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-clock text-primary mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-primary">{{ open_complaints }}</h4>
+          <p class="mb-0">Open Issues</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fas fa-check-circle text-success mb-2" style="font-size: 2rem;"></i>
+          <h4 class="text-success">{{ resolved_complaints }}</h4>
+          <p class="mb-0">Resolved Issues</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Complaints List -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="fas fa-list me-2"></i>Complaint History</h5>
+        </div>
+        <div class="card-body">
+          {% for complaint in complaints %}
+          <div class="complaint-item border rounded p-3 mb-3">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <h6 class="mb-1">{{ complaint.subject }}</h6>
+                <p class="text-muted mb-1">{{ complaint.description }}</p>
+                <div class="d-flex gap-2">
+                  <span class="badge bg-secondary">{{ complaint.type }}</span>
+                  <span class="badge {% if complaint.priority == 'High' or complaint.priority == 'Urgent' %}bg-danger{% elif complaint.priority == 'Medium' %}bg-warning{% else %}bg-info{% endif %}">
+                    {{ complaint.priority }}
+                  </span>
+                  <span class="badge {% if complaint.status == 'Open' %}bg-warning{% elif complaint.status == 'Resolved' %}bg-success{% else %}bg-primary{% endif %}">
+                    {{ complaint.status }}
+                  </span>
+                </div>
+              </div>
+              <small class="text-muted">{{ complaint.submitted_date }}</small>
+            </div>
+            
+            <!-- Replies Section -->
+            <div class="replies-section mt-3">
+              <h6 class="mb-2"><i class="fas fa-comments me-2"></i>Replies ({{ complaint.replies|length }})</h6>
+              {% for reply in complaint.replies %}
+              <div class="reply-item border-start border-3 ps-3 mb-2 {% if reply.from == 'Support Team' %}border-primary{% else %}border-success{% endif %}">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div class="flex-grow-1">
+                    <strong class="text-primary">{{ reply.from }}</strong>
+                    <p class="mb-1">{{ reply.message }}</p>
+                  </div>
+                  <small class="text-muted">{{ reply.date }}</small>
+                </div>
+              </div>
+              {% empty %}
+              <p class="text-muted small">No replies yet. Our support team will respond soon.</p>
+              {% endfor %}
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="mt-3">
+              <button class="btn btn-sm btn-outline-primary" onclick="addReply({{ complaint.id }})">
+                <i class="fas fa-reply me-1"></i>Add Reply
+              </button>
+              {% if complaint.status != 'Resolved' %}
+              <button class="btn btn-sm btn-outline-success" onclick="markResolved({{ complaint.id }})">
+                <i class="fas fa-check me-1"></i>Mark Resolved
+              </button>
+              {% endif %}
+            </div>
+          </div>
+          {% empty %}
+          <div class="text-center py-4">
+            <i class="fas fa-inbox text-muted" style="font-size: 3rem;"></i>
+            <h5 class="mt-3 text-muted">No Complaints Yet</h5>
+            <p class="text-muted">You haven't submitted any complaints yet.</p>
+            <a href="/users/complaints/new/" class="btn btn-success">
+              <i class="fas fa-plus me-2"></i>Submit Your First Complaint
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.complaint-item {
+  transition: box-shadow 0.2s ease;
+  background-color: #f8f9fa;
+}
+
+.complaint-item:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.reply-item {
+  background-color: white;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.border-primary {
+  border-color: #007bff !important;
+}
+
+.border-success {
+  border-color: #28a745 !important;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 1px solid #dee2e6;
+}
+</style>
+
+<script>
+function addReply(complaintId) {
+  const reply = prompt('Enter your reply:');
+  if (reply && reply.trim()) {
+    alert('Reply added successfully! (Demo - backend will be implemented)');
+    // In a real application, this would send the reply to the server
+  }
+}
+
+function markResolved(complaintId) {
+  if (confirm('Are you sure you want to mark this complaint as resolved?')) {
+    alert('Complaint marked as resolved! (Demo - backend will be implemented)');
+    // In a real application, this would update the complaint status
+  }
+}
+</script>
+
+{% include 'footer.html' %} 

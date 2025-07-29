@@ -1,0 +1,243 @@
+{% include 'header_users.html' %}
+
+<div class="container py-4">
+  <!-- Header Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="mb-1">
+            <i class="fas fa-comment me-2 text-primary"></i>Submit Complaint & Feedback
+          </h2>
+          <p class="text-muted mb-0">Let us know about any issues or share your feedback</p>
+        </div>
+        <a href="/users/complaints/view-reply/" class="btn btn-outline-secondary">
+          <i class="fas fa-arrow-left me-2"></i>Back to Complaints
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Message -->
+  {% if messages %}
+  <div class="row mb-4">
+    <div class="col-12">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>{{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Complaint Form -->
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="fas fa-edit me-2"></i>New Complaint Form</h5>
+        </div>
+        <div class="card-body">
+          <form method="post" id="complaintForm">
+            {% csrf_token %}
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="complaint_type" class="form-label">Complaint Type *</label>
+                  <select class="form-select" id="complaint_type" name="complaint_type" required>
+                    <option value="">Select complaint type</option>
+                    {% for type in complaint_types %}
+                    <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="priority" class="form-label">Priority Level *</label>
+                  <select class="form-select" id="priority" name="priority" required>
+                    <option value="">Select priority</option>
+                    {% for level in priority_levels %}
+                    <option value="{{ level }}">{{ level }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="subject" class="form-label">Subject *</label>
+              <input type="text" class="form-control" id="subject" name="subject" 
+                     placeholder="Brief description of your issue" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">Detailed Description *</label>
+              <textarea class="form-control" id="description" name="description" rows="5" 
+                        placeholder="Please provide detailed information about your issue, including any relevant details that will help us assist you better..." required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="contact_preference" class="form-label">Preferred Contact Method</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="contact_preference" id="email" value="email" checked>
+                <label class="form-check-label" for="email">
+                  Email
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="contact_preference" id="phone" value="phone">
+                <label class="form-check-label" for="phone">
+                  Phone Call
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="contact_preference" id="sms" value="sms">
+                <label class="form-check-label" for="sms">
+                  SMS
+                </label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="urgent" name="urgent">
+                <label class="form-check-label" for="urgent">
+                  <strong>Mark as Urgent</strong> - This issue requires immediate attention
+                </label>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane me-2"></i>Submit Complaint
+              </button>
+              <button type="reset" class="btn btn-outline-secondary">
+                <i class="fas fa-undo me-2"></i>Reset Form
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Section -->
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="mb-0"><i class="fas fa-info-circle me-2"></i>How to Submit an Effective Complaint</h6>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Be specific about the issue</li>
+            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Include relevant order numbers or dates</li>
+            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Provide clear, detailed descriptions</li>
+            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Attach screenshots if applicable</li>
+            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose appropriate priority level</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="mb-0"><i class="fas fa-clock me-2"></i>Response Times</h6>
+        </div>
+        <div class="card-body">
+          <div class="mb-2">
+            <strong class="text-danger">Urgent:</strong> Within 2-4 hours
+          </div>
+          <div class="mb-2">
+            <strong class="text-warning">High:</strong> Within 24 hours
+          </div>
+          <div class="mb-2">
+            <strong class="text-info">Medium:</strong> Within 48 hours
+          </div>
+          <div class="mb-2">
+            <strong class="text-success">Low:</strong> Within 72 hours
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.card {
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 1px solid #dee2e6;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.form-check-input:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+</style>
+
+<script>
+document.getElementById('complaintForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Get form data
+  const formData = new FormData(this);
+  const complaintType = formData.get('complaint_type');
+  const subject = formData.get('subject');
+  const description = formData.get('description');
+  const priority = formData.get('priority');
+  
+  // Basic validation
+  if (!complaintType || !subject || !description || !priority) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+  
+  // Show success message
+  alert('Complaint submitted successfully! We will get back to you soon.');
+  
+  // Reset form
+  this.reset();
+});
+
+// Priority level change handler
+document.getElementById('priority').addEventListener('change', function(e) {
+  const urgentCheckbox = document.getElementById('urgent');
+  if (e.target.value === 'Urgent') {
+    urgentCheckbox.checked = true;
+  }
+});
+
+// Urgent checkbox handler
+document.getElementById('urgent').addEventListener('change', function(e) {
+  const prioritySelect = document.getElementById('priority');
+  if (e.target.checked) {
+    prioritySelect.value = 'Urgent';
+  }
+});
+</script>
+
+{% include 'footer.html' %} 
