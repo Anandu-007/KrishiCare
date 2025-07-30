@@ -12,9 +12,10 @@
         <label for="phone" class="form-label">Phone Number</label>
         <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required pattern="[0-9]{10}">
       </div>
+
       <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+        <label for="place" class="form-label">Place/Village</label>
+        <input type="text" class="form-control" id="place" name="place" placeholder="Enter your place/village" required>
       </div>
       <div class="mb-3">
         <label for="address" class="form-label">Address</label>
@@ -28,9 +29,11 @@
         <label for="farmer_type" class="form-label">Farmer Type</label>
         <select class="form-select" id="farmer_type" name="farmer_type" required>
           <option value="" disabled selected>Select type</option>
-          <option value="small">Small Farmer</option>
-          <option value="medium">Medium Farmer</option>
-          <option value="large">Large Farmer</option>
+          <option value="small">Small</option>
+          <option value="marginal">Marginal</option>
+          <option value="sc">SC</option>
+          <option value="st">ST</option>
+          <option value="organic">Organic</option>
         </select>
       </div>
       <div class="mb-3">
@@ -41,9 +44,28 @@
         <label for="photo" class="form-label">Your Photo</label>
         <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
       </div>
+      
       <div class="mb-3">
-        <label for="land_photo" class="form-label">Land Photo</label>
-        <input type="file" class="form-control" id="land_photo" name="land_photo" accept="image/*" required>
+        <label for="land_tax" class="form-label">Document Land Tax</label>
+        <input type="file" class="form-control" id="land_tax" name="land_tax" accept="image/*" required>
+      </div>
+      <div class="mb-3">
+        <label for="id_proof" class="form-label">Document ID Proof</label>
+        <input type="file" class="form-control" id="id_proof" name="id_proof" accept="image/*" required>
+      </div>
+      <div class="mb-3">
+        <label for="bank_passbook" class="form-label">Document Bank Passbook</label>
+        <input type="file" class="form-control" id="bank_passbook" name="bank_passbook" accept="image/*" required>
+      </div>
+      <div class="mb-3">
+        <label for="approval_status" class="form-label">Approval Status</label>
+        <select class="form-select" id="approval_status" name="approval_status" required>
+          <option value="" disabled selected>Select approval status</option>
+          <option value="pending">Pending Approval</option>
+          <option value="approved">Pre-approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+        <small class="form-text text-muted">Select your current approval status. If unsure, choose "Pending Approval".</small>
       </div>
       <div class="d-grid">
         <button type="submit" class="btn btn-success">Register</button>

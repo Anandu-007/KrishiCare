@@ -1,7 +1,7 @@
 {% include 'header.html' %}
 <div class="container py-5">
   <h2 class="text-center fw-bold mb-4" style="color: #388e3c;">
-    <i class="fas fa-exclamation-triangle me-2"></i>View Complaints
+    <i class="fas fa-exclamation-triangle me-2"></i>Complaints & Feedback Management
   </h2>
   
   <!-- Search and Filter -->
@@ -20,17 +20,32 @@
         <option value="Resolved">Resolved</option>
       </select>
     </div>
-    <div class="col-md-3">
-      <select class="form-select" id="priorityFilter">
-        <option selected value="">All Priorities</option>
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-      </select>
+
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <ul class="nav nav-tabs" id="managementTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="complaints-tab" data-bs-toggle="tab" data-bs-target="#complaints" type="button" role="tab">
+            <i class="fas fa-exclamation-triangle me-2"></i>Complaints
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="feedback-tab" data-bs-toggle="tab" data-bs-target="#feedback" type="button" role="tab">
+            <i class="fas fa-comment me-2"></i>User Feedback
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
 
-  <!-- Statistics Cards -->
+  <!-- Tab Content -->
+  <div class="tab-content" id="managementTabsContent">
+    <!-- Complaints Tab -->
+    <div class="tab-pane fade show active" id="complaints" role="tabpanel">
+      <!-- Statistics Cards -->
   <div class="row mb-4">
     <div class="col-md-3 mb-3">
       <div class="card text-center border-0 shadow-sm">
@@ -114,18 +129,7 @@
               </div>
             </div>
             
-            <div class="info-item d-flex align-items-center mb-3">
-              <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
-                   style="width: 35px; height: 35px;">
-                <i class="fas fa-exclamation text-danger"></i>
-              </div>
-              <div>
-                <small class="text-muted d-block">Priority</small>
-                <span class="badge {% if complaint.priority == 'High' %}bg-danger{% elif complaint.priority == 'Medium' %}bg-warning{% else %}bg-success{% endif %}">
-                  {{ complaint.priority }}
-                </span>
-              </div>
-            </div>
+
             
             <div class="info-item d-flex align-items-center mb-3">
               <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
@@ -199,6 +203,307 @@
   </div>
   {% endif %}
   
+    </div> <!-- End of complaints tab -->
+    
+    <!-- Feedback Tab -->
+    <div class="tab-pane fade" id="feedback" role="tabpanel">
+      <!-- Feedback Statistics Cards -->
+      <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+          <div class="card text-center border-0 shadow-sm">
+            <div class="card-body">
+              <i class="fas fa-comment text-info mb-2" style="font-size: 2rem;"></i>
+              <h4 class="text-info mb-1">15</h4>
+              <p class="mb-0 text-muted">Total Feedback</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card text-center border-0 shadow-sm">
+            <div class="card-body">
+              <i class="fas fa-thumbs-up text-success mb-2" style="font-size: 2rem;"></i>
+              <h4 class="text-success mb-1">12</h4>
+              <p class="mb-0 text-muted">Positive</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card text-center border-0 shadow-sm">
+            <div class="card-body">
+              <i class="fas fa-lightbulb text-warning mb-2" style="font-size: 2rem;"></i>
+              <h4 class="text-warning mb-1">8</h4>
+              <p class="mb-0 text-muted">Suggestions</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card text-center border-0 shadow-sm">
+            <div class="card-body">
+              <i class="fas fa-clock text-primary mb-2" style="font-size: 2rem;"></i>
+              <h4 class="text-primary mb-1">3</h4>
+              <p class="mb-0 text-muted">This Week</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback Search -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search feedback..." id="feedbackSearchInput">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" id="feedbackTypeFilter">
+            <option selected value="">All Types</option>
+            <option value="positive">Positive</option>
+            <option value="suggestion">Suggestion</option>
+            <option value="issue">Issue</option>
+            <option value="general">General</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" id="feedbackDateFilter">
+            <option selected value="">All Time</option>
+            <option value="today">Today</option>
+            <option value="week">This Week</option>
+            <option value="month">This Month</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Feedback Cards -->
+      <div class="row" id="feedbackContainer">
+        <!-- Sample Feedback Card 1 -->
+        <div class="col-md-6 col-lg-4 mb-4 feedback-card">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-gradient-success text-white py-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <h6 class="mb-1 text-truncate">Great Platform Experience</h6>
+                  <small class="opacity-75">Feedback ID: #001</small>
+                </div>
+                <div class="text-end">
+                  <span class="badge bg-success">Positive</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-body">
+              <div class="feedback-info">
+                <div class="info-item d-flex align-items-center mb-3">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                       style="width: 35px; height: 35px;">
+                    <i class="fas fa-user text-primary"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Submitted By</small>
+                    <strong>John Doe</strong>
+                    <span class="badge bg-secondary ms-2">User</span>
+                  </div>
+                </div>
+                
+                <div class="info-item d-flex align-items-center mb-3">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                       style="width: 35px; height: 35px;">
+                    <i class="fas fa-calendar-alt text-info"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Submitted Date</small>
+                    <strong>2024-01-15</strong>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                       style="width: 35px; height: 35px;">
+                    <i class="fas fa-comment text-secondary"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Message</small>
+                    <p class="mb-0 text-truncate" style="max-width: 200px;">The platform is very user-friendly and the services are excellent. I particularly like the easy navigation and quick response times.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-footer bg-white border-0 pt-0">
+              <div class="btn-group w-100" role="group">
+                <button class="btn btn-outline-primary btn-sm view-feedback-btn" title="View Details" data-feedback-id="1">
+                  <i class="fas fa-eye me-1"></i>View
+                </button>
+                <button class="btn btn-outline-success btn-sm mark-important-btn" title="Mark as Important" data-feedback-id="1">
+                  <i class="fas fa-star me-1"></i>Important
+                </button>
+                <button class="btn btn-outline-info btn-sm reply-feedback-btn" title="Reply to Feedback" data-feedback-id="1">
+                  <i class="fas fa-reply me-1"></i>Reply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sample Feedback Card 2 -->
+        <div class="col-md-6 col-lg-4 mb-4 feedback-card">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-gradient-warning text-white py-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <h6 class="mb-1 text-truncate">Feature Suggestion</h6>
+                  <small class="opacity-75">Feedback ID: #002</small>
+                </div>
+                <div class="text-end">
+                  <span class="badge bg-warning">Suggestion</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-body">
+              <div class="feedback-info">
+                <div class="info-item d-flex align-items-center mb-3">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                       style="width: 35px; height: 35px;">
+                    <i class="fas fa-user text-primary"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Submitted By</small>
+                    <strong>Jane Smith</strong>
+                    <span class="badge bg-secondary ms-2">User</span>
+                  </div>
+                </div>
+                
+                <div class="info-item d-flex align-items-center mb-3">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                       style="width: 35px; height: 35px;">
+                    <i class="fas fa-calendar-alt text-info"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Submitted Date</small>
+                    <strong>2024-01-14</strong>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                       style="width: 35px; height: 35px;">
+                    <i class="fas fa-comment text-secondary"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Message</small>
+                    <p class="mb-0 text-truncate" style="max-width: 200px;">It would be great to have a dark mode option and maybe some additional payment methods for better convenience.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-footer bg-white border-0 pt-0">
+              <div class="btn-group w-100" role="group">
+                <button class="btn btn-outline-primary btn-sm view-feedback-btn" title="View Details" data-feedback-id="2">
+                  <i class="fas fa-eye me-1"></i>View
+                </button>
+                <button class="btn btn-outline-success btn-sm mark-important-btn" title="Mark as Important" data-feedback-id="2">
+                  <i class="fas fa-star me-1"></i>Important
+                </button>
+                <button class="btn btn-outline-info btn-sm reply-feedback-btn" title="Reply to Feedback" data-feedback-id="2">
+                  <i class="fas fa-reply me-1"></i>Reply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sample Feedback Card 3 -->
+        <div class="col-md-6 col-lg-4 mb-4 feedback-card">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-gradient-info text-white py-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <h6 class="mb-1 text-truncate">General Feedback</h6>
+                  <small class="opacity-75">Feedback ID: #003</small>
+                </div>
+                <div class="text-end">
+                  <span class="badge bg-info">General</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-body">
+              <div class="feedback-info">
+                <div class="info-item d-flex align-items-center mb-3">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                       style="width: 35px; height: 35px;">
+                    <i class="fas fa-user text-primary"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Submitted By</small>
+                    <strong>Mike Johnson</strong>
+                    <span class="badge bg-secondary ms-2">User</span>
+                  </div>
+                </div>
+                
+                <div class="info-item d-flex align-items-center mb-3">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                       style="width: 35px; height: 35px;">
+                    <i class="fas fa-calendar-alt text-info"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Submitted Date</small>
+                    <strong>2024-01-13</strong>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <div class="info-icon bg-light rounded-circle d-flex align-items-center justify-content-center me-3" 
+                       style="width: 35px; height: 35px;">
+                    <i class="fas fa-comment text-secondary"></i>
+                  </div>
+                  <div>
+                    <small class="text-muted d-block">Message</small>
+                    <p class="mb-0 text-truncate" style="max-width: 200px;">Overall good experience with the platform. The customer support team is very helpful and responsive.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-footer bg-white border-0 pt-0">
+              <div class="btn-group w-100" role="group">
+                <button class="btn btn-outline-primary btn-sm view-feedback-btn" title="View Details" data-feedback-id="3">
+                  <i class="fas fa-eye me-1"></i>View
+                </button>
+                <button class="btn btn-outline-success btn-sm mark-important-btn" title="Mark as Important" data-feedback-id="3">
+                  <i class="fas fa-star me-1"></i>Important
+                </button>
+                <button class="btn btn-outline-info btn-sm reply-feedback-btn" title="Reply to Feedback" data-feedback-id="3">
+                  <i class="fas fa-reply me-1"></i>Reply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback Pagination -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <nav aria-label="Feedback pagination">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div> <!-- End of feedback tab -->
+  </div> <!-- End of tab content -->
+
   <div class="text-center mt-4">
     <a href="/admin/dashboard/" class="btn btn-outline-secondary">
       <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
@@ -209,6 +514,18 @@
 <style>
 .bg-gradient-primary {
   background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+}
+
+.bg-gradient-info {
+  background: linear-gradient(135deg, #17a2b8 0%, #6f42c1 100%);
 }
 
 .card {
@@ -284,24 +601,7 @@ document.getElementById('statusFilter').addEventListener('change', function() {
   });
 });
 
-// Priority filter functionality
-document.getElementById('priorityFilter').addEventListener('change', function() {
-  const filterValue = this.value;
-  const complaintCards = document.querySelectorAll('.complaint-card');
-  
-  complaintCards.forEach(function(card) {
-    if (filterValue === '') {
-      card.style.display = 'block';
-    } else {
-      const priority = card.querySelectorAll('.badge')[1].textContent.trim();
-      if (priority === filterValue) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
-    }
-  });
-});
+
 
 // Complaint action functions
 function viewComplaint(complaintId) {
@@ -342,6 +642,93 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.addEventListener('click', function() {
       const complaintId = this.getAttribute('data-complaint-id');
       replyComplaint(complaintId);
+    });
+  });
+});
+
+// Feedback search functionality
+document.getElementById('feedbackSearchInput').addEventListener('input', function() {
+  const searchTerm = this.value.toLowerCase();
+  const feedbackCards = document.querySelectorAll('.feedback-card');
+  
+  feedbackCards.forEach(function(card) {
+    const title = card.querySelector('h6').textContent.toLowerCase();
+    const submittedBy = card.querySelector('.feedback-info .info-item strong').textContent.toLowerCase();
+    const message = card.querySelector('.text-truncate').textContent.toLowerCase();
+    
+    if (title.includes(searchTerm) || submittedBy.includes(searchTerm) || message.includes(searchTerm)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+});
+
+// Feedback type filter functionality
+document.getElementById('feedbackTypeFilter').addEventListener('change', function() {
+  const filterValue = this.value;
+  const feedbackCards = document.querySelectorAll('.feedback-card');
+  
+  feedbackCards.forEach(function(card) {
+    if (filterValue === '') {
+      card.style.display = 'block';
+    } else {
+      const type = card.querySelector('.badge').textContent.trim().toLowerCase();
+      if (type === filterValue) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    }
+  });
+});
+
+// Feedback date filter functionality
+document.getElementById('feedbackDateFilter').addEventListener('change', function() {
+  const filterValue = this.value;
+  console.log('Filtering feedback by date:', filterValue);
+  // This would be implemented with backend data
+});
+
+// Feedback action functions
+function viewFeedback(feedbackId) {
+  alert('View feedback details for feedback ID: ' + feedbackId);
+}
+
+function markImportant(feedbackId) {
+  if (confirm('Mark this feedback as important?')) {
+    alert('Feedback marked as important! Feedback ID: ' + feedbackId);
+    // Here you would typically make an AJAX call to update the feedback status
+  }
+}
+
+function replyFeedback(feedbackId) {
+  alert('Reply to feedback for feedback ID: ' + feedbackId);
+}
+
+// Event listeners for feedback action buttons
+document.addEventListener('DOMContentLoaded', function() {
+  // View feedback buttons
+  document.querySelectorAll('.view-feedback-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const feedbackId = this.getAttribute('data-feedback-id');
+      viewFeedback(feedbackId);
+    });
+  });
+
+  // Mark important buttons
+  document.querySelectorAll('.mark-important-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const feedbackId = this.getAttribute('data-feedback-id');
+      markImportant(feedbackId);
+    });
+  });
+
+  // Reply feedback buttons
+  document.querySelectorAll('.reply-feedback-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const feedbackId = this.getAttribute('data-feedback-id');
+      replyFeedback(feedbackId);
     });
   });
 });

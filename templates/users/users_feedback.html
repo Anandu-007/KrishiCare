@@ -7,12 +7,12 @@
       <div class="d-flex justify-content-between align-items-center">
         <div>
           <h2 class="mb-1">
-            <i class="fas fa-comment me-2 text-primary"></i>Submit Complaint & Feedback
+            <i class="fas fa-comment me-2 text-primary"></i>Submit Feedback
           </h2>
-          <p class="text-muted mb-0">Let us know about any issues or share your feedback</p>
+          <p class="text-muted mb-0">Share your thoughts, suggestions, or feedback with us</p>
         </div>
-        <a href="/users/complaints/view-reply/" class="btn btn-outline-secondary">
-          <i class="fas fa-arrow-left me-2"></i>Back to Complaints
+        <a href="/users/dashboard/" class="btn btn-outline-secondary">
+          <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
         </a>
       </div>
     </div>
@@ -32,91 +32,33 @@
   </div>
   {% endif %}
 
-  <!-- Complaint Form -->
+  <!-- Feedback Form -->
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card shadow">
         <div class="card-header">
-          <h5 class="mb-0"><i class="fas fa-edit me-2"></i>New Complaint Form</h5>
+          <h5 class="mb-0"><i class="fas fa-edit me-2"></i>Share Your Feedback</h5>
         </div>
         <div class="card-body">
-          <form method="post" id="complaintForm">
+          <form method="post" id="feedbackForm">
             {% csrf_token %}
             
-            <div class="row">
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="complaint_type" class="form-label">Complaint Type *</label>
-                  <select class="form-select" id="complaint_type" name="complaint_type" required>
-                    <option value="">Select complaint type</option>
-                    {% for type in complaint_types %}
-                    <option value="{{ type }}">{{ type }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="priority" class="form-label">Priority Level *</label>
-                  <select class="form-select" id="priority" name="priority" required>
-                    <option value="">Select priority</option>
-                    {% for level in priority_levels %}
-                    <option value="{{ level }}">{{ level }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-            </div>
-
             <div class="mb-3">
-              <label for="subject" class="form-label">Subject *</label>
-              <input type="text" class="form-control" id="subject" name="subject" 
-                     placeholder="Brief description of your issue" required>
-            </div>
-
-            <div class="mb-3">
-              <label for="description" class="form-label">Detailed Description *</label>
-              <textarea class="form-control" id="description" name="description" rows="5" 
-                        placeholder="Please provide detailed information about your issue, including any relevant details that will help us assist you better..." required></textarea>
-            </div>
-
-            <div class="mb-3">
-              <label for="contact_preference" class="form-label">Preferred Contact Method</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="contact_preference" id="email" value="email" checked>
-                <label class="form-check-label" for="email">
-                  Email
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="contact_preference" id="phone" value="phone">
-                <label class="form-check-label" for="phone">
-                  Phone Call
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="contact_preference" id="sms" value="sms">
-                <label class="form-check-label" for="sms">
-                  SMS
-                </label>
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="urgent" name="urgent">
-                <label class="form-check-label" for="urgent">
-                  <strong>Mark as Urgent</strong> - This issue requires immediate attention
-                </label>
+              <label for="message" class="form-label">Your Message *</label>
+              <textarea class="form-control" id="message" name="message" rows="6" 
+                        placeholder="Please share your feedback, suggestions, or any thoughts you have about our services. We value your input and use it to improve our platform..." required></textarea>
+              <div class="form-text">
+                <i class="fas fa-info-circle me-1"></i>
+                Your feedback helps us improve our services. Feel free to share any suggestions, comments, or concerns.
               </div>
             </div>
 
             <div class="d-flex gap-2">
               <button type="submit" class="btn btn-primary">
-                <i class="fas fa-paper-plane me-2"></i>Submit Complaint
+                <i class="fas fa-paper-plane me-2"></i>Submit Feedback
               </button>
               <button type="reset" class="btn btn-outline-secondary">
-                <i class="fas fa-undo me-2"></i>Reset Form
+                <i class="fas fa-undo me-2"></i>Clear
               </button>
             </div>
           </form>
@@ -130,15 +72,15 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
-          <h6 class="mb-0"><i class="fas fa-info-circle me-2"></i>How to Submit an Effective Complaint</h6>
+          <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>What to Include in Your Feedback</h6>
         </div>
         <div class="card-body">
           <ul class="list-unstyled">
-            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Be specific about the issue</li>
-            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Include relevant order numbers or dates</li>
-            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Provide clear, detailed descriptions</li>
-            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Attach screenshots if applicable</li>
-            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Choose appropriate priority level</li>
+            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Your experience with our services</li>
+            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Suggestions for improvements</li>
+            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Features you'd like to see</li>
+            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Any issues you encountered</li>
+            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Positive experiences you had</li>
           </ul>
         </div>
       </div>
@@ -146,20 +88,20 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
-          <h6 class="mb-0"><i class="fas fa-clock me-2"></i>Response Times</h6>
+          <h6 class="mb-0"><i class="fas fa-heart me-2"></i>Why Your Feedback Matters</h6>
         </div>
         <div class="card-body">
           <div class="mb-2">
-            <strong class="text-danger">Urgent:</strong> Within 2-4 hours
+            <strong class="text-primary">Improve Services:</strong> Your input helps us enhance our platform
           </div>
           <div class="mb-2">
-            <strong class="text-warning">High:</strong> Within 24 hours
+            <strong class="text-success">Better Experience:</strong> We use feedback to improve user experience
           </div>
           <div class="mb-2">
-            <strong class="text-info">Medium:</strong> Within 48 hours
+            <strong class="text-info">New Features:</strong> Your suggestions guide our development roadmap
           </div>
           <div class="mb-2">
-            <strong class="text-success">Low:</strong> Within 72 hours
+            <strong class="text-warning">Quick Response:</strong> We review all feedback and respond promptly
           </div>
         </div>
       </div>
@@ -171,14 +113,16 @@
 .card {
   border: none;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 12px;
 }
 
 .card-header {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-bottom: 1px solid #dee2e6;
+  border-radius: 12px 12px 0 0 !important;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus {
   border-color: #007bff;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
@@ -186,56 +130,59 @@
 .btn-primary {
   background-color: #007bff;
   border-color: #007bff;
+  border-radius: 8px;
 }
 
 .btn-primary:hover {
   background-color: #0056b3;
   border-color: #0056b3;
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
 }
 
-.form-check-input:checked {
-  background-color: #007bff;
-  border-color: #007bff;
+.btn-outline-secondary {
+  border-radius: 8px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-text {
+  color: #6c757d;
+  font-size: 0.875rem;
 }
 </style>
 
 <script>
-document.getElementById('complaintForm').addEventListener('submit', function(e) {
+document.getElementById('feedbackForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
   // Get form data
   const formData = new FormData(this);
-  const complaintType = formData.get('complaint_type');
-  const subject = formData.get('subject');
-  const description = formData.get('description');
-  const priority = formData.get('priority');
+  const message = formData.get('message');
   
   // Basic validation
-  if (!complaintType || !subject || !description || !priority) {
-    alert('Please fill in all required fields.');
+  if (!message || message.trim().length < 10) {
+    alert('Please provide a meaningful message (at least 10 characters).');
     return;
   }
   
   // Show success message
-  alert('Complaint submitted successfully! We will get back to you soon.');
+  alert('Thank you for your feedback! We appreciate your input and will review it carefully.');
   
   // Reset form
   this.reset();
 });
 
-// Priority level change handler
-document.getElementById('priority').addEventListener('change', function(e) {
-  const urgentCheckbox = document.getElementById('urgent');
-  if (e.target.value === 'Urgent') {
-    urgentCheckbox.checked = true;
-  }
-});
-
-// Urgent checkbox handler
-document.getElementById('urgent').addEventListener('change', function(e) {
-  const prioritySelect = document.getElementById('priority');
-  if (e.target.checked) {
-    prioritySelect.value = 'Urgent';
+// Character counter
+document.getElementById('message').addEventListener('input', function(e) {
+  const maxLength = 1000;
+  const currentLength = e.target.value.length;
+  
+  if (currentLength > maxLength) {
+    e.target.value = e.target.value.substring(0, maxLength);
   }
 });
 </script>

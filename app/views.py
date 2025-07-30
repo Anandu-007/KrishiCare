@@ -16,6 +16,53 @@ def register_user(request):
     return render(request, 'RegisterUser.html')
 
 def register_farmer(request):
+    if request.method == 'POST':
+        try:
+            # Get form data
+            name = request.POST.get('name')
+            phone = request.POST.get('phone')
+            place = request.POST.get('place')
+            address = request.POST.get('address')
+            land_size = request.POST.get('land_size')
+            farmer_type = request.POST.get('farmer_type')
+            aadhaar = request.POST.get('aadhaar')
+            approval_status = request.POST.get('approval_status')
+            
+            # Handle file uploads
+            photo = request.FILES.get('photo')
+            land_photo = request.FILES.get('land_photo')
+            land_tax = request.FILES.get('land_tax')
+            id_proof = request.FILES.get('id_proof')
+            bank_passbook = request.FILES.get('bank_passbook')
+            
+            # Convert approval status to boolean
+            is_approved = False
+            if approval_status == 'approved':
+                is_approved = True
+            elif approval_status == 'rejected':
+                is_approved = False
+            else:  # pending
+                is_approved = False
+            
+            # Create Farmer object
+            farmer = Farmer.objects.create(
+                name=name,
+                phone=phone,
+                place=place,
+                address=address,
+                land_size=land_size,
+                farmer_type=farmer_type,
+                aadhaar_number=aadhaar,
+                photo=photo,
+                is_approved=is_approved
+            )
+            
+            messages.success(request, f'Farmer {name} registered successfully! Approval status: {approval_status.title()}')
+            return redirect('home')
+            
+        except Exception as e:
+            messages.error(request, f'Registration failed: {str(e)}')
+    
     return render(request, 'RegisterFarmer.html')
 
 def admin_dashboard(request):
